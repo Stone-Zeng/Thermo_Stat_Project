@@ -1,0 +1,17 @@
+*.obj
+*.exe
+
+*.VC.db
+*.idb
+*.pdb
+
+*.log
+*.tlog
+
+*.csv
+*.xls
+*.xlsx
+*.dat
+
+Debug/
+.vs/
