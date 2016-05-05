@@ -2,6 +2,7 @@
 *.exe
 
 *.VC.db
+*.opendb
 *.idb
 *.pdb
 
