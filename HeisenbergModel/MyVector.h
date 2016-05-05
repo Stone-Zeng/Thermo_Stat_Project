@@ -6,9 +6,6 @@
 #pragma once
 
 #include <iostream>
-#include <cmath>
-#include <cstdlib>
-#include "Function.h"
 
 class MyVector
 {

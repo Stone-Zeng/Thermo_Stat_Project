@@ -1,3 +1,7 @@
+//Here are some switches and adjusted parameters for
+//the program.
+//Try no to add functions here!
+
 #ifndef HEAD_H_
 #define HEAD_H_
 #pragma once
@@ -25,50 +29,49 @@
 #define $FILENAME_DATA "data.dat"
 
 //Parameters:
-#define LENGTH_X $LATTICE_LENGTH
-#define LENGTH_Y $LATTICE_LENGTH
-#define LENGTH_Z $LATTICE_LENGTH
-#define SIZE (LENGTH_X * LENGTH_Y * LENGTH_Z)
+//#define LENGTH_X $LATTICE_LENGTH
+//#define LENGTH_Y $LATTICE_LENGTH
+//#define SIZE (LENGTH_X * LENGTH_Y * LENGTH_Z)
 #define STEP 1000000
 
-typedef bool Point;
+//typedef bool Point;
 //typedef std::vector<std::vector<std::vector<Point>>> LatticeData;
-typedef Point LatticeData[LENGTH_X][LENGTH_Y][LENGTH_Z];
+//typedef Point LatticeData[LENGTH_X][LENGTH_Y][LENGTH_Z];
 
-inline int randomInt(const int& min, const int& max)
-{
-#ifdef CPP11_RANDOM
-	random_device rd;
-	uniform_int_distribution<> dist(min, max);
-	mt19937 gen(rd());
-	return dist(gen);
-#else
-	return rand() % (max - min + 1) + min;
-#endif
-}
+//inline int randomInt(const int& min, const int& max)
+//{
+//#ifdef CPP11_RANDOM
+//	random_device rd;
+//	uniform_int_distribution<> dist(min, max);
+//	mt19937 gen(rd());
+//	return dist(gen);
+//#else
+//	return rand() % (max - min + 1) + min;
+//#endif
+//}
+//
+//inline double randomReal(const double& min, const double& max)
+//{
+//#ifdef CPP11_RANDOM
+//	random_device rd;
+//	uniform_real_distribution<> dist(min, max);
+//	mt19937 gen(rd());
+//	return dist(gen);
+//#else
+//	auto r = 0.0001 * (double) ((rand() * rand()) % 10000);
+//	return (max - min) * r + min;
+//#endif
+//}
 
-inline double randomReal(const double& min, const double& max)
-{
-#ifdef CPP11_RANDOM
-	random_device rd;
-	uniform_real_distribution<> dist(min, max);
-	mt19937 gen(rd());
-	return dist(gen);
-#else
-	auto r = 0.0001 * (double) ((rand() * rand()) % 10000);
-	return (max - min) * r + min;
-#endif
-}
-
-inline int energyBetween(const Point& p1, const Point& p2)
-{
-	return ((p1 == p2) ? -1 : 1);
-}
-
-inline double possibilityOfFlip(const int& dE, const double& temperature)
-{
-	return ((dE > 0) ? exp(-dE / temperature) : 1);
-}
+//inline int energyBetween(const Point& p1, const Point& p2)
+//{
+//	return ((p1 == p2) ? -1 : 1);
+//}
+//
+//inline double possibilityOfFlip(const int& dE, const double& temperature)
+//{
+//	return ((dE > 0) ? exp(-dE / temperature) : 1);
+//}
 
 inline void output(std::ofstream& file, const int& index, const int& E, const int& M)
 {

@@ -116,6 +116,7 @@
     <ClCompile Include="HeisenbergModel_Main.cpp" />
     <ClCompile Include="MyLattice.cpp" />
     <ClCompile Include="MyVector.cpp" />
+    <ClCompile Include="VectorTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Function.h" />

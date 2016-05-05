@@ -1,3 +1,6 @@
+#include <cmath>
+#include <cstdlib>
+#include "Function.h"
 #include "MyVector.h"
 using namespace std;
 

@@ -24,6 +24,9 @@
     <ClCompile Include="MyVector.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="VectorTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Head.h">
