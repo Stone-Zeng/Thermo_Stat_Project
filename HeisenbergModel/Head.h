@@ -29,14 +29,14 @@
 #define $FILENAME_DATA "data.dat"
 
 //Parameters:
-//#define LENGTH_X $LATTICE_LENGTH
-//#define LENGTH_Y $LATTICE_LENGTH
-//#define SIZE (LENGTH_X * LENGTH_Y * LENGTH_Z)
+//#define X_LENGTH $LATTICE_LENGTH
+//#define Y_LENGTH $LATTICE_LENGTH
+//#define SIZE (X_LENGTH * Y_LENGTH * LENGTH_Z)
 #define STEP 1000000
 
 //typedef bool Point;
 //typedef std::vector<std::vector<std::vector<Point>>> LatticeData;
-//typedef Point LatticeData[LENGTH_X][LENGTH_Y][LENGTH_Z];
+//typedef Point LatticeData[X_LENGTH][Y_LENGTH][LENGTH_Z];
 
 //inline int randomInt(const int& min, const int& max)
 //{

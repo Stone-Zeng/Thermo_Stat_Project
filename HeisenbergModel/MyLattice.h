@@ -5,15 +5,14 @@
 #pragma once
 
 #include "Head.h"
-#include "Function.h"
 #include "MyVector.h"
 
-#define LENGTH_X $LATTICE_LENGTH
-#define LENGTH_Y $LATTICE_LENGTH
-#define SIZE (LENGTH_X * LENGTH_Y)
+#define X_LENGTH $LATTICE_LENGTH
+#define Y_LENGTH $LATTICE_LENGTH
+#define SIZE (X_LENGTH * Y_LENGTH)
 
 typedef MyVector Point;
-typedef Point LatticeData[LENGTH_X][LENGTH_Y];
+typedef Point LatticeData[X_LENGTH][Y_LENGTH];
 
 class MyLattice
 {
@@ -27,7 +26,7 @@ class MyLattice
 	inline int energyOfChange(const int&, const int&, const int&);
 
 public:
-	MyLattice(const int&, const int&, const int&);
+	MyLattice();
 
 	int totalEnergy;
 	int totalMagneticDipole;

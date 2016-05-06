@@ -14,5 +14,9 @@
 *.xlsx
 *.dat
 
+*.pdf
+*.doc
+*.docx
+
 Debug/
 .vs/

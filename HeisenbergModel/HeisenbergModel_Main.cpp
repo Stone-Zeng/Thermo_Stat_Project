@@ -15,7 +15,7 @@
 //#ifndef CPP11_RANDOM
 //	srand((unsigned int) time(NULL));
 //#endif
-//	MyLattice lattice(LENGTH_X, LENGTH_Y, LENGTH_Z);
+//	MyLattice lattice(X_LENGTH, Y_LENGTH, LENGTH_Z);
 //
 //	ofstream outfile;
 //	outfile.open($FILENAME_CSV);
@@ -57,7 +57,7 @@
 //
 //	//Display information:
 //	cout << "Information:" << endl
-//		<< "\tLattice size: X = " << LENGTH_X << ", Y = " << LENGTH_Y << ", Z = " << LENGTH_Z << endl
+//		<< "\tLattice size: X = " << X_LENGTH << ", Y = " << Y_LENGTH << ", Z = " << LENGTH_Z << endl
 //		<< "\tTemperature: " << arg_temprature << endl
 //		<< "\tSteps: 10e" << log10(arg_step) << endl << endl;
 //	for (auto i = 0; i != 4; ++i)

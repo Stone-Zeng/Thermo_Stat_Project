@@ -1,37 +1,30 @@
-//#include "Head.h"
-//#include "MyLattice.h"
-//using namespace std;
-//
-//inline int MyLattice::x_minus_1(const int& x)
-//{
-//	return (x == 0 ? x_Length - 1 : x - 1);
-//}
-//
-//inline int MyLattice::x_plus_1(const int& x)
-//{
-//	return (x == x_Length - 1 ? 0 : x + 1);
-//}
-//
-//inline int MyLattice::y_minus_1(const int& y)
-//{
-//	return (y == 0 ? y_Length - 1 : y - 1);
-//}
-//
-//inline int MyLattice::y_plus_1(const int& y)
-//{
-//	return (y == y_Length - 1 ? 0 : y + 1);
-//}
-//
-//inline int MyLattice::z_minus_1(const int& z)
-//{
-//	return (z == 0 ? z_Length - 1 : z - 1);
-//}
-//
-//inline int MyLattice::z_plus_1(const int& z)
-//{
-//	return (z == z_Length - 1 ? 0 : z + 1);
-//}
-//
+#include <cmath>
+#include <cstdlib>
+#include "Function.h"
+#include "MyVector.h"
+#include "MyLattice.h"
+using namespace std;
+
+inline int MyLattice::x_minus_1(const int& x)
+{
+	return (x == 0 ? X_LENGTH - 1 : x - 1);
+}
+
+inline int MyLattice::x_plus_1(const int& x)
+{
+	return (x == X_LENGTH - 1 ? 0 : x + 1);
+}
+
+inline int MyLattice::y_minus_1(const int& y)
+{
+	return (y == 0 ? Y_LENGTH - 1 : y - 1);
+}
+
+inline int MyLattice::y_plus_1(const int& y)
+{
+	return (y == Y_LENGTH - 1 ? 0 : y + 1);
+}
+
 //inline int MyLattice::energyCount(const Point& p, const int& i, const int& j, const int& k)
 //{
 //	return energyBetween(p, data[x_minus_1(i)][j][k]) + energyBetween(p, data[x_plus_1(i)][j][k])
@@ -90,8 +83,8 @@
 //double MyLattice::calculateHeatCapacity()
 //{
 //	int E = 0, E_square = 0;
-//	for (auto i = 0; i != LENGTH_X; ++i)
-//		for (auto j = 0; j != LENGTH_Y; ++j)
+//	for (auto i = 0; i != X_LENGTH; ++i)
+//		for (auto j = 0; j != Y_LENGTH; ++j)
 //			for (auto k = 0; k != LENGTH_Z; ++k)
 //			{
 //				int E_temp = energyCount(data[i][j][k], i, j, k);
@@ -104,8 +97,8 @@
 //double MyLattice::calculateMagneticSusceptibility()
 //{
 //	int M = 0, M_square = 0;
-//	for (auto i = 0; i != LENGTH_X; ++i)
-//		for (auto j = 0; j != LENGTH_Y; ++j)
+//	for (auto i = 0; i != X_LENGTH; ++i)
+//		for (auto j = 0; j != Y_LENGTH; ++j)
 //			for (auto k = 0; k != LENGTH_Z; ++k)
 //			{
 //				int M_temp = data[i][j][k] ? 1 : -1;
