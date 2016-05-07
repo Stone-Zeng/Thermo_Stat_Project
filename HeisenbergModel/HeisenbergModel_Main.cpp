@@ -2,12 +2,13 @@
 #include "MyLattice.h"
 using namespace std;
 
-int main()
+int main(int argc, char* argv[])
 {
 	srand((unsigned int) time(NULL));
 	MyLattice lattice;
-	auto step = 10000000;
-	auto temprature = 0.001;
+	//auto step = 100000;
+	auto temprature = atof(argv[1]);
+	auto step = atoi(argv[2]) * 10000;
 
 	ofstream outfile;
 	outfile.open($FILENAME_CSV);

@@ -9,6 +9,11 @@
 *.log
 *.tlog
 
+*.sln
+*.vcxproj
+*.filters
+*.user
+
 *.csv
 *.xls
 *.xlsx

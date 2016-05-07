@@ -29,7 +29,7 @@ public:
 	MyLattice();
 
 	//int->double
-	int totalEnergy;
+	double totalEnergy;
 	int totalMagneticDipole;
 	void flipOnePoint(const double&);
 	//void outputData(std::ofstream&);
