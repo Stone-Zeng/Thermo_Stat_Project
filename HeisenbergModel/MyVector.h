@@ -15,6 +15,7 @@ public:
 	MyVector();
 	MyVector(const double&, const double&, const double&);
 	
+	//Can be replaced?
 	double& operator[](int);
 	double operator[](int) const;
 

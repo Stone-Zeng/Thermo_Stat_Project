@@ -2,8 +2,8 @@
 //the program.
 //Try no to add functions here!
 
-#ifndef HEAD_H_
-#define HEAD_H_
+#ifndef _HEAD_H_
+#define _HEAD_H_
 #pragma once
 
 #include <iostream>
@@ -20,7 +20,7 @@
 #define DISPLAY_PROGRESS
 //#define USING_ARG_STEP
 
-#define $LATTICE_LENGTH 20
+#define $LATTICE_LENGTH 100
 #define $DATA_NUMBER 10000
 #define $LAST_10_PERCENT 1000 //1/1000
 #define $DISPLAY_NUMBER 10
@@ -73,9 +73,9 @@
 //	return ((dE > 0) ? exp(-dE / temperature) : 1);
 //}
 
-inline void output(std::ofstream& file, const int& index, const int& E, const int& M)
-{
-	file << index << "," << E << "," << M << std::endl;
-}
+//inline void output(std::ofstream& file, const int& index, const int& E, const int& M)
+//{
+//	file << index << "," << E << "," << M << std::endl;
+//}
 
 #endif

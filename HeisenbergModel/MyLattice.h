@@ -1,7 +1,7 @@
 //This is the class for 2D Heisenberg model lattice.
 
-#ifndef MYLATTICE_H_
-#define MYLATTICE_H_
+#ifndef _MYLATTICE_H_
+#define _MYLATTICE_H_
 #pragma once
 
 #include "Head.h"
@@ -22,12 +22,13 @@ class MyLattice
 	inline int y_minus_1(const int&);
 	inline int y_plus_1(const int&);
 
-	inline int energyCount(const Point&, const int&, const int&, const int&);
-	inline int energyOfChange(const int&, const int&, const int&);
+	inline double energyCount(const Point&, const int&, const int&);
+	//inline int energyOfChange(const int&, const int&, const int&);
 
 public:
 	MyLattice();
 
+	//int->double
 	int totalEnergy;
 	int totalMagneticDipole;
 	void flipOnePoint(const double&);

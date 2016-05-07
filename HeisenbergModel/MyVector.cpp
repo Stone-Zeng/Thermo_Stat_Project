@@ -29,14 +29,14 @@ double MyVector::operator[](int index) const
 MyVector& MyVector::operator+=(const MyVector& v)
 {
 	for (auto i = 0; i != 3; ++i)
-		data[i] += v[i];
+		data[i] += v.data[i];
 	return *this;
 }
 
 MyVector& MyVector::operator-=(const MyVector& v)
 {
 	for (auto i = 0; i != 3; ++i)
-		data[i] -= v[i];
+		data[i] -= v.data[i];
 	return *this;
 }
 
@@ -63,19 +63,19 @@ void MyVector::initialize()
 		r[i] = randomReal(-10, 10);
 		rSum += r[i] * r[i];
 	}
-	rSumSqrt = sqrt(rSum);	 
+	rSumSqrt = sqrt(rSum); 
 	for (auto i = 0; i != 3; ++i)
 		data[i] = r[i] / rSumSqrt;
 }
 
 double MyVector::dot(const MyVector& v)
 {
-	return data[0] * v[0] + data[1] * v[1] + data[2] * v[2];
+	return data[0] * v.data[0] + data[1] * v.data[1] + data[2] * v.data[2];
 }
 
 MyVector MyVector::cross(const MyVector& v)
 {
-	MyVector result(-data[2] * v[1] + data[1] * v[2], data[2] * v[0] - data[0] * v[2], -data[1] * v[0] + data[0] * v[1]);
+	MyVector result(-data[2] * v.data[1] + data[1] * v.data[2], data[2] * v.data[0] - data[0] * v.data[2], -data[1] * v.data[0] + data[0] * v.data[1]);
 	return result;
 }
 
@@ -111,6 +111,6 @@ MyVector operator/(const MyVector& v, const double& x)
 
 ostream& operator<<(ostream & out, const MyVector & v)
 {
-	out << v[0] << "\t" << v[1] << "\t" << v[2];
+	out << v.data[0] << "\t" << v.data[1] << "\t" << v.data[2];
 	return out;
 }

@@ -2,8 +2,8 @@
 //	randomInt
 //	randomReal
 
-#ifndef FUNCTION_H_
-#define FUNCTION_H_
+#ifndef _FUNCTION_H_
+#define _FUNCTION_H_
 #pragma once
 
 //#define CPP11_RANDOM
@@ -34,6 +34,11 @@ inline double randomReal(const double& min, const double& max)
 	auto r = 0.0001 * (double) ((rand() * rand()) % 10000);
 	return (max - min) * r + min;
 #endif
+}
+
+inline double possibilityOfFlip(const double& dE, const double& temperature)
+{
+	return ((dE > 0.0) ? exp(-dE / temperature) : 1);
 }
 
 #endif

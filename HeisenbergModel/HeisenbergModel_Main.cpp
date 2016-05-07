@@ -1,7 +1,26 @@
-//#include "Head.h"
-//#include "MyLattice.h"
-//using namespace std;
-//
+#include "Head.h"
+#include "MyLattice.h"
+using namespace std;
+
+int main()
+{
+	srand((unsigned int) time(NULL));
+	MyLattice lattice;
+	auto step = 10000000;
+	auto temprature = 0.001;
+
+	ofstream outfile;
+	outfile.open($FILENAME_CSV);
+
+	outfile << lattice.totalEnergy << endl;
+	for (auto i = 0; i != step; ++i)
+	{
+		lattice.flipOnePoint(temprature);
+		if ((i + 1) % (step / 10000) == 0)
+			outfile << lattice.totalEnergy << endl;
+	}
+}
+
 //int main(int argc, char* argv[])
 //{
 //	double arg_temprature = atof(argv[1]);
