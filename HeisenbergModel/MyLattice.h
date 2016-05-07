@@ -23,7 +23,7 @@ class MyLattice
 	inline int y_plus_1(const int&);
 
 	inline double energyCount(const Point&, const int&, const int&);
-	//inline int energyOfChange(const int&, const int&, const int&);
+	//inline double energyOfChange(const int&, const int&, const int&);
 
 public:
 	MyLattice();
