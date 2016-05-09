@@ -1,30 +1,95 @@
 #include "Head.h"
 #include "MyLattice.h"
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <ctime>
+#include <Windows.h>
+#include <omp.h>
 using namespace std;
 
-int main(int argc, char* argv[])
+int main()
 {
 	srand((unsigned int) time(NULL));
-	MyLattice lattice;
-	//auto step = 100000;
-	auto temprature = atof(argv[1]);
-	auto step = atoi(argv[2]) * 10000;
+	auto step = 0;
+	double temperature = 0, minTemperature = 0, maxTemperature = 0;
+	int temperatureN = 0;
+	cout << "Step: *10000" << endl;
+	cin >> step;
+	step *= 10000;
+	cout << "minT, maxT:" << endl;
+	cin >> minTemperature >> maxTemperature;
+	cout << "How many T?" << endl;
+	cin >> temperatureN;
+	//minTemperature = 0.1;
+	//maxTemperature = 10;
+	//temperatureN = 100;
+	double dTemperature = (maxTemperature - minTemperature) / (double) (temperatureN - 1);
+
+
+	double result[4][11] = { 0 }; //The 11th element is for the total value
 
 	ofstream outfile;
 	outfile.open($FILENAME_CSV);
 
-	outfile << lattice.totalEnergy << endl;
-	for (auto i = 0; i != step; ++i)
+	//outfile << lattice.totalEnergy << endl;
+
+	auto index_T = minTemperature;
+	LARGE_INTEGER m_nFreq;
+	LARGE_INTEGER m_nBeginTime;
+	LARGE_INTEGER nEndTime;
+	QueryPerformanceFrequency(&m_nFreq); // 获取时钟周期  
+	QueryPerformanceCounter(&m_nBeginTime);
+#pragma omp parallel for
+	for (auto i = 0; i < temperatureN; ++i)
 	{
-		lattice.flipOnePoint(temprature);
-		if ((i + 1) % (step / 10000) == 0)
-			outfile << lattice.totalEnergy << endl;
+		MyLattice lattice;
+		for (auto index_step = 0; index_step != step; ++index_step)
+		{
+			lattice.flipOnePoint(index_T);
+			//if ((index_step + 1) % (step / 10000) == 0)
+			//	outfile << lattice.totalEnergy << endl;
+
+			//For "the last 10" steps:
+			for (auto i = 0; i != 10; ++i)
+				if (index_step == (step / (10 * $LAST_10_PERCENT))*((10 * $LAST_10_PERCENT - 10) + i))
+				{
+					//Calculate energy:
+					result[0][i] = lattice.totalEnergy;
+					////Calculate magnetic dipole:
+					//result[1][i] = lattice.totalMagneticDipole;
+					////Calculate heat capacity:
+					//result[2][i] = lattice.calculateHeatCapacity() / pow(temperature, 2);
+					////Calculate magnetic susceptibility:
+					//result[3][i] = lattice.calculateMagneticSusceptibility() / arg_temperature;
+				}
+			//if (index_step % (step / $DATA_NUMBER) == 0)
+			//	output(outfile, index_step, lattice.totalEnergy, lattice.totalMagneticDipole);
+		}
+
+		for (auto j = 0; j != 10; ++j)
+			result[0][10] += result[0][j];
+
+		string r = to_string(index_T) + "," + to_string(result[0][10] / 10) + "\n";
+		outfile << r;
+		//outfile << index_T << ","
+		//	<< -result[0][10] / 10 << endl;
+
+		for (auto j = 0; j != 11; ++j)
+			result[0][j] = 0;
+
+		index_T += dTemperature;
 	}
+	QueryPerformanceCounter(&nEndTime);
+	cout << "Time: " << (double) (nEndTime.QuadPart - m_nBeginTime.QuadPart) / m_nFreq.QuadPart << "s" << endl;
 }
+
+
 
 //int main(int argc, char* argv[])
 //{
-//	double arg_temprature = atof(argv[1]);
+//	double arg_temperature = atof(argv[1]);
 //#ifdef USING_ARG_STEP
 //	int arg_step = atoi(argv[2]) * 10000;
 //#else
@@ -45,7 +110,7 @@ int main(int argc, char* argv[])
 //	//Flip...
 //	for (int index_step = 0; index_step != arg_step; ++index_step)
 //	{
-//		lattice.flipOnePoint(arg_temprature);
+//		lattice.flipOnePoint(arg_temperature);
 //
 //		//For "the last 10" steps:
 //		for (auto index = 0; index != 10; ++index)
@@ -56,9 +121,9 @@ int main(int argc, char* argv[])
 //				//Calculate magnetic dipole:
 //				result[1][index] = lattice.totalMagneticDipole;
 //				//Calculate heat capacity:
-//				result[2][index] = lattice.calculateHeatCapacity() / pow(arg_temprature, 2);
+//				result[2][index] = lattice.calculateHeatCapacity() / pow(arg_temperature, 2);
 //				//Calculate magnetic susceptibility:
-//				result[3][index] = lattice.calculateMagneticSusceptibility() / arg_temprature;
+//				result[3][index] = lattice.calculateMagneticSusceptibility() / arg_temperature;
 //			}
 //		if (index_step % (arg_step / $DATA_NUMBER) == 0)
 //			output(outfile, index_step, lattice.totalEnergy, lattice.totalMagneticDipole);
@@ -78,7 +143,7 @@ int main(int argc, char* argv[])
 //	//Display information:
 //	cout << "Information:" << endl
 //		<< "\tLattice size: X = " << X_LENGTH << ", Y = " << Y_LENGTH << ", Z = " << LENGTH_Z << endl
-//		<< "\tTemperature: " << arg_temprature << endl
+//		<< "\tTemperature: " << arg_temperature << endl
 //		<< "\tSteps: 10e" << log10(arg_step) << endl << endl;
 //	for (auto i = 0; i != 4; ++i)
 //		for (auto j = 0; j != 10; ++j)

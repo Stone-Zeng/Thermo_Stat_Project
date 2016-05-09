@@ -9,7 +9,7 @@
 
 #define X_LENGTH $LATTICE_LENGTH
 #define Y_LENGTH $LATTICE_LENGTH
-#define SIZE (X_LENGTH * Y_LENGTH)
+//#define SIZE (X_LENGTH * Y_LENGTH)
 
 typedef MyVector Point;
 typedef Point LatticeData[X_LENGTH][Y_LENGTH];
