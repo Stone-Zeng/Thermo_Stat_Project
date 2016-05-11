@@ -28,6 +28,7 @@ public:
 	double dot(const MyVector&);
 	MyVector cross(const MyVector&);
 
+	//TODO: Friend can be delete?
 	friend MyVector operator+(const MyVector&, const MyVector&);
 	friend MyVector operator-(const MyVector&, const MyVector&);
 	friend MyVector operator*(const MyVector&, const double&);

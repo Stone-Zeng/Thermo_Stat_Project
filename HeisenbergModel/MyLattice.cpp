@@ -38,20 +38,22 @@ inline double MyLattice::energyCount(const Point& p, const int& i, const int& j)
 //	return 2 * (energyCount(!(data[x][y][z]), x, y, z) - energyCount(data[x][y][z], x, y, z));
 //}
 
-MyLattice::MyLattice()
+MyLattice::MyLattice() :totalEnergy(0), totalMagneticDipole(0, 0, 0)
 {
-	totalEnergy = 0;
-	totalMagneticDipole = 0;
+	//TODO: Should be initialzed?
+	//totalEnergy = 0;
+	//totalMagneticDipole = 0;
 
 	for (auto i = 0; i != X_LENGTH; ++i)
 		for (auto j = 0; j != Y_LENGTH; ++j)
 			data[i][j].initialize();
 
+	//Calculate the initial physical varibles:
 	for (auto i = 0; i != X_LENGTH; ++i)
 		for (auto j = 0; j != Y_LENGTH; ++j)
 			{
 				totalEnergy += energyCount(data[i][j], i, j);
-				//totalMagneticDipole += (data[i][j] ? 1 : -1);
+				totalMagneticDipole += data[i][j];
 			}
 }
 
@@ -67,7 +69,7 @@ void MyLattice::flipOnePoint(const double& temperature)
 	{
 		data[i][j] = pointAfter;
 		totalEnergy += dE;
-		//totalMagneticDipole += (data[i][j][k] ? 2 : -2);
+		totalMagneticDipole += data[i][j];
 	}
 }
 //

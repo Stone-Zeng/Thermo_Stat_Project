@@ -30,7 +30,7 @@ public:
 
 	//int->double
 	double totalEnergy;
-	int totalMagneticDipole;
+	MyVector totalMagneticDipole;
 	void flipOnePoint(const double&);
 	//void outputData(std::ofstream&);
 

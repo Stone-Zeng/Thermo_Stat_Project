@@ -1,18 +1,19 @@
 //Here are some switches and adjusted parameters for
 //the program.
-//Try no to add functions here!
+//TODO: Do not add functions here.
+//TODO: Do not add .h files here.
 
 #ifndef _HEAD_H_
 #define _HEAD_H_
 #pragma once
 
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-#include <vector>
-#include <random>
-#include <cstdlib>
-#include <ctime>
+//#include <iostream>
+//#include <fstream>
+//#include <iomanip>
+//#include <vector>
+//#include <random>
+//#include <cstdlib>
+//#include <ctime>
 
 //#define CPP11_RANDOM
 //#define OUTPUT_WIN_CSV
@@ -22,11 +23,11 @@
 
 #define $LATTICE_LENGTH 100
 #define $DATA_NUMBER 10000
-#define $LAST_10_PERCENT 1000 //1/1000
+#define $LAST_10_PERCENT 1000 // 1/1000
 #define $DISPLAY_NUMBER 10
-#define $FILENAME_CSV "output.csv"
-#define $FILENAME_DAT "output.dat"
-#define $FILENAME_DATA "data.dat"
+//#define $FILENAME_CSV "output.csv"
+//#define $FILENAME_DAT "output.dat"
+//#define $FILENAME_DATA "data.dat"
 
 //Parameters:
 //#define X_LENGTH $LATTICE_LENGTH
@@ -37,31 +38,6 @@
 //typedef bool Point;
 //typedef std::vector<std::vector<std::vector<Point>>> LatticeData;
 //typedef Point LatticeData[X_LENGTH][Y_LENGTH][LENGTH_Z];
-
-//inline int randomInt(const int& min, const int& max)
-//{
-//#ifdef CPP11_RANDOM
-//	random_device rd;
-//	uniform_int_distribution<> dist(min, max);
-//	mt19937 gen(rd());
-//	return dist(gen);
-//#else
-//	return rand() % (max - min + 1) + min;
-//#endif
-//}
-//
-//inline double randomReal(const double& min, const double& max)
-//{
-//#ifdef CPP11_RANDOM
-//	random_device rd;
-//	uniform_real_distribution<> dist(min, max);
-//	mt19937 gen(rd());
-//	return dist(gen);
-//#else
-//	auto r = 0.0001 * (double) ((rand() * rand()) % 10000);
-//	return (max - min) * r + min;
-//#endif
-//}
 
 //inline int energyBetween(const Point& p1, const Point& p2)
 //{
