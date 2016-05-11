@@ -31,7 +31,9 @@ int main()
 	double result[4][11] = { 0 }; //The 11th element is for the total value
 
 	ofstream outfile;
-	outfile.open($FILENAME_CSV);
+	string filename = "Output_step=" + to_string(step / 1000) +
+		"k_T=" + to_string(minTemperature) + "--" + to_string(maxTemperature) + ".csv";
+	outfile.open(filename);
 
 	//outfile << lattice.totalEnergy << endl;
 
@@ -45,11 +47,18 @@ int main()
 	for (auto i = 0; i < temperatureN; ++i)
 	{
 		MyLattice lattice;
+
+		ofstream outfile_flip;
+		string filename_flip = "OutputFlip_step=" + to_string(step / 100) +
+			"k_T=" + to_string(index_T) + ".csv";
+		outfile_flip.open(filename_flip);
+
 		for (auto index_step = 0; index_step != step; ++index_step)
 		{
 			lattice.flipOnePoint(index_T);
-			//if ((index_step + 1) % (step / 10000) == 0)
-			//	outfile << lattice.totalEnergy << endl;
+
+			if ((index_step + 1) % (step / 10000) == 0)
+				outfile_flip << index_step + 1 << "," << lattice.totalEnergy << endl;
 
 			//For "the last 10" steps:
 			for (auto i = 0; i != 10; ++i)
@@ -71,10 +80,9 @@ int main()
 		for (auto j = 0; j != 10; ++j)
 			result[0][10] += result[0][j];
 
+		outfile_flip.close();
 		string r = to_string(index_T) + "," + to_string(result[0][10] / 10) + "\n";
 		outfile << r;
-		//outfile << index_T << ","
-		//	<< -result[0][10] / 10 << endl;
 
 		for (auto j = 0; j != 11; ++j)
 			result[0][j] = 0;
