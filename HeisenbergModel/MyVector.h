@@ -1,8 +1,8 @@
 //This is the class for 3D unit vector, which is used for lattice 
 //points in Heisenberg model.
 
-#ifndef MYVECTOR_H_
-#define MYVECTOR_H_
+#ifndef _MYVECTOR_H_
+#define _MYVECTOR_H_
 #pragma once
 
 #include <iostream>

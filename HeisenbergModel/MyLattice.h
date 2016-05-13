@@ -6,6 +6,7 @@
 
 #include "Head.h"
 #include "MyVector.h"
+#include "Physics.h"
 
 #define X_LENGTH $LATTICE_LENGTH
 #define Y_LENGTH $LATTICE_LENGTH
@@ -28,14 +29,16 @@ class MyLattice
 public:
 	MyLattice();
 
-	//int->double
-	double totalEnergy;
-	MyVector totalMagneticDipole;
+	//double totalEnergy;
+	//MyVector totalMagneticDipole;
+
 	void flipOnePoint(const double&);
+	Physics physicalQuantity;
+
 	//void outputData(std::ofstream&);
 
-	double calculateHeatCapacity();
-	double calculateMagneticSusceptibility();
+	//double calculateHeatCapacity();
+	//double calculateMagneticSusceptibility();
 };
 
 #endif

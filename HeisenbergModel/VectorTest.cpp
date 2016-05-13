@@ -5,7 +5,7 @@
 #include "Function.h"
 #include "MyVector.h"
 
-#ifdef VECTOR_TEST_OPEN
+#ifdef VECTOR_TEST_ON
 
 using namespace std;
 
@@ -17,7 +17,7 @@ int main()
 {
 	//srand((unsigned int) time(NULL));
 
-	MyVector v1, v2, v3;
+	MyVector v1, v2, v3(4.5,4,-1654184);
 	cout << "v1= " << v1 << endl
 		<< "v2= " << v2 << endl
 		<< "v3= " << v3 << endl << endl;

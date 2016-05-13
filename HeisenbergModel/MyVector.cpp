@@ -4,17 +4,11 @@
 #include "MyVector.h"
 using namespace std;
 
-MyVector::MyVector()
-{
-	data[0] = data[1] = data[2] = 0.0;
-}
+MyVector::MyVector() :data{ 0.0,0.0,0.0 }
+{}
 
-MyVector::MyVector(const double& x, const double& y, const double& z)
-{
-	data[0] = x;
-	data[1] = y;
-	data[2] = z;
-}
+MyVector::MyVector(const double& x, const double& y, const double& z) : data{ x,y,z }
+{}
 
 double& MyVector::operator[](int index)
 {
@@ -111,6 +105,6 @@ MyVector operator/(const MyVector& v, const double& x)
 
 ostream& operator<<(ostream & out, const MyVector & v)
 {
-	out << v.data[0] << "\t" << v.data[1] << "\t" << v.data[2];
+	out << v.data[0] << "," << v.data[1] << "," << v.data[2];
 	return out;
 }

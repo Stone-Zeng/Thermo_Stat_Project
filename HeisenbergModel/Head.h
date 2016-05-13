@@ -10,13 +10,17 @@
 #define $LATTICE_LENGTH 100
 #define $DATA_NUMBER 10000
 #define $LAST_10_PERCENT 1000 // 1/1000
-#define $DISPLAY_NUMBER 10
+//#define $DISPLAY_NUMBER 10
+#define $AVERAGE_NUMBER 10
 
-//#define NORMAL_RUN
+#define NORMAL_RUN
 #ifndef NORMAL_RUN
-//#define VECTOR_TEST_OPEN
-#define AMP_TEST_OPEN
+#define VECTOR_TEST_ON
+//#define AMP_TEST_ON
 #endif
+
+#define INPUT_PARAMETERS_ON
+
 
 //#include <iostream>
 //#include <fstream>

@@ -27,8 +27,6 @@ inline int MyLattice::y_plus_1(const int& y)
 
 inline double MyLattice::energyCount(const Point& p, const int& i, const int& j)
 {
-	//Two methods:
-	//return (data[x_minus_1(i)][j] + data[x_plus_1(i)][j] + data[y_minus_1(i)][j] + data[y_plus_1(i)][j]).dot(p);
 	return data[x_minus_1(i)][j].dot(p) + data[x_plus_1(i)][j].dot(p)
 		+ data[y_minus_1(i)][j].dot(p) + data[y_plus_1(i)][j].dot(p);
 }
@@ -38,22 +36,18 @@ inline double MyLattice::energyCount(const Point& p, const int& i, const int& j)
 //	return 2 * (energyCount(!(data[x][y][z]), x, y, z) - energyCount(data[x][y][z], x, y, z));
 //}
 
-MyLattice::MyLattice() :totalEnergy(0), totalMagneticDipole(0, 0, 0)
+MyLattice::MyLattice()
 {
-	//TODO: Should be initialzed?
-	//totalEnergy = 0;
-	//totalMagneticDipole = 0;
-
-	for (auto i = 0; i != X_LENGTH; ++i)
-		for (auto j = 0; j != Y_LENGTH; ++j)
-			data[i][j].initialize();
+	for (auto &i : data)
+		for (auto j : i)
+			j.initialize();
 
 	//Calculate the initial physical varibles:
 	for (auto i = 0; i != X_LENGTH; ++i)
 		for (auto j = 0; j != Y_LENGTH; ++j)
 			{
-				totalEnergy += energyCount(data[i][j], i, j);
-				totalMagneticDipole += data[i][j];
+				physicalQuantity.energy += energyCount(data[i][j], i, j);
+				physicalQuantity.magneticDipole += data[i][j];
 			}
 }
 
@@ -68,8 +62,8 @@ void MyLattice::flipOnePoint(const double& temperature)
 	if (randomReal(0, 1) < possibilityOfFlip(dE, temperature))
 	{
 		data[i][j] = pointAfter;
-		totalEnergy += dE;
-		totalMagneticDipole += data[i][j];
+		physicalQuantity.energy += dE;
+		physicalQuantity.magneticDipole += data[i][j];
 	}
 }
 //
