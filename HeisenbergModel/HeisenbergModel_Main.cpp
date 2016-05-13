@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <numeric>
 #include <array>
 #include <vector>
 #include <string>
@@ -9,6 +11,9 @@
 #include <omp.h>
 #include "Head.h"
 #include "MyLattice.h"
+
+#ifdef NORMAL_RUN
+
 using namespace std;
 
 int main()
@@ -46,7 +51,7 @@ int main()
 	LARGE_INTEGER m_nBeginTime;
 	LARGE_INTEGER nEndTime;
 	QueryPerformanceFrequency(&m_nFreq); // Obtain clock period
-	QueryPerformanceCounter(&m_nBeginTime);
+	//QueryPerformanceCounter(&m_nBeginTime);
 
 //#pragma omp parallel for
 	for (auto index_T_N = 0; index_T_N < temperatureN; ++index_T_N)
@@ -55,6 +60,7 @@ int main()
 		array<array<double, $AVERAGE_NUMBER>, $PHYSICAL_VARIBLE_NUMBER> result;
 
 		//Flip and save data:
+		QueryPerformanceCounter(&m_nBeginTime);
 		for (auto index_step = 0; index_step != step; ++index_step)
 		{
 			lattice.flipOnePoint(index_T);
@@ -85,11 +91,13 @@ int main()
 					//result[3][i] = lattice.calculateMagneticSusceptibility() / arg_temperature;
 				}
 		}
-
+		QueryPerformanceCounter(&nEndTime);
+		cout << "Time: " << (double) (nEndTime.QuadPart - m_nBeginTime.QuadPart) / m_nFreq.QuadPart << "s" << endl;
+		
+		//TODO: "result" should be changed into class.
 		for (auto i = 0; i != $PHYSICAL_VARIBLE_NUMBER; ++i)
-			for (auto j : result[i])
-				averageResult[index_T_N][i] += j; //Now averageResult is the total value.
-
+			averageResult[index_T_N][i] = accumulate(result[i].cbegin(), result[i].cend(), 0.0);
+		
 		for (auto i : result)
 			for (auto j : i)
 				j = 0;
@@ -98,8 +106,8 @@ int main()
 	}
 	//Parallel end.
 
-	QueryPerformanceCounter(&nEndTime);
-	cout << "Time: " << (double) (nEndTime.QuadPart - m_nBeginTime.QuadPart) / m_nFreq.QuadPart << "s" << endl;
+	//QueryPerformanceCounter(&nEndTime);
+	//cout << "Time: " << (double) (nEndTime.QuadPart - m_nBeginTime.QuadPart) / m_nFreq.QuadPart << "s" << endl;
 
 
 
@@ -144,3 +152,5 @@ int main()
 
 	outfile_Result.close();
 }
+
+#endif

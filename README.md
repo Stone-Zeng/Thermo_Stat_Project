@@ -1,11 +1,20 @@
 # Thermo_Stat_Project
-git add *filename*
+!!The path of this directory can only use ASCII characters.
 
-git commit -m *comments*
+Git usage:
+    git add <filename>
 
-git remote add origin *https://github.com/Stone-Zeng/Thermo_Stat_Project.git*
+    git commit -m <comments>
 
-git push -u origin master
+    git remote add origin <https://github.com/Stone-Zeng/Thermo_Stat_Project.git>
+
+    git push -u origin master
 
 Heisenberg Model
-	v0.1	First version of this model. Can only calculate energy.
+
+    v0.1
+        First version of this model. Can only calculate energy.
+    v0.2
+        Parallelize, but data seem to be abnormal.
+    v0.3
+        Parallelize debug.

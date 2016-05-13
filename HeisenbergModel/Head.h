@@ -7,6 +7,17 @@
 #define _HEAD_H_
 #pragma once
 
+#define $LATTICE_LENGTH 100
+#define $DATA_NUMBER 10000
+#define $LAST_10_PERCENT 1000 // 1/1000
+#define $DISPLAY_NUMBER 10
+
+//#define NORMAL_RUN
+#ifndef NORMAL_RUN
+//#define VECTOR_TEST_OPEN
+#define AMP_TEST_OPEN
+#endif
+
 //#include <iostream>
 //#include <fstream>
 //#include <iomanip>
@@ -18,13 +29,9 @@
 //#define CPP11_RANDOM
 //#define OUTPUT_WIN_CSV
 //#define OUTPUT_DATA
-#define DISPLAY_PROGRESS
+//#define DISPLAY_PROGRESS
 //#define USING_ARG_STEP
 
-#define $LATTICE_LENGTH 100
-#define $DATA_NUMBER 10000
-#define $LAST_10_PERCENT 1000 // 1/1000
-#define $DISPLAY_NUMBER 10
 //#define $FILENAME_CSV "output.csv"
 //#define $FILENAME_DAT "output.dat"
 //#define $FILENAME_DATA "data.dat"
@@ -33,7 +40,7 @@
 //#define X_LENGTH $LATTICE_LENGTH
 //#define Y_LENGTH $LATTICE_LENGTH
 //#define SIZE (X_LENGTH * Y_LENGTH * LENGTH_Z)
-#define STEP 1000000
+//#define STEP 1000000
 
 //typedef bool Point;
 //typedef std::vector<std::vector<std::vector<Point>>> LatticeData;
