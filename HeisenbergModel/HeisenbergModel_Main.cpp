@@ -28,7 +28,7 @@ int main()
 #ifdef INPUT_PARAMETERS_ON
 	cout << "Step: *10000" << endl;
 	cin >> step;
-	step *= 10000;
+	//step *= 10000;
 	cout << "minT, maxT:" << endl;
 	cin >> minTemperature >> maxTemperature;
 	cout << "How many T?" << endl;

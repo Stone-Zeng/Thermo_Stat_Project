@@ -35,9 +35,14 @@ inline double MyLattice::energyCount(const Point& p, const int& i, const int& j)
 
 	//Uniform magnetic field:
 	MyVector B(0, 0, 1);
-	return data[x_minus_1(i)][j].dot(p) + data[x_plus_1(i)][j].dot(p)
-		+ data[y_minus_1(i)][j].dot(p) + data[y_plus_1(i)][j].dot(p)
-		+ B.dot(p);
+	MyVector ex(1, 0, 0), ey(0, 1, 0);
+	double D = 1;
+
+	return /*data[x_minus_1(i)][j].dot(p) +*/ data[x_plus_1(i)][j].dot(p)
+		/*+ data[y_minus_1(i)][j].dot(p)*/ + data[y_plus_1(i)][j].dot(p)
+		+ B.dot(p)
+		+ D * (/*(data[x_minus_1(i)][j].cross(p)).dot(ex)*/ - (data[x_plus_1(i)][j].cross(p)).dot(ex)
+			/*+ (data[y_minus_1(i)][j].cross(p)).dot(ey)*/ - (data[y_plus_1(i)][j].cross(p)).dot(ey));
 }
 
 MyLattice::MyLattice()
@@ -57,18 +62,20 @@ MyLattice::MyLattice()
 
 void MyLattice::flipOnePoint(const double& temperature)
 {
-	auto i = randomInt(0, X_LENGTH - 1), j = randomInt(0, Y_LENGTH - 1);
+	for (auto i = 0; i != X_LENGTH; ++i)
+		for (auto j = 0; j != Y_LENGTH; ++j)
+		{
+			MyVector pointAfter;
+			pointAfter.initialize();
+			auto dE = energyCount(pointAfter, i, j) - energyCount(data[i][j], i, j);
 
-	MyVector pointAfter;
-	pointAfter.initialize();
-	auto dE = energyCount(pointAfter, i, j) - energyCount(data[i][j], i, j);
-
-	if (randomReal(0, 1) < possibilityOfFlip(dE, temperature))
-	{
-		data[i][j] = pointAfter;
-		physicalQuantity.energy += dE;
-		physicalQuantity.magneticDipole += data[i][j];
-	}
+			if (randomReal(0, 1) < possibilityOfFlip(dE, temperature))
+			{
+				data[i][j] = pointAfter;
+				physicalQuantity.energy += dE;
+				physicalQuantity.magneticDipole += data[i][j];
+			}
+		}
 }
 //
 //double MyLattice::calculateHeatCapacity()

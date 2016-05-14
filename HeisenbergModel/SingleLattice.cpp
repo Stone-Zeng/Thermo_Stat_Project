@@ -22,33 +22,33 @@ void SingleLattice::completeFlip(const int& step, const double& temperature)
 #endif
 
 		//TODO: Figure:
-		//if ((step_index + 1) % (step / 20) == 0)
-		//{
-		//	auto stepNumber = (step_index + 1) / (step / $DATA_NUMBER) - 1;
-		//
-		//	ofstream out;
-		//	string filename = to_string(step_index + 1);
-		//	out.open(filename);
-		//
-		//	out << "{";
-		//	for (auto i = 0; i != X_LENGTH - 1; ++i)
-		//	{
-		//		out << "{";
-		//		for (auto j = 0; j != Y_LENGTH - 1; ++j)
-		//		{
-		//			out << "{" << lattice.data[i][j] << "},";
-		//		}
-		//		out << "{" << lattice.data[i][Y_LENGTH - 1] << "}},";
-		//	}
-		//	out << "{";
-		//	for (auto j = 0; j != Y_LENGTH - 1; ++j)
-		//	{
-		//		out << "{" << lattice.data[X_LENGTH - 1][j] << "},";
-		//	}
-		//	out << "{" << lattice.data[X_LENGTH - 1][Y_LENGTH - 1] << "}}}";
-		//
-		//	out.close();
-		//}
+		if ((step_index + 1) % (step / 20) == 0)
+		{
+			auto stepNumber = (step_index + 1) / (step / $DATA_NUMBER) - 1;
+		
+			ofstream out;
+			string filename = to_string(step_index + 1);
+			out.open(filename);
+		
+			out << "{";
+			for (auto i = 0; i != X_LENGTH - 1; ++i)
+			{
+				out << "{";
+				for (auto j = 0; j != Y_LENGTH - 1; ++j)
+				{
+					out << "{" << lattice.data[i][j] << "},";
+				}
+				out << "{" << lattice.data[i][Y_LENGTH - 1] << "}},";
+			}
+			out << "{";
+			for (auto j = 0; j != Y_LENGTH - 1; ++j)
+			{
+				out << "{" << lattice.data[X_LENGTH - 1][j] << "},";
+			}
+			out << "{" << lattice.data[X_LENGTH - 1][Y_LENGTH - 1] << "}}}";
+		
+			out.close();
+		}
 
 		//For "the last 10" steps:
 		for (auto i = 0; i != 10; ++i)
