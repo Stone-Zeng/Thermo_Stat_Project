@@ -27,28 +27,32 @@ inline int MyLattice::y_plus_1(const int& y)
 
 inline double MyLattice::energyCount(const Point& p, const int& i, const int& j)
 {
-	return data[x_minus_1(i)][j].dot(p) + data[x_plus_1(i)][j].dot(p)
-		+ data[y_minus_1(i)][j].dot(p) + data[y_plus_1(i)][j].dot(p);
-}
+	//TODO: Outside field can be added here.
 
-//inline int MyLattice::energyOfChange(const int& x, const int& y, const int& z)
-//{
-//	return 2 * (energyCount(!(data[x][y][z]), x, y, z) - energyCount(data[x][y][z], x, y, z));
-//}
+	//No field:
+	//return data[x_minus_1(i)][j].dot(p) + data[x_plus_1(i)][j].dot(p)
+	//	+ data[y_minus_1(i)][j].dot(p) + data[y_plus_1(i)][j].dot(p);
+
+	//Uniform magnetic field:
+	MyVector B(0, 0, 1);
+	return data[x_minus_1(i)][j].dot(p) + data[x_plus_1(i)][j].dot(p)
+		+ data[y_minus_1(i)][j].dot(p) + data[y_plus_1(i)][j].dot(p)
+		+ B.dot(p);
+}
 
 MyLattice::MyLattice()
 {
-	for (auto &i : data)
-		for (auto j : i)
-			j.initialize();
+	for (auto i = 0; i != X_LENGTH; ++i)
+		for (auto j = 0; j != Y_LENGTH; ++j)
+			data[i][j].initialize();
 
 	//Calculate the initial physical varibles:
 	for (auto i = 0; i != X_LENGTH; ++i)
 		for (auto j = 0; j != Y_LENGTH; ++j)
-			{
-				physicalQuantity.energy += energyCount(data[i][j], i, j);
-				physicalQuantity.magneticDipole += data[i][j];
-			}
+		{
+			physicalQuantity.energy += energyCount(data[i][j], i, j);
+			physicalQuantity.magneticDipole += data[i][j];
+		}
 }
 
 void MyLattice::flipOnePoint(const double& temperature)
@@ -95,18 +99,18 @@ void MyLattice::flipOnePoint(const double& temperature)
 //	return (double) M_square / (double) SIZE - pow(M / SIZE, 2);
 //}
 //
-////void MyLattice::outputData(ofstream& file)
-////{
-////	file << "{";
-////	for (int i = 0; i < x_Length - 1; ++i)
-////	{
-////		file << "{";
-////		for (int j = 0; j < y_Length - 1; ++j)
-////			file << data[i][j] << ",";
-////		file << data[i][y_Length - 1] << "},";
-////	}
-////	file << "{";
-////	for (int j = 0; j < y_Length - 1; ++j)
-////		file << data[x_Length - 1][j] << ",";
-////	file << data[x_Length - 1][y_Length - 1] << "}},";
-////}
+//void MyLattice::outputData(ofstream& file)
+//{
+//	file << "{";
+//	for (int i = 0; i < x_Length - 1; ++i)
+//	{
+//		file << "{";
+//		for (int j = 0; j < y_Length - 1; ++j)
+//			file << data[i][j] << ",";
+//		file << data[i][y_Length - 1] << "},";
+//	}
+//	file << "{";
+//	for (int j = 0; j < y_Length - 1; ++j)
+//		file << data[x_Length - 1][j] << ",";
+//	file << data[x_Length - 1][y_Length - 1] << "}},";
+//}

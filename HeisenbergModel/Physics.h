@@ -7,6 +7,7 @@
 #include <iostream>
 #include "MyVector.h"
 
+#define PHYSICS_LIST "E, M_x, M_y, M_z"
 class Physics
 {
 public:

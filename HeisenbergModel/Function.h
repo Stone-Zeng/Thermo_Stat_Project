@@ -1,14 +1,19 @@
 //Here are some simple functions:
 //	randomInt
 //	randomReal
+//	possibilityOfFlip
+//	doubleToString
 
 #ifndef _FUNCTION_H_
 #define _FUNCTION_H_
 #pragma once
 
-//#define CPP11_RANDOM
+#include "Head.h"
 
-#include <random> //For C++11 random
+#ifdef CPP11_RANDOM
+#include <random>
+#endif
+#include <string>
 #include <cstdlib>
 
 inline int randomInt(const int& min, const int& max)
@@ -39,6 +44,17 @@ inline double randomReal(const double& min, const double& max)
 inline double possibilityOfFlip(const double& dE, const double& temperature)
 {
 	return ((dE > 0.0) ? exp(-dE / temperature) : 1);
+}
+
+inline std::string doubleToString(const double& x)
+{
+	auto s = std::to_string(x);
+	auto i = s.find_last_of(".123456789");
+	s.erase(i + 1);
+
+	if (s[s.length() - 1] == '.')
+		--i;
+	return s.substr(0, i + 1);
 }
 
 #endif

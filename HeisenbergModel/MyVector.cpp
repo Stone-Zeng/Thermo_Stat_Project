@@ -48,7 +48,7 @@ MyVector& MyVector::operator/=(const double& x)
 	return *this;
 }
 
-void MyVector::initialize()
+MyVector MyVector::initialize()
 {
 	double r[3] = { 0 };
 	double rSum = 0.0, rSumSqrt = 0.0;
@@ -60,6 +60,7 @@ void MyVector::initialize()
 	rSumSqrt = sqrt(rSum); 
 	for (auto i = 0; i != 3; ++i)
 		data[i] = r[i] / rSumSqrt;
+	return *this;
 }
 
 double MyVector::dot(const MyVector& v)

@@ -10,7 +10,6 @@
 #define $LATTICE_LENGTH 100
 #define $DATA_NUMBER 10000
 #define $LAST_10_PERCENT 1000 // 1/1000
-//#define $DISPLAY_NUMBER 10
 #define $AVERAGE_NUMBER 10
 
 #define NORMAL_RUN
@@ -20,6 +19,8 @@
 #endif
 
 #define INPUT_PARAMETERS_ON
+#define FLIP_DATA_OUTPUT_ON
+//#define CPP11_RANDOM
 
 
 //#include <iostream>

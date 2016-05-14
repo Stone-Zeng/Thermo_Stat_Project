@@ -24,7 +24,7 @@ public:
 	MyVector& operator*=(const double&);
 	MyVector& operator/=(const double&);
 	
-	void initialize();
+	MyVector initialize();
 	double dot(const MyVector&);
 	MyVector cross(const MyVector&);
 

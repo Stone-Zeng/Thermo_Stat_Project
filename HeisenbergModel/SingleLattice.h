@@ -5,7 +5,7 @@
 #pragma once
 
 #include <array>
-#include <amp.h>
+#include <iostream>
 #include "MyLattice.h"
 #include "Physics.h"
 
@@ -19,7 +19,7 @@ public:
 	PhysicsData flipData;
 
 	void completeFlip(const int& step, const double& temperature);
-	//TODO: output function
+	void output(std::ostream& out_Result, const int& step, const double& temperature);
 };
 
 #endif
