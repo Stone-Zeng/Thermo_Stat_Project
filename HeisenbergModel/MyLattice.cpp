@@ -25,24 +25,31 @@ inline int MyLattice::y_plus_1(const int& y)
 	return (y == Y_LENGTH - 1 ? 0 : y + 1);
 }
 
+#define HAMILTONIAN_J 1.0
+#define HAMILTONIAN_D 1
+#define HAMILTONIAN_A 1
+
 inline double MyLattice::energyCount(const Point& p, const int& i, const int& j)
 {
+	double H = 0.0;
 	//TODO: Outside field can be added here.
 
-	//No field:
-	//return data[x_minus_1(i)][j].dot(p) + data[x_plus_1(i)][j].dot(p)
-	//	+ data[y_minus_1(i)][j].dot(p) + data[y_plus_1(i)][j].dot(p);
+	//Exchange:
+	H -= HAMILTONIAN_J * (data[x_minus_1(i)][j] + data[x_plus_1(i)][j] + data[y_minus_1(i)][j] + data[y_plus_1(i)][j]).dot(p);
 
-	//Uniform magnetic field:
-	MyVector B(0, 0, 1);
+	//Zeeman(magnetic field):
+	MyVector B(j - 50, -i + 50, 0);
+	B /= 10;
+	H -= B.dot(p);
+
+	//D-M interaction:
 	MyVector ex(1, 0, 0), ey(0, 1, 0);
-	double D = 1;
+	H -= HAMILTONIAN_D * (
+		(data[x_minus_1(i)][j].cross(p)).dot(ex) - (data[x_plus_1(i)][j].cross(p)).dot(ex)
+		+ (data[y_minus_1(i)][j].cross(p)).dot(ey) - (data[y_plus_1(i)][j].cross(p)).dot(ey)
+		);
 
-	return /*data[x_minus_1(i)][j].dot(p) +*/ data[x_plus_1(i)][j].dot(p)
-		/*+ data[y_minus_1(i)][j].dot(p)*/ + data[y_plus_1(i)][j].dot(p)
-		+ B.dot(p)
-		+ D * (/*(data[x_minus_1(i)][j].cross(p)).dot(ex)*/ - (data[x_plus_1(i)][j].cross(p)).dot(ex)
-			/*+ (data[y_minus_1(i)][j].cross(p)).dot(ey)*/ - (data[y_plus_1(i)][j].cross(p)).dot(ey));
+	return H;
 }
 
 MyLattice::MyLattice()

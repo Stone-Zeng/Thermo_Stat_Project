@@ -22,12 +22,13 @@ void SingleLattice::completeFlip(const int& step, const double& temperature)
 #endif
 
 		//TODO: Figure:
+#ifdef VECTOR_PLOT_OUTPUT_ON
 		if ((step_index + 1) % (step / 20) == 0)
 		{
 			auto stepNumber = (step_index + 1) / (step / $DATA_NUMBER) - 1;
 		
 			ofstream out;
-			string filename = to_string(step_index + 1);
+			string filename = "VEC" + to_string(step_index + 1);
 			out.open(filename);
 		
 			out << "{";
@@ -49,6 +50,7 @@ void SingleLattice::completeFlip(const int& step, const double& temperature)
 		
 			out.close();
 		}
+#endif
 
 		//For "the last 10" steps:
 		for (auto i = 0; i != 10; ++i)

@@ -7,7 +7,7 @@
 #define _HEAD_H_
 #pragma once
 
-#define $LATTICE_LENGTH 20
+#define $LATTICE_LENGTH 100
 #define $DATA_NUMBER 100
 #define $LAST_10_PERCENT 1000 // 1/1000
 #define $AVERAGE_NUMBER 10
@@ -19,7 +19,9 @@
 #endif
 
 #define INPUT_PARAMETERS_ON
-#define FLIP_DATA_OUTPUT_ON
+//#define FLIP_DATA_OUTPUT_ON
+//#define VECTOR_PLOT_OUTPUT_ON
+
 //#define CPP11_RANDOM
 
 

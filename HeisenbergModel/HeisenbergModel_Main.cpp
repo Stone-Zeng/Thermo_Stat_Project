@@ -44,7 +44,7 @@ int main()
 
 	//Flip:
 	timingFlag.timingStart();
-	#pragma omp parallel for
+#pragma omp parallel for
 	for (auto i = 0; i < temperatureN; ++i) //Must use "<" instead of "!=" in order to use omp
 		lattices[i].completeFlip(step, T_array[i]);
 	timingFlag.timingEnd();
