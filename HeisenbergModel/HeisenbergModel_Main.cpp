@@ -44,9 +44,18 @@ int main()
 
 	//Flip:
 	timingFlag.timingStart();
+
+	//parallel_for_each(
+	//	lattices_AMP.extent,
+	//	[=](index<1> idx) restrict(amp)
+	//	//TODO: add resrict(amp).
+	//{lattices_AMP[idx].completeFlip(step, T_array_AMP[idx]); }
+	//);
+
 #pragma omp parallel for
 	for (auto i = 0; i < temperatureN; ++i) //Must use "<" instead of "!=" in order to use omp
 		lattices[i].completeFlip(step, T_array[i]);
+
 	timingFlag.timingEnd();
 	cout << "Time: " << timingFlag.runTime() << "s" << endl;
 

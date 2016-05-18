@@ -26,7 +26,7 @@ inline int MyLattice::y_plus_1(const int& y)
 }
 
 #define HAMILTONIAN_J 1.0
-#define HAMILTONIAN_D 1
+#define HAMILTONIAN_D 100.0
 #define HAMILTONIAN_A 1
 
 inline double MyLattice::energyCount(const Point& p, const int& i, const int& j)
@@ -35,12 +35,13 @@ inline double MyLattice::energyCount(const Point& p, const int& i, const int& j)
 	//TODO: Outside field can be added here.
 
 	//Exchange:
-	H -= HAMILTONIAN_J * (data[x_minus_1(i)][j] + data[x_plus_1(i)][j] + data[y_minus_1(i)][j] + data[y_plus_1(i)][j]).dot(p);
+	//H -= HAMILTONIAN_J * (data[x_minus_1(i)][j] + data[x_plus_1(i)][j] + data[y_minus_1(i)][j] + data[y_plus_1(i)][j]).dot(p);
 
 	//Zeeman(magnetic field):
-	MyVector B(j - 50, -i + 50, 0);
-	B /= 10;
-	H -= B.dot(p);
+	//MyVector B(i - $LATTICE_LENGTH / 2, j - $LATTICE_LENGTH / 2, 0);
+	////MyVector B(0, 0, 2);
+	//B /= 10;
+	//H -= B.dot(p);
 
 	//D-M interaction:
 	MyVector ex(1, 0, 0), ey(0, 1, 0);
@@ -69,6 +70,8 @@ MyLattice::MyLattice()
 
 void MyLattice::flipOnePoint(const double& temperature)
 {
+	calculateEnergy();
+
 	for (auto i = 0; i != X_LENGTH; ++i)
 		for (auto j = 0; j != Y_LENGTH; ++j)
 		{
@@ -83,6 +86,14 @@ void MyLattice::flipOnePoint(const double& temperature)
 				physicalQuantity.magneticDipole += data[i][j];
 			}
 		}
+}
+double MyLattice::calculateEnergy()
+{
+	double E = 0.0;
+	for (auto i = 0; i != X_LENGTH; ++i)
+		for (auto j = 0; j != Y_LENGTH; ++j)
+			E += energyCount(data[i][j], i, j);
+	return E;
 }
 //
 //double MyLattice::calculateHeatCapacity()

@@ -34,6 +34,7 @@ public:
 
 	//void outputData(std::ofstream&);
 
+	double calculateEnergy();
 	//double calculateHeatCapacity();
 	//double calculateMagneticSusceptibility();
 };

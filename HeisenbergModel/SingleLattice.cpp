@@ -9,8 +9,6 @@ void SingleLattice::completeFlip(const int& step, const double& temperature)
 {
 	for (auto step_index = 0; step_index != step; ++step_index)
 	{
-		lattice.flipOnePoint(temperature);
-
 		//Output data for "each" flip:
 #ifdef FLIP_DATA_OUTPUT_ON
 		if ((step_index + 1) % (step / $DATA_NUMBER) == 0)
@@ -51,6 +49,8 @@ void SingleLattice::completeFlip(const int& step, const double& temperature)
 			out.close();
 		}
 #endif
+
+		lattice.flipOnePoint(temperature);
 
 		//For "the last 10" steps:
 		for (auto i = 0; i != 10; ++i)
