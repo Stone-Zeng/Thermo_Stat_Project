@@ -1,0 +1,144 @@
+\documentclass{ctexart}
+
+\usepackage{geometry}
+	\geometry{a4paper, twoside, left = 2.54 cm, right = 2.54 cm, top = 3.18 cm, bottom = 3.18 cm, headheight = 3 cm}
+
+\usepackage{titlesec}
+
+\usepackage{xcolor}
+\usepackage[hyperfootnotes=false]{hyperref}
+	\hypersetup{
+		bookmarksopen = true,
+		bookmarksopenlevel = 1,
+%		pdfborder = 0 0 1
+		colorlinks,
+		linkcolor = {red!50!black},
+		citecolor = {blue!50!black},
+		urlcolor = {blue!80!black}
+	}
+
+\usepackage[stable, perpage]{footmisc}
+\usepackage{pifont}
+	\renewcommand{\thefootnote}{\ding{\numexpr171+\value{footnote}}}
+
+\RequirePackage[numbers, square, super]{natbib}
+	\setlength{\bibsep}{0 pt}
+	\renewcommand{\citenumfont}{\itshape}
+	\renewcommand{\bibsection}{\section{参考文献}}
+	\bibliographystyle{FDUbib}
+
+\usepackage{amsmath}
+\usepackage[math-style=ISO, bold-style=ISO]{unicode-math}
+	\setmathfont{xits-math.otf}
+\usepackage{bm}
+
+\usepackage{fontspec}
+	\setmainfont[BoldFont = XITS]{XITS}
+	\setsansfont{Verdana}
+	\setmonofont{Courier New}
+	\newfontfamily \helvetica {HelveticaNeueLTPro-Roman.otf}
+
+\usepackage{xeCJK}
+	\xeCJKsetup{
+		AutoFakeBold = false,
+		AutoFakeSlant = false
+	}
+	\setCJKmainfont[BoldFont = 华文中宋, ItalicFont = 华文楷体, Mapping = fullwidth-stop]{宋体}
+	\setCJKfamilyfont{中宋}[Mapping = fullwidth-stop]{华文中宋}
+	\setCJKfamilyfont{楷体}[Mapping = fullwidth-stop]{华文楷体}
+	\setCJKfamilyfont{仿宋}[Mapping = fullwidth-stop]{华文仿宋}
+	\setCJKfamilyfont{黑体}[Mapping = fullwidth-stop]{黑体}
+	\newcommand{\myHeavy}{\helvetica \CJKfamily{黑体}}
+%\usepackage{ctex}
+%	\setcounter{secnumdepth}{4}
+	\ctexset{
+		%abstractname = {中},%{\myHeavy \normalsize 摘\phantom{空}要}，
+		section = {
+			format = {\myHeavy \Large \centering},
+			name = {,、\hspace{-1 em}},
+			number = \chinese{section},
+		},
+		subsection = {
+			format = {\myHeavy \large},
+%			name = {,、\hspace{-1 em}},
+%			numbering = true,
+%			number = \chinese{subsection},
+		}
+	}
+	\renewcommand{\abstractname}{\myHeavy \large 摘 \quad 要}
+
+\usepackage{enumitem}
+
+\usepackage{array}
+	\newcolumntype{M}{>{$}c<{$}} %数学模式，居中
+\usepackage{tabularx}
+	\newcolumntype{Y}{>{\centering\arraybackslash}X} %定宽居中
+\usepackage{booktabs} %三线表
+
+\usepackage{graphicx}
+
+\usepackage{float} %浮动体H选项
+\usepackage{caption}
+	\DeclareCaptionFont{myFigureCaptionFont}{\small}
+	\DeclareCaptionFont{myTableCaptionFont}{\myHeavy \small}
+	\captionsetup[figure]{
+		font = myFigureCaptionFont,
+		labelsep = quad,
+		skip = 10 pt,
+		position = bottom
+	}
+	\captionsetup[table]{
+		font = myTableCaptionFont,
+		labelsep = quad,
+		skip = 10 pt,
+		position = top
+	}
+\usepackage[labelformat=simple]{subcaption} %并排图表
+
+\input{Symbols.tex}
+
+\newcommand{\emphA}[1]{{\myHeavy #1}}
+\newcommand{\emphB}[1]{{\itshape #1}}
+
+\newenvironment{myAbstract}
+	{\begin{abstract} \normalsize}
+	{\end{abstract}}
+
+\title{
+	\vspace{-2 cm} \LARGE \bfseries
+	基于Heisenberg模型的Skyrme子
+}
+\author{
+	\CJKfamily{楷体}
+	陶润恺，曾祥东，孙晓晨，杜治纬，王金银
+}
+
+\date{
+	\CJKfamily{楷体}
+	\today
+}
+
+\begin{document}
+	\maketitle
+	
+	\begin{myAbstract}
+		四个米子
+	\end{myAbstract}
+	
+	\section{介绍}
+		Skyrme子是
+		
+		\subsection{ebaebv啊的vs}
+		这是 $\sin x = 1$
+		
+		\textsf{ABVcadv毛孔里}
+		
+		\emphA{ABVcadv毛孔里}
+		
+		\emphB{ABVcadv毛孔里}
+		\begin{equation}
+			\int \sin x \dd x = \cos xz +\mathbb{C}
+		\end{equation}
+	
+	\section{致谢}
+\end{document}
