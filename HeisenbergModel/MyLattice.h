@@ -22,19 +22,19 @@ class MyLattice
 	inline int y_minus_1(const int&);
 	inline int y_plus_1(const int&);
 
-	inline double energyCount(const Point&, const int&, const int&);
+	inline double energyCount(const Point& p, const int& i, const int& j, const double& hamiltonian_J, const double& magnetic_B, const double& hamiltonian_D);
 
 public:
-	MyLattice();
+	MyLattice(const double& hamiltonian_J, const double& magnetic_B, const double& hamiltonian_D);
 
 	LatticeData data;
 
-	void flipOnePoint(const double&);
+	void flipOnePoint(const double& temperature, const double& hamiltonian_J, const double& magnetic_B, const double& hamiltonian_D);
 	Physics physicalQuantity;
 
 	//void outputData(std::ofstream&);
 
-	double calculateEnergy();
+	double calculateEnergy(const double& hamiltonian_J, const double& magnetic_B, const double& hamiltonian_D);
 	//double calculateHeatCapacity();
 	//double calculateMagneticSusceptibility();
 };

@@ -5,7 +5,10 @@
 #include "SingleLattice.h"
 using namespace std;
 
-void SingleLattice::completeFlip(const int& step, const double& temperature)
+SingleLattice::SingleLattice(const double & hamiltonian_J, const double & magnetic_B, const double & hamiltonian_D) :lattice(hamiltonian_J, magnetic_B, hamiltonian_D)
+{}
+
+void SingleLattice::completeFlip(const int& step, const double& temperature, const double& hamiltonian_J, const double& magnetic_B, const double& hamiltonian_D)
 {
 	for (auto step_index = 0; step_index != step; ++step_index)
 	{
@@ -26,7 +29,7 @@ void SingleLattice::completeFlip(const int& step, const double& temperature)
 			auto stepNumber = (step_index + 1) / (step / $DATA_NUMBER) - 1;
 		
 			ofstream out;
-			string filename = "VEC" + to_string(step_index + 1);
+			string filename = "VEC" + doubleToString(magnetic_B) + "_" + to_string(step_index + 1);
 			out.open(filename);
 		
 			out << "{";
@@ -50,7 +53,7 @@ void SingleLattice::completeFlip(const int& step, const double& temperature)
 		}
 #endif
 
-		lattice.flipOnePoint(temperature);
+		lattice.flipOnePoint(temperature, hamiltonian_J, magnetic_B, hamiltonian_D);
 
 		//For "the last 10" steps:
 		for (auto i = 0; i != 10; ++i)

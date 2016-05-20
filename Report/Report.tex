@@ -28,15 +28,15 @@
 	\bibliographystyle{FDUbib}
 
 \usepackage{amsmath}
-\usepackage[math-style=ISO, bold-style=ISO]{unicode-math}
-	\setmathfont{xits-math.otf}
+\usepackage{unicode-math}
+	\setmathfont[math-style=ISO, bold-style=ISO]{xits-math.otf}
 \usepackage{bm}
 
 \usepackage{fontspec}
 	\setmainfont[BoldFont = XITS]{XITS}
 	\setsansfont{Verdana}
 	\setmonofont{Courier New}
-	\newfontfamily \helvetica {HelveticaNeueLTPro-Roman.otf}
+	\newfontfamily \helvetica {HelveticaNeueLTPro-Roman.otf}[BoldFont = HelveticaNeueLTPro-Roman.otf]
 
 \usepackage{xeCJK}
 	\xeCJKsetup{
@@ -47,7 +47,7 @@
 	\setCJKfamilyfont{中宋}[Mapping = fullwidth-stop]{华文中宋}
 	\setCJKfamilyfont{楷体}[Mapping = fullwidth-stop]{华文楷体}
 	\setCJKfamilyfont{仿宋}[Mapping = fullwidth-stop]{华文仿宋}
-	\setCJKfamilyfont{黑体}[Mapping = fullwidth-stop]{黑体}
+	\setCJKfamilyfont{黑体}[BoldFont = 黑体, Mapping = fullwidth-stop]{黑体}
 	\newcommand{\myHeavy}{\helvetica \CJKfamily{黑体}}
 %\usepackage{ctex}
 %	\setcounter{secnumdepth}{4}
@@ -139,6 +139,21 @@
 		\begin{equation}
 			\int \sin x \dd x = \cos xz +\mathbb{C}
 		\end{equation}
-	
+		
+		\textcolor{red!50!black}{ABVcadv毛孔里}
+		
+		
+		\textcolor{blue!50!black}{ABVcadv毛孔里}
+		
+		
+		\textcolor{blue!70!black}{ABVcadv毛孔里}
+		
+		
+		\textcolor{green!50!black}{ABVcadv毛孔里}
+%	{red!50!black},
+%	citecolor = {blue!50!black},
+%	urlcolor = {blue!80!black}
 	\section{致谢}
+		首先感谢陈焱老师
+		感谢吴义政老师
 \end{document}

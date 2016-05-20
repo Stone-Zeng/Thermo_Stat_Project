@@ -25,27 +25,26 @@ inline int MyLattice::y_plus_1(const int& y)
 	return (y == Y_LENGTH - 1 ? 0 : y + 1);
 }
 
-#define HAMILTONIAN_J 1.0
-#define HAMILTONIAN_D 100.0
-#define HAMILTONIAN_A 1
+//#define HAMILTONIAN_J 1.0
+//#define HAMILTONIAN_D 2.4494897427831780981972840747059
 
-inline double MyLattice::energyCount(const Point& p, const int& i, const int& j)
+inline double MyLattice::energyCount(const Point& p, const int& i, const int& j, const double& hamiltonian_J,const double& magnetic_B, const double& hamiltonian_D)
 {
 	double H = 0.0;
 	//TODO: Outside field can be added here.
 
 	//Exchange:
-	//H -= HAMILTONIAN_J * (data[x_minus_1(i)][j] + data[x_plus_1(i)][j] + data[y_minus_1(i)][j] + data[y_plus_1(i)][j]).dot(p);
+	H -= hamiltonian_J * (data[x_minus_1(i)][j] + data[x_plus_1(i)][j] + data[y_minus_1(i)][j] + data[y_plus_1(i)][j]).dot(p);
 
 	//Zeeman(magnetic field):
-	//MyVector B(i - $LATTICE_LENGTH / 2, j - $LATTICE_LENGTH / 2, 0);
-	////MyVector B(0, 0, 2);
+	//MyVector B(-j + $LATTICE_LENGTH / 2, i - $LATTICE_LENGTH / 2, 10);
+	MyVector B(0, 0, magnetic_B);
 	//B /= 10;
-	//H -= B.dot(p);
+	H -= B.dot(p);
 
 	//D-M interaction:
 	MyVector ex(1, 0, 0), ey(0, 1, 0);
-	H -= HAMILTONIAN_D * (
+	H -= hamiltonian_D * (
 		(data[x_minus_1(i)][j].cross(p)).dot(ex) - (data[x_plus_1(i)][j].cross(p)).dot(ex)
 		+ (data[y_minus_1(i)][j].cross(p)).dot(ey) - (data[y_plus_1(i)][j].cross(p)).dot(ey)
 		);
@@ -53,7 +52,7 @@ inline double MyLattice::energyCount(const Point& p, const int& i, const int& j)
 	return H;
 }
 
-MyLattice::MyLattice()
+MyLattice::MyLattice(const double& hamiltonian_J, const double& magnetic_B, const double& hamiltonian_D)
 {
 	for (auto i = 0; i != X_LENGTH; ++i)
 		for (auto j = 0; j != Y_LENGTH; ++j)
@@ -63,21 +62,21 @@ MyLattice::MyLattice()
 	for (auto i = 0; i != X_LENGTH; ++i)
 		for (auto j = 0; j != Y_LENGTH; ++j)
 		{
-			physicalQuantity.energy += energyCount(data[i][j], i, j);
+			physicalQuantity.energy += energyCount(data[i][j], i, j, hamiltonian_J, magnetic_B, hamiltonian_D);
 			physicalQuantity.magneticDipole += data[i][j];
 		}
 }
 
-void MyLattice::flipOnePoint(const double& temperature)
+void MyLattice::flipOnePoint(const double& temperature, const double& hamiltonian_J, const double& magnetic_B, const double& hamiltonian_D)
 {
-	calculateEnergy();
+	calculateEnergy(hamiltonian_J, magnetic_B, hamiltonian_D);
 
 	for (auto i = 0; i != X_LENGTH; ++i)
 		for (auto j = 0; j != Y_LENGTH; ++j)
 		{
 			MyVector pointAfter;
 			pointAfter.initialize();
-			auto dE = energyCount(pointAfter, i, j) - energyCount(data[i][j], i, j);
+			auto dE = energyCount(pointAfter, i, j, hamiltonian_J, magnetic_B, hamiltonian_D) - energyCount(data[i][j], i, j, hamiltonian_J, magnetic_B, hamiltonian_D);
 
 			if (randomReal(0, 1) < possibilityOfFlip(dE, temperature))
 			{
@@ -87,12 +86,12 @@ void MyLattice::flipOnePoint(const double& temperature)
 			}
 		}
 }
-double MyLattice::calculateEnergy()
+double MyLattice::calculateEnergy(const double& hamiltonian_J, const double& magnetic_B, const double& hamiltonian_D)
 {
 	double E = 0.0;
 	for (auto i = 0; i != X_LENGTH; ++i)
 		for (auto j = 0; j != Y_LENGTH; ++j)
-			E += energyCount(data[i][j], i, j);
+			E += energyCount(data[i][j], i, j, hamiltonian_J, magnetic_B, hamiltonian_D);
 	return E;
 }
 //

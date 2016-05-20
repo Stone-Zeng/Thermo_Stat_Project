@@ -22,9 +22,14 @@ int main()
 	MyTiming timingFlag;
 
 	//Flip parameters:
-	int step = 1;
-	double temperature = 0, minTemperature = 0.1, maxTemperature = 1;
-	int temperatureN = 10;
+	int step = 1000;
+	double temperature = 0, minTemperature = 0.01, maxTemperature = 0.01;
+	int temperatureN = 1;
+	double hamiltonian_J = 1.0, magnetic_B = 0.0, hamiltonian_D = 2.4494897427831780981972840747059;
+
+	cout << "Input B:" << endl;
+	cin >> magnetic_B;
+
 #ifdef INPUT_PARAMETERS_ON
 	cout << "Step: *10000" << endl;
 	cin >> step;
@@ -37,7 +42,8 @@ int main()
 	double dTemperature = ((temperatureN == 1) ? 0.0 : (maxTemperature - minTemperature) / (double) (temperatureN - 1));
 
 	//Lattices, data and results:
-	vector<SingleLattice> lattices(temperatureN);
+	SingleLattice temp(hamiltonian_J, magnetic_B, hamiltonian_D);
+	vector<SingleLattice> lattices{ temp };
 	vector<double> T_array(temperatureN, 0);
 	for (auto i = 0; i != temperatureN; ++i)
 		T_array[i] = minTemperature + dTemperature * i;
@@ -52,28 +58,28 @@ int main()
 	//{lattices_AMP[idx].completeFlip(step, T_array_AMP[idx]); }
 	//);
 
-#pragma omp parallel for
+//#pragma omp parallel for
 	for (auto i = 0; i < temperatureN; ++i) //Must use "<" instead of "!=" in order to use omp
-		lattices[i].completeFlip(step, T_array[i]);
+		lattices[i].completeFlip(step, T_array[i], hamiltonian_J, magnetic_B, hamiltonian_D);
 
 	timingFlag.timingEnd();
 	cout << "Time: " << timingFlag.runTime() << "s" << endl;
 
-	//Output:
-	ofstream outfile_Result;
-	string filename_Result = "Result Step=" + to_string(step / 1000) + "K "
-		+ "T=" + doubleToString(minTemperature) + "~" + doubleToString(maxTemperature)
-		+ ".csv";
-	outfile_Result.open(filename_Result);
-	outfile_Result << "T, " << PHYSICS_LIST << endl; //Head
+	////Output:
+	//ofstream outfile_Result;
+	//string filename_Result = "Result Step=" + to_string(step / 1000) + "K "
+	//	+ "T=" + doubleToString(minTemperature) + "~" + doubleToString(maxTemperature)
+	//	+ ".csv";
+	//outfile_Result.open(filename_Result);
+	//outfile_Result << "T, " << PHYSICS_LIST << endl; //Head
 
-	timingFlag.timingStart();
-	for (auto i = 0; i != temperatureN; ++i)
-		lattices[i].output(outfile_Result, step, T_array[i]);
-	timingFlag.timingEnd();
-	cout << "Output Time: " << timingFlag.runTime() << "s" << endl;
+	//timingFlag.timingStart();
+	//for (auto i = 0; i != temperatureN; ++i)
+	//	lattices[i].output(outfile_Result, step, T_array[i]);
+	//timingFlag.timingEnd();
+	//cout << "Output Time: " << timingFlag.runTime() << "s" << endl;
 
-	outfile_Result.close();
+	//outfile_Result.close();
 }
 
 #endif
