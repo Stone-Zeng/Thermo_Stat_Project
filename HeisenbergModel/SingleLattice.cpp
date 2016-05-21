@@ -29,7 +29,7 @@ void SingleLattice::completeFlip(const int& step, const double& temperature, con
 			auto stepNumber = (step_index + 1) / (step / $DATA_NUMBER) - 1;
 		
 			ofstream out;
-			string filename = "VEC" + doubleToString(magnetic_B) + "_" + to_string(step_index + 1);
+			string filename = "B=" + doubleToString(magnetic_B) + "_D=" + doubleToString(hamiltonian_D) + "_Step_" + to_string(step_index + 1) + ".vector";
 			out.open(filename);
 		
 			out << "{";

@@ -28,7 +28,7 @@ int main()
 	double hamiltonian_J = 1.0, magnetic_B = 0.0, hamiltonian_D = 2.4494897427831780981972840747059;
 
 	cout << "Input B:" << endl;
-	cin >> magnetic_B;
+	cin >> magnetic_B;// >> hamiltonian_D;
 
 #ifdef INPUT_PARAMETERS_ON
 	cout << "Step: *10000" << endl;
