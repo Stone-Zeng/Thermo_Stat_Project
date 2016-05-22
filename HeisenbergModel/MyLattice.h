@@ -36,6 +36,7 @@ public:
 	MyVector calculateMagneticDipole();
 	double calculateHeatCapacity(const double& hamiltonian_J, const double& magnetic_B, const double& hamiltonian_D);
 	double calculateMagneticSusceptibility();
+	double calculateSkyrmionDensity();
 };
 
 #endif

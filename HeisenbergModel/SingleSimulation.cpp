@@ -14,16 +14,8 @@ void SingleSimulation::completeFlip(const int& step, const double& temperature, 
 
 	for (auto step_index = 0; step_index != step; ++step_index)
 	{
-		//Output data for "each" flip:
+		//Output data for each MCS:
 #ifdef FLIP_DATA_OUTPUT_ON
-		//TODO: Delete
-		//if ((step_index + 1) % (step / $DATA_NUMBER) == 0)
-		//{
-		//	auto stepNumber = (step_index + 1) / (step / $DATA_NUMBER) - 1;
-		//	auto iter = flipData.begin() + stepNumber;
-		//	*iter = lattice.physicalQuantity;
-		//}
-
 		flipData.push_back(lattice.physicalQuantity);
 #endif
 
@@ -65,10 +57,9 @@ void SingleSimulation::completeFlip(const int& step, const double& temperature, 
 			if (step_index == step - $AVERAGE_NUMBER + i)
 				//Now "result" is the total value.
 				result += lattice.physicalQuantity;
-
-		//Get the average value.
 	}
 
+	//Get the average value.
 	result *= 1 / (double) $AVERAGE_NUMBER;
 
 	//Finishing information:

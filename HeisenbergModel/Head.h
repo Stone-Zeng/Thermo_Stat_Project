@@ -7,7 +7,7 @@
 #define _HEAD_H_
 #pragma once
 
-#define $LATTICE_LENGTH 50
+#define $LATTICE_LENGTH 36
 //TODO: would be delete
 #define $DATA_NUMBER 100
 //TODO: would be delete
