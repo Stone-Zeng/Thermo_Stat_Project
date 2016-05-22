@@ -36,7 +36,9 @@ inline double randomReal(const double& min, const double& max)
 	std::mt19937 gen(rd());
 	return dist(gen);
 #else
-	auto r = 0.0001 * (double) ((rand() * rand()) % 10000);
+	//auto r = 0.0001 * (double) ((rand() * rand()) % 10000);
+	//Fast:
+	auto r = 0.001 * (double) (rand() % 1000);
 	return (max - min) * r + min;
 #endif
 }

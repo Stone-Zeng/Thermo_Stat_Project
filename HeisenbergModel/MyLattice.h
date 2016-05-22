@@ -10,7 +10,6 @@
 
 #define X_LENGTH $LATTICE_LENGTH
 #define Y_LENGTH $LATTICE_LENGTH
-//#define SIZE (X_LENGTH * Y_LENGTH)
 
 typedef MyVector Point;
 typedef Point LatticeData[X_LENGTH][Y_LENGTH];
@@ -28,15 +27,15 @@ public:
 	MyLattice(const double& hamiltonian_J, const double& magnetic_B, const double& hamiltonian_D);
 
 	LatticeData data;
-
-	void flipOnePoint(const double& temperature, const double& hamiltonian_J, const double& magnetic_B, const double& hamiltonian_D);
 	Physics physicalQuantity;
 
-	//void outputData(std::ofstream&);
+	//One MC step means flip all the points in the lattice.
+	void oneMonteCarloStep(const double& temperature, const double& hamiltonian_J, const double& magnetic_B, const double& hamiltonian_D);
 
 	double calculateEnergy(const double& hamiltonian_J, const double& magnetic_B, const double& hamiltonian_D);
-	//double calculateHeatCapacity();
-	//double calculateMagneticSusceptibility();
+	MyVector calculateMagneticDipole();
+	double calculateHeatCapacity(const double& hamiltonian_J, const double& magnetic_B, const double& hamiltonian_D);
+	double calculateMagneticSusceptibility();
 };
 
 #endif

@@ -50,6 +50,7 @@ MyVector& MyVector::operator/=(const double& x)
 
 MyVector MyVector::initialize()
 {
+	//For Heisenberg model:
 	double r[3] = { 0 };
 	double rSum = 0.0, rSumSqrt = 0.0;
 	for (auto i = 0; i != 3; ++i)
@@ -60,6 +61,14 @@ MyVector MyVector::initialize()
 	rSumSqrt = sqrt(rSum); 
 	for (auto i = 0; i != 3; ++i)
 		data[i] = r[i] / rSumSqrt;
+
+	//For Ising model:
+	//for (int i = 0; i != 3; ++i)
+	//{
+	//	data[i] = 0;
+	//}
+	//data[2] = randomInt(0, 1) * 2 - 1;
+	
 	return *this;
 }
 

@@ -7,7 +7,7 @@
 #include <iostream>
 #include "MyVector.h"
 
-#define PHYSICS_LIST "E, M_x, M_y, M_z"
+#define PHYSICS_LIST "E, M_x, M_y, M_z, C, X"
 class Physics
 {
 public:
@@ -15,12 +15,14 @@ public:
 
 	double energy;
 	MyVector magneticDipole;
+	double heatCapacity;
+	double magneticSusceptibility;
 
 	Physics& operator+=(const Physics&);
-	Physics& operator/=(const double&);
+	Physics& operator*=(const double&);
 
 	friend Physics operator+(const Physics&, const Physics&);
-	friend Physics operator/(const Physics&, const double&);
+	friend Physics operator*(const Physics&, const double&);
 	friend std::ostream& operator<<(std::ostream&, const Physics&);
 };
 

@@ -9,7 +9,7 @@
 #include "Function.h"
 #include "MyLattice.h"
 #include "Physics.h"
-#include "SingleLattice.h"
+#include "SingleSimulation.h"
 #include "MyTiming.h"
 
 #ifdef NORMAL_RUN
@@ -22,64 +22,72 @@ int main()
 	MyTiming timingFlag;
 
 	//Flip parameters:
-	int step = 1000;
-	double temperature = 0, minTemperature = 0.01, maxTemperature = 0.01;
-	int temperatureN = 1;
-	double hamiltonian_J = 1.0, magnetic_B = 0.0, hamiltonian_D = 2.4494897427831780981972840747059;
+	//step must be larger than 10.
+	int step = 10;
 
-	cout << "Input B:" << endl;
-	cin >> magnetic_B;// >> hamiltonian_D;
+	//Temperature:
+	double min_T = 0.1, max_T = 1.0;
+	int T_n = 10;
+
+	//Hamiltonian J:
+	double min_J = 0.1, max_J = 1.0;
+	int J_n = 10;
+
+	//Magnetic B:
+	double min_B = 0.1, max_B = 1.0;
+	int B_n = 10;
+
+	//Hamiltonian D:
+	double min_D = 0.1, max_D = 1.0;
+	int D_n = 10;
+
+	//double hamiltonian_J = 1.0, magnetic_B = 0.0, hamiltonian_D = 2.4494897427831780981972840747059;
+
+	//cout << "Input B:" << endl;
+	//cin >> magnetic_B;// >> hamiltonian_D;
 
 #ifdef INPUT_PARAMETERS_ON
-	cout << "Step: *10000" << endl;
+	cout << "Step (must be larger than 10):" << endl;
 	cin >> step;
-	//step *= 10000;
 	cout << "minT, maxT:" << endl;
-	cin >> minTemperature >> maxTemperature;
+	cin >> min_T >> max_T;
 	cout << "How many T?" << endl;
-	cin >> temperatureN;
+	cin >> T_n;
 #endif
-	double dTemperature = ((temperatureN == 1) ? 0.0 : (maxTemperature - minTemperature) / (double) (temperatureN - 1));
+	double dT = (T_n == 1) ? 0.0 : (max_T - min_T) / (double) (T_n - 1);
 
 	//Lattices, data and results:
-	SingleLattice temp(hamiltonian_J, magnetic_B, hamiltonian_D);
-	vector<SingleLattice> lattices{ temp };
-	vector<double> T_array(temperatureN, 0);
-	for (auto i = 0; i != temperatureN; ++i)
-		T_array[i] = minTemperature + dTemperature * i;
+	SingleSimulation tempSimulation(min_J, min_B, min_D);
+	vector<SingleSimulation> lattices(T_n, tempSimulation);
+	vector<double> T_array(T_n, 0.0);
+	for (auto i = 0; i != T_n; ++i)
+		T_array[i] = min_T + dT * i;
 
-	//Flip:
+	//Simulation:
 	timingFlag.timingStart();
 
-	//parallel_for_each(
-	//	lattices_AMP.extent,
-	//	[=](index<1> idx) restrict(amp)
-	//	//TODO: add resrict(amp).
-	//{lattices_AMP[idx].completeFlip(step, T_array_AMP[idx]); }
-	//);
-
-//#pragma omp parallel for
-	for (auto i = 0; i < temperatureN; ++i) //Must use "<" instead of "!=" in order to use omp
-		lattices[i].completeFlip(step, T_array[i], hamiltonian_J, magnetic_B, hamiltonian_D);
+#pragma omp parallel for
+	for (auto i = 0; i < T_n; ++i) //Must use "<" instead of "!=" in order to use omp
+		lattices[i].completeFlip(step, T_array[i], min_J, min_B, min_D);
 
 	timingFlag.timingEnd();
-	cout << "Time: " << timingFlag.runTime() << "s" << endl;
+	cout << "Simulation Time: " << timingFlag.runTime() << "s." << endl;
 
-	////Output:
-	//ofstream outfile_Result;
-	//string filename_Result = "Result Step=" + to_string(step / 1000) + "K "
-	//	+ "T=" + doubleToString(minTemperature) + "~" + doubleToString(maxTemperature)
-	//	+ ".csv";
-	//outfile_Result.open(filename_Result);
-	//outfile_Result << "T, " << PHYSICS_LIST << endl; //Head
+	//Output:
+	ofstream outfile_Result;
+	string filename_Result = "Result_Step=" + to_string(step)
+		+ "_T=" + doubleToString(min_T) + "~" + doubleToString(max_T)
+		+ ".csv";
+	outfile_Result.open(filename_Result);
+	outfile_Result << "T, J, B, D, " << PHYSICS_LIST << endl; //Head
 
-	//timingFlag.timingStart();
-	//for (auto i = 0; i != temperatureN; ++i)
-	//	lattices[i].output(outfile_Result, step, T_array[i]);
-	//timingFlag.timingEnd();
-	//cout << "Output Time: " << timingFlag.runTime() << "s" << endl;
+	timingFlag.timingStart();
+	for (auto i = 0; i != T_n; ++i)
+		lattices[i].output(outfile_Result, step, T_array[i], min_J, min_B, min_D);
+	timingFlag.timingEnd();
+	cout << "Output Time: " << timingFlag.runTime() << "s" << endl;
 
-	//outfile_Result.close();
+	outfile_Result.close();
 }
 
 #endif
