@@ -31,22 +31,22 @@ inline int MyLattice::y_plus_1(const int& y)
 inline double MyLattice::energyCount(const Point& p, const int& i, const int& j, const double& hamiltonian_J,const double& magnetic_B, const double& hamiltonian_D)
 {
 	double H = 0.0;
+	auto leftP = data[x_minus_1(i)][j], rightP = data[x_plus_1(i)][j];
+	auto downP = data[i][y_minus_1(j)], upP = data[i][y_plus_1(j)];
 	//TODO: Outside field can be added here.
 
 	//Exchange:
-	H -= hamiltonian_J * (data[x_minus_1(i)][j] + data[x_plus_1(i)][j] + data[i][y_minus_1(j)] + data[i][y_plus_1(j)]).dot(p);
+	H -= hamiltonian_J * (leftP + rightP + downP + upP).dot(p);
 
-	//Zeeman(magnetic field):
-	//MyVector B(-j + $LATTICE_LENGTH / 2, i - $LATTICE_LENGTH / 2, 10);
-	//B /= 10;
+	////Zeeman(magnetic field):
 	MyVector B(0, 0, magnetic_B);
 	H -= B.dot(p);
 
 	//D-M interaction:
 	MyVector ex(1, 0, 0), ey(0, 1, 0);
 	H -= hamiltonian_D * (
-		(-(data[x_minus_1(i)][j].cross(p)).dot(ex)) + (data[x_plus_1(i)][j].cross(p)).dot(ex)
-		- (data[i][y_minus_1(j)].cross(p)).dot(ey) + (data[i][y_plus_1(j)].cross(p)).dot(ey)
+		(-(leftP.cross(p)).dot(ex)) + (rightP.cross(p)).dot(ex)
+		- (downP.cross(p)).dot(ey) + (upP.cross(p)).dot(ey)
 		);
 
 	return H;

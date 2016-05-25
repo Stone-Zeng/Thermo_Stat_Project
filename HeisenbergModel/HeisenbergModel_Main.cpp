@@ -36,14 +36,6 @@ int B_n = 10;
 double min_D = 0.1, max_D = 1.0;
 int D_n = 10;
 
-
-
-//double hamiltonian_J = 1.0, magnetic_B = 0.0, hamiltonian_D = 2.4494897427831780981972840747059;
-
-//cout << "Input B:" << endl;
-//cin >> magnetic_B;// >> hamiltonian_D;
-
-
 void simulationWithT()
 {
 	MyTiming timingFlag;
@@ -69,7 +61,7 @@ void simulationWithT()
 	timingFlag.timingStart();
 
 #pragma omp parallel for
-	for (auto i = 0; i < T_n; ++i) //Must use "<" instead of "!=" in order to use omp
+	for (auto i = 0; i < T_n; ++i)
 		lattices[i].completeFlip(step, T_array[i], min_J, min_B, min_D);
 
 	timingFlag.timingEnd();
@@ -120,7 +112,7 @@ void simulationWithJ()
 	timingFlag.timingStart();
 
 #pragma omp parallel for
-	for (auto i = 0; i < J_n; ++i) //Must use "<" instead of "!=" in order to use omp
+	for (auto i = 0; i < J_n; ++i)
 		lattices[i].completeFlip(step, min_T, J_array[i], min_B, min_D);
 
 	timingFlag.timingEnd();
@@ -171,7 +163,7 @@ void simulationWithB()
 	timingFlag.timingStart();
 
 #pragma omp parallel for
-	for (auto i = 0; i < B_n; ++i) //Must use "<" instead of "!=" in order to use omp
+	for (auto i = 0; i < B_n; ++i)
 		lattices[i].completeFlip(step, min_T, min_J, B_array[i], min_D);
 
 	timingFlag.timingEnd();
@@ -222,7 +214,7 @@ void simulationWithD()
 	timingFlag.timingStart();
 
 #pragma omp parallel for
-	for (auto i = 0; i < D_n; ++i) //Must use "<" instead of "!=" in order to use omp
+	for (auto i = 0; i < D_n; ++i)
 		lattices[i].completeFlip(step, min_T, min_J, min_B, D_array[i]);
 
 	timingFlag.timingEnd();
@@ -249,12 +241,12 @@ int main()
 {
 	srand((unsigned int) time(NULL));
 
+	cout << "Step (must be larger than 10):" << endl;
+	cin >> step;
 	int variableFlag = 0;
 	cout << "Variable:" << endl
 		<< "  1.T  2.J  3.B  4.D" << endl;
 	cin >> variableFlag;
-	cout << "Step (must be larger than 10):" << endl;
-	cin >> step;
 
 	switch (variableFlag)
 	{

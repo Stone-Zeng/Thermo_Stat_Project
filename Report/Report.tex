@@ -10,11 +10,11 @@
 	\hypersetup{
 		bookmarksopen = true,
 		bookmarksopenlevel = 1,
-		bookmarksnumbered = false,
-		pdftitle = {基于Heisenberg模型的Skyrme子研究},%TODO：title
-		pdfauthor = {陶润恺，曾祥东，孙晓晨，杜治纬，王金银},
+		bookmarksnumbered = true,
+		pdftitle = {基于Heisenberg模型的Skyrmion研究},%TODO：title
+		pdfauthor = {杜治纬，孙晓晨，陶润恺，王金银，曾祥东},
 		colorlinks,
-		linkcolor = {red!50!black},
+		linkcolor = {red!60!black},
 		citecolor = {green!50!black},
 		urlcolor = {blue!70!black}
 	}
@@ -132,11 +132,11 @@
 
 \title{
 	\vspace{-2 cm} \LARGE \bfseries
-	基于Heisenberg模型的Skyrme子研究
+	基于Heisenberg模型的Skyrmion研究
 }
 \author{
 	\CJKfamily{楷体}
-	陶润恺，曾祥东，孙晓晨，杜治纬，王金银
+	杜治纬，孙晓晨，陶润恺，王金银，曾祥东
 }
 
 \date{
@@ -152,11 +152,10 @@
 	\end{myAbstract}
 	
 	\section{引言}
-		Skyrme子是
 	
 	\section{Heisenberg模型}
 		\subsection{介绍}
-			（经典）Heisenberg模型是开展Skyrme子等一系列研究的基础，它是 $n$-矢量模型在 $n = 3$ 时的情况。取一个 $d$ 维点阵，每个点阵点均是具有单位长度的三维自旋矢量
+			（经典）Heisenberg模型是开展Skyrmion等一系列研究的基础，它是 $n$-矢量模型在 $n = 3$ 时的情况。取一个 $d$ 维点阵，每个点阵点均是具有单位长度的三维自旋矢量
 			\begin{equation}
 				\vecb{s}_i \in \mathbb{R}^3, \quad \abs{\vecb{s}_i} = 1 \fullstop
 			\end{equation}
@@ -164,7 +163,7 @@
 			\begin{equation} \label{EQ_DEF_OF_HEISENBERG_MODEL}
 				\scH = -\sum_{\mean{i,j}} J_{i\!j} \vecb{s}_i \cdot \vecb{s}_j \comma
 			\end{equation}
-			则该自旋系统就是Heisenberg模型。式~\eqref{EQ_DEF_OF_HEISENBERG_MODEL} 中的
+			则该自旋系统就是Heisenberg模型。\cite{joyce1967classical,wiki:ClassicalHeisenbergModel} 式~\eqref{EQ_DEF_OF_HEISENBERG_MODEL} 中的
 			\begin{equation}
 				J_{i\!j} =
 				\begin{cases}
@@ -172,10 +171,30 @@
 					0, & \text{其他情况} \comma
 				\end{cases}
 			\end{equation}
-		\subsection{算法与程序}
+			在Hamilton量中添加其他的相互作用，就可以得到各种外场下的情况。
+			
+		\subsection{算法}
+			我们研究的是二维Heisenberg模型，并且不考虑外场。利用Metropolis算法（一种Monte Carlo算法），可以对该模型进行模拟。该算法的思路如下：
+			\begin{enumerate}
+				\item 给出自旋矢量在平面点阵中的一个随机分布。
+				\item 选择一个自旋 $\vecb{s}_i$。
+				\item 随机生成一个自旋矢量 $\vecb{s}'_i$，计算从 $\vecb{s}_i$ 翻转到 $\vecb{s}'_i$ 所带来的的能量变化 $\incr E$，从而得到翻转概率
+					\begin{equation}
+						P =
+						\begin{cases}
+							\exp \left(-\frac{\incr E}{\kB T}\right), &\incr E > 0 \semicomma \\
+							1, &\incr E \leqslant 0 \comma
+						\end{cases}
+					\end{equation}
+				\item 生成一个 $[0,1)$ 之间的随机数。若该随机数小于翻转概率 $P$，则将 $\vecb{s}_i$ 翻转为 $\vecb{s}'_i$。
+				\item 重复进行步骤 $2\sim4$。我们采取的方式是遍历整个点阵，将它记为一个Monte Carlo步（MCS）。进行若干MCS后，体系就可以达到稳态。
+				\item 在最后的若干MCS中计算各物理量，并取其平均值。\cite{周琼2010蒙特卡洛方法在磁性系统中的应用}%TODO：为什么
+			\end{enumerate}
+			
+			在我们的模拟中，点阵大小取为 $36 \times 36$。整个过程包含1000个MCS，并在最后50步中计算各物理量。另外，所有参数均采用约化单位。其中，取 $\kB=1$，$J=1$。
 			
 		\subsection{结果与分析}
-		
+			温度 $T$ 从0取到4，测量能量 $E$、总磁矩 $M$、比热 $C$ 和磁化率 $\c$ 随温度的变化。
 	\section{Monte Carlo模拟}
 	\section{简要的数学}
 	\section{总结}
@@ -183,12 +202,14 @@
 		首先感谢陈焱老师在全过程的帮助，尤其是对我们选题的指导。其次要感谢吴义政老师，他从实验的角度提出了一些很有价值的观点。还要感谢左光宏老师，他帮助我们实现了并行计算。最后要感谢张宇学长、秦金谷学姐和李超然学长等人的支持与帮助，他们的科研经历给我们的课题带来了很多启发。
 		
 %	\section{参考文献}
-		\flushleft
+		\nocite{LippmanLajoieMooEtAl2013}
+		\flushleft \small
 		\bibliography{Reference}
 	
 	\appendix
 	\section{评分}
 	\section{代码实现}
+		\linespread{1}
 %		\lstinputlisting{Codes/Head.h}
 		\lstinputlisting{Codes/HeisenbergModel_Main.cpp}
 \end{document}

@@ -42,7 +42,8 @@
 \newcommand{\f}{\phi}
 \renewcommand{\j}{\varphi}
 \newcommand{\vf}{\varphi}
-\renewcommand{\c}{\chi}
+\newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}}
+\renewcommand{\c}{{\mathpalette\irchi\relax}}
 \newcommand{\y}{\psi}
 \renewcommand{\o}{\omega}
 \newcommand{\w}{\omega}
