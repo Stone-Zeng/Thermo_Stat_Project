@@ -1,5 +1,4 @@
-//This is the class for 3D unit vector, which is used for lattice 
-//points in Heisenberg model.
+//This is the class for 3D unit vector, which is used for lattice points in Heisenberg model.
 
 #ifndef _MYVECTOR_H_
 #define _MYVECTOR_H_
@@ -15,7 +14,6 @@ public:
 	MyVector();
 	MyVector(const double&, const double&, const double&);
 	
-	//Can be replaced?
 	double& operator[](int);
 	double operator[](int) const;
 
@@ -28,7 +26,6 @@ public:
 	double dot(const MyVector&);
 	MyVector cross(const MyVector&);
 
-	//TODO: Friend can be delete?
 	friend MyVector operator+(const MyVector&, const MyVector&);
 	friend MyVector operator-(const MyVector&, const MyVector&);
 	friend MyVector operator*(const MyVector&, const double&);

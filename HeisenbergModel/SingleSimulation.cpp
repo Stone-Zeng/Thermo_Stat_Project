@@ -19,16 +19,20 @@ void SingleSimulation::completeFlip(const int& step, const double& temperature, 
 		flipData.push_back(lattice.physicalQuantity);
 #endif
 
-		//TODO: Figure:
+		//Vector plot:
 #ifdef VECTOR_PLOT_OUTPUT_ON
-		if ((step_index + 1) % (step / 20) == 0)
+		if ((step_index + 1) % (step / $VECTOR_PLOT_NUMBER) == 0)
 		{
-			auto stepNumber = (step_index + 1) / (step / $DATA_NUMBER) - 1;
-		
 			ofstream out;
-			string filename = "B=" + doubleToString(magnetic_B) + "_D=" + doubleToString(hamiltonian_D) + "_Step_" + to_string(step_index + 1) + ".vector";
+			string filename = "Step=" + to_string(step_index + 1) +
+				"_T=" + doubleToString(temperature) +
+				"_J=" + doubleToString(hamiltonian_J) +
+				"_B=" + doubleToString(magnetic_B) +
+				"_D=" + doubleToString(hamiltonian_D) +
+				".vector";
 			out.open(filename);
-		
+
+			//For Mathematica list format:
 			out << "{";
 			for (auto i = 0; i != X_LENGTH - 1; ++i)
 			{
@@ -52,10 +56,9 @@ void SingleSimulation::completeFlip(const int& step, const double& temperature, 
 
 		lattice.oneMonteCarloStep(temperature, hamiltonian_J, magnetic_B, hamiltonian_D);
 
-		//For "the last 10" steps:
+		//Calculate phyical quantities(total value):
 		for (auto i = 0; i != $AVERAGE_NUMBER; ++i)
 			if (step_index == step - $AVERAGE_NUMBER + i)
-				//Now "result" is the total value.
 				result += lattice.physicalQuantity;
 	}
 

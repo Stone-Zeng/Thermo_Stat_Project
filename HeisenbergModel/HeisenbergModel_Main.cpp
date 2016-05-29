@@ -241,7 +241,19 @@ int main()
 {
 	srand((unsigned int) time(NULL));
 
-	cout << "Step (must be larger than 10):" << endl;
+	cout << endl;
+#ifdef FLIP_DATA_OUTPUT_ON
+	cout << "\tFLIP_DATA_OUTPUT_ON" << endl;
+#else
+	cout << "\tFLIP_DATA_OUTPUT_OFF" << endl;
+#endif
+#ifdef VECTOR_PLOT_OUTPUT_ON
+	cout << "\tVECTOR_PLOT_OUTPUT_ON" << endl;
+#else
+	cout << "\tVECTOR_PLOT_OUTPUT_OFF" << endl;
+#endif
+
+	cout << endl << "Step (must be larger than 10):" << endl;
 	cin >> step;
 	int variableFlag = 0;
 	cout << "Variable:" << endl

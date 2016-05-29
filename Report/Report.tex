@@ -1,7 +1,8 @@
 \documentclass{article}
 
 \usepackage{geometry}
-	\geometry{a4paper, twoside, left = 2.54 cm, right = 2.54 cm, top = 3.18 cm, bottom = 3.18 cm, headheight = 3 cm}
+%	\geometry{a4paper, twoside, left = 2.54 cm, right = 2.54 cm, top = 2.54 cm, bottom = 2.54 cm, headheight = 3 cm}
+	\geometry{a4paper, twoside, left = 1.91 cm, right = 1.91 cm, top = 2.54 cm, bottom = 2.54 cm, headheight = 3 cm}
 
 \usepackage{titlesec}
 
@@ -37,7 +38,7 @@
 \usepackage[no-math]{fontspec}
 	\setmainfont[Ligatures = TeX, BoldFont = AGaramondPro-Semibold.otf]{AGaramondPro-Regular.otf}
 
-\usepackage[UTF8, heading = true]{ctex}
+\usepackage[UTF8, heading = true, 10pt]{ctex}
 \usepackage{xeCJK}
 	\xeCJKsetup{
 		AutoFakeBold = false,
@@ -79,6 +80,9 @@
 
 \usepackage{enumitem}
 
+\usepackage{multicol}
+\setlength{\columnsep}{20 pt}
+
 \usepackage{listings}
 \lstset{
 	language = C++,
@@ -86,10 +90,10 @@
 	breaklines = true,
 	tabsize = 4,
 	numbers = left,
-	numberstyle = \sffamily \tiny \color{gray},
+	numberstyle = \sffamily \itshape \tiny \color{gray},
 	numbersep = 10 pt,
 	showstringspaces = false,
-	keywordstyle = \color[rgb]{0,0,1},
+	keywordstyle = \bfseries \color[rgb]{0,0,1},
 	commentstyle = \color[rgb]{0,0.5,0},
 	stringstyle = \color[rgb]{0.64,0.082,0.082},
 	morecomment = [l][\color{violet}]{\#}
@@ -111,7 +115,9 @@
 		font = myFigureCaptionFont,
 		labelsep = quad,
 		skip = 10 pt,
-		position = bottom
+		position = bottom,
+%		justification = centerfirst
+		format = hang
 	}
 	\captionsetup[table]{
 		font = myTableCaptionFont,
@@ -120,15 +126,24 @@
 		position = top
 	}
 \usepackage[labelformat=simple]{subcaption} %并排图表
+\makeatletter
+\renewcommand\p@subfigure{\thefigure-}
+\renewcommand\thesubfigure{(\alph{subfigure})} %Subfig reference format: x-(x)
+\makeatother
 
 \input{Symbols.tex}
 
 \newcommand{\emphA}[1]{{\myHeavy #1}}
 \newcommand{\emphB}[1]{{\itshape #1}}
+\newcommand{\figCaption}[2][]{\captionof{figure}{#2 \\ \emphB{#1}}}
 
 \newenvironment{myAbstract}
 	{\begin{abstract} \normalsize}
 	{\end{abstract}}
+
+\newenvironment{myFigure}
+	{\par\medskip\noindent\minipage{\linewidth}\centering}
+	{\endminipage\par\medskip}
 
 \title{
 	\vspace{-2 cm} \LARGE \bfseries
@@ -148,11 +163,26 @@
 	\maketitle
 	
 	\begin{myAbstract}
-		四个米子
+		我们
 	\end{myAbstract}
 	
+	\begin{multicols}{2}
 	\section{引言}
-	
+		Skyrmion最初由Skyrme在1962年提出 ，用于刻画描述重子的行为。它是一种具有特定拓扑结构的准粒子，并被实验观察所证实。\cite{yu2010real}
+		
+		在磁性物质中，如果各电子自旋方向满足Skyrmion解，那就会形成一种稳定且具有手征性和拓扑性的磁结构。在二维磁性系统中，可以形成的一种Skyrmion呈涡旋形，自旋方向由中心向外周依次偏转，中心位置自旋向下，到最外周处自旋统一向上，如图 \ref{FIG_Skyrmions_WIKI} 所示。它的尺度是纳米数量级。由于自身的拓扑性质，Skyrmion能在外界扰动下保持稳定。%TODO：图，到底是哪一种
+		
+		\begin{myFigure}
+			\includegraphics[width = 5 cm]{"Figures/FIG_Skyrmions_WIKI.png"}
+			\captionof{figure}{二维Skyrmion的示意图\\图 (a)}
+			\label{FIG_Skyrmions_WIKI}
+		\end{myFigure}
+		
+		微观尺度上，Skyrmion的形成源于电子间的D-M相互作用。\cite{dzyaloshinsky1958thermodynamic,moriya1960anisotropic,wiki:MagneticSkyrmion} 它是由于界面附近空间对称性破坏而产生的，对应的Hamilton量可以表示为
+		\begin{equation}
+			H_\text{DM} = \vecb{D}_{12} \cdot (\vecb{s}_1 \times \vecb{s}_2) \comma
+		\end{equation}
+		其中的 $\vecb{s}_1$、$\vecb{s}_2$ 分别表示两个电子的自旋矢量，而 $\vecb{D}_{12}$ 是一个常矢量，由界面材料和晶体结构决定。
 	\section{Heisenberg模型}
 		\subsection{介绍}
 			（经典）Heisenberg模型是开展Skyrmion等一系列研究的基础，它是 $n$-矢量模型在 $n = 3$ 时的情况。取一个 $d$ 维点阵，每个点阵点均是具有单位长度的三维自旋矢量
@@ -175,14 +205,14 @@
 			
 		\subsection{算法}
 			我们研究的是二维Heisenberg模型，并且不考虑外场。利用Metropolis算法（一种Monte Carlo算法），可以对该模型进行模拟。该算法的思路如下：
-			\begin{enumerate}
+			\begin{enumerate}[itemsep = 0 pt]
 				\item 给出自旋矢量在平面点阵中的一个随机分布。
 				\item 选择一个自旋 $\vecb{s}_i$。
 				\item 随机生成一个自旋矢量 $\vecb{s}'_i$，计算从 $\vecb{s}_i$ 翻转到 $\vecb{s}'_i$ 所带来的的能量变化 $\incr E$，从而得到翻转概率
 					\begin{equation}
 						P =
 						\begin{cases}
-							\exp \left(-\frac{\incr E}{\kB T}\right), &\incr E > 0 \semicomma \\
+							\exp \left(-\dfrac{\incr E}{\kB T}\right), &\incr E > 0 \semicomma \\
 							1, &\incr E \leqslant 0 \comma
 						\end{cases}
 					\end{equation}
@@ -193,9 +223,63 @@
 			
 			在我们的模拟中，点阵大小取为 $36 \times 36$。整个过程包含1000个MCS，并在最后50步中计算各物理量。另外，所有参数均采用约化单位。其中，取 $\kB=1$，$J=1$。
 			
+			下面给出各物理量的计算公式。总能量
+			\begin{equation}%TODO：系数
+				E = \sum_{i} \ve_i \comma
+			\end{equation}
+			这里的 $\ve_i$ 即单个格点的Hamilton量。总磁矩
+			\begin{equation}
+				\vecb{M} = \sum_{i} \vecb{s}_i \fullstop
+			\end{equation}
+			比热
+			\begin{equation} \label{EQ_HEAT_CAPACITY}
+				C = \frac{\mean{E^2} - \mean{E}^2}{\kB T^2}
+				= \frac{1}{\kB T^2} \left[ \frac{\sum_{i} \ve_i^2}{L^2} - \left( \frac{\sum_{i} \ve_i}{L^2} \right)^2 \right] \semicomma
+			\end{equation}
+			磁化率
+			\begin{equation} \label{EQ_MAGNETIC_SUSCEPTIBILITY}
+				\c = \frac{\mean{\vecb{M}^2} - \mean{\vecb{M}}^2}{\kB T}
+				= \frac{1}{\kB T} \left[ \frac{\sum_{i} \vecb{s}_i^2}{L^2} - \left( \frac{\sum_{i} \vecb{s}_i}{L^2} \right)^2 \right] \fullstop
+			\end{equation}
+			以上两式中的 $L$ 为点阵边长。实际模拟中，各常数均忽略不计。
+			
 		\subsection{结果与分析}
-			温度 $T$ 从0取到4，测量能量 $E$、总磁矩 $M$、比热 $C$ 和磁化率 $\c$ 随温度的变化。
-	\section{Monte Carlo模拟}
+			温度 $T$ 从0取到4，测量能量 $E$、总磁矩 $\vecb{M}$、比热 $C$ 和磁化率 $\c$ 随温度的变化。
+%			\begin{figure}[h]
+%				\centering
+%				\begin{subfigure}[h]{0.47 \textwidth}
+%					\includegraphics[width = 7cm]{"Figures/FIG_HEISENBERG_E_VS_T"}
+%					\subcaption{能量}
+%				\end{subfigure}
+%				\begin{subfigure}[h]{0.47 \textwidth}
+%					\includegraphics[width = 7cm]{"Figures/FIG_HEISENBERG_M_VS_T"}
+%					\subcaption{总磁矩的大小}
+%				\end{subfigure}
+%%				\begin{subfigure}[h]{0.47 \textwidth}
+%%					\includegraphics[width = 7cm]{"Figures/FIG_HEISENBERG_M_VS_T"}
+%%					\subcaption{热容}
+%%				\end{subfigure}
+%%				\begin{subfigure}[h]{0.47 \textwidth}
+%%					\includegraphics[width = 7cm]{"Figures/FIG_HEISENBERG_M_VS_T"}
+%%					\subcaption{磁化率}
+%%				\end{subfigure}
+%				\caption{各物理量随温度的变化}
+%			\end{figure}
+			\begin{myFigure}
+				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_E_M_VS_T}
+				\figCaption[灰色曲线表示原始数据，蓝色曲线表示平滑后的结果；数据已进行单位化，即将原始值除以格点数。]{能量、总磁矩大小随温度的变化}
+			\end{myFigure}
+			
+			由于式 \eqref{EQ_HEAT_CAPACITY} 和 \eqref{EQ_MAGNETIC_SUSCEPTIBILITY} 在 $T \approach 0$ 时是发散的，因此热容与磁化率利用能量、总磁矩曲线的导数来计算，如图 
+			\ref{FIG_HEISENBERG_C_X_VS_T} 中的蓝色曲线所示。
+			\begin{myFigure}
+				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_C_X_VS_T}
+				\figCaption[灰色曲线表示原始数据，蓝色曲线表示利用能量、总磁矩曲线的导数（差分）计算出的结果。]{热容、磁化率随温度的变化}
+				\label{FIG_HEISENBERG_C_X_VS_T}
+			\end{myFigure}
+			
+			要写分析！！！
+	\section{Skyrmion的模拟}
 	\section{简要的数学}
 	\section{总结}
 	\section{致谢}
@@ -203,13 +287,32 @@
 		
 %	\section{参考文献}
 		\nocite{LippmanLajoieMooEtAl2013}
-		\flushleft \small
-		\bibliography{Reference}
-	
+		{
+			\flushleft \small
+			\bibliography{Reference}
+		}
+	\end{multicols}
 	\appendix
 	\section{评分}
 	\section{代码实现}
+		Heisenberg模型与产生Skyrmion的系统，差别仅在于Hamilton量，因此代码是相同的。实际模拟中，为了加快运行速度，Heisenberg模型中其他相互作用项的代码未被编译。
+		
+		矢量类（\texttt{MyVector}）、计时类（\texttt{MyTiming}）和若干简单函数的实现代码没有给出。
 		\linespread{1}
-%		\lstinputlisting{Codes/Head.h}
-		\lstinputlisting{Codes/HeisenbergModel_Main.cpp}
+%		\subsection{Head.h}
+%		\lstinputlisting{../HeisenbergModel/Head.h}
+%		\subsection{MyLattice.h}
+%		\lstinputlisting{../HeisenbergModel/MyLattice.h}
+%		\subsection{MyLattice.cpp}
+%		\lstinputlisting{../HeisenbergModel/MyLattice.cpp}
+%		\subsection{Physics.h}
+%		\lstinputlisting{../HeisenbergModel/Physics.h}
+%		\subsection{Physics.cpp}
+%		\lstinputlisting{../HeisenbergModel/Physics.cpp}
+%		\subsection{SingleSimulation.h}
+%		\lstinputlisting{../HeisenbergModel/SingleSimulation.h}
+%		\subsection{SingleSimulation.cpp}
+%		\lstinputlisting{../HeisenbergModel/SingleSimulation.cpp}
+		\subsection{Main.cpp}
+		\lstinputlisting{../HeisenbergModel/HeisenbergModel_Main.cpp}
 \end{document}

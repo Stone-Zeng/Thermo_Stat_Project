@@ -25,20 +25,16 @@ inline int MyLattice::y_plus_1(const int& y)
 	return (y == Y_LENGTH - 1 ? 0 : y + 1);
 }
 
-//#define HAMILTONIAN_J 1.0
-//#define HAMILTONIAN_D 2.4494897427831780981972840747059
-
 inline double MyLattice::energyCount(const Point& p, const int& i, const int& j, const double& hamiltonian_J,const double& magnetic_B, const double& hamiltonian_D)
 {
 	double H = 0.0;
 	auto leftP = data[x_minus_1(i)][j], rightP = data[x_plus_1(i)][j];
 	auto downP = data[i][y_minus_1(j)], upP = data[i][y_plus_1(j)];
-	//TODO: Outside field can be added here.
 
 	//Exchange:
 	H -= hamiltonian_J * (leftP + rightP + downP + upP).dot(p);
 
-	////Zeeman(magnetic field):
+	//Magnetic field:
 	MyVector B(0, 0, magnetic_B);
 	H -= B.dot(p);
 
@@ -69,26 +65,16 @@ MyLattice::MyLattice(const double& hamiltonian_J, const double& magnetic_B, cons
 
 void MyLattice::oneMonteCarloStep(const double& temperature, const double& hamiltonian_J, const double& magnetic_B, const double& hamiltonian_D)
 {
-	//Calculate origin energy and magnetic dipole:
-	//TODO: Not necessary.
-	//physicalQuantity.energy = calculateEnergy(hamiltonian_J, magnetic_B, hamiltonian_D);
-	//physicalQuantity.magneticDipole = calculateMagneticDipole();
-
 	for (auto i = 0; i != X_LENGTH; ++i)
 		for (auto j = 0; j != Y_LENGTH; ++j)
 		{
 			MyVector pointAfter;
 			pointAfter.initialize();
-			//auto dE = energyCount(pointAfter, i, j, hamiltonian_J, magnetic_B, hamiltonian_D) - energyCount(data[i][j], i, j, hamiltonian_J, magnetic_B, hamiltonian_D);
 			auto dE = energyCount(pointAfter - data[i][j], i, j, hamiltonian_J, magnetic_B, hamiltonian_D);
 	
 			//Flip:
 			if (randomReal(0, 1) < possibilityOfFlip(dE, temperature))
-			{
 				data[i][j] = pointAfter;
-				//physicalQuantity.energy += dE;
-				//physicalQuantity.magneticDipole += data[i][j];
-			}
 		}
 
 	//Calculate final physical quantities:
@@ -153,12 +139,8 @@ double MyLattice::calculateSkyrmionDensity()
 	double SD = 0.0;
 	for (auto i = 0; i != X_LENGTH; ++i)
 		for (auto j = 0; j != Y_LENGTH; ++j)
-		{
-			//auto dx = data[x_plus_1(i)][j] - data[x_minus_1(i)][j];
-			//auto dy = data[i][y_plus_1(j)] - data[i][y_minus_1(j)];
 			SD += data[i][j].dot(
-				(data[i][y_plus_1(j)] - data[i][y_minus_1(j)]).cross(data[x_plus_1(i)][j] - data[x_minus_1(i)][j])
+			(data[i][y_plus_1(j)] - data[i][y_minus_1(j)]).cross(data[x_plus_1(i)][j] - data[x_minus_1(i)][j])
 			);
-		}
 	return SD;
 }

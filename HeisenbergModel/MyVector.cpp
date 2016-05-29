@@ -62,11 +62,9 @@ MyVector MyVector::initialize()
 	for (auto i = 0; i != 3; ++i)
 		data[i] = r[i] / rSumSqrt;
 
-	//For Ising model:
+	////For Ising model:
 	//for (int i = 0; i != 3; ++i)
-	//{
 	//	data[i] = 0;
-	//}
 	//data[2] = randomInt(0, 1) * 2 - 1;
 	
 	return *this;

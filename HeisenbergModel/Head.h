@@ -1,19 +1,16 @@
-//Here are some switches and adjusted parameters for
-//the program.
-//TODO: Do not add functions here.
-//TODO: Do not add .h files here.
+//Here are some switches and adjusted parameters for the program.
+//Need C++ 11.
 
 #ifndef _HEAD_H_
 #define _HEAD_H_
 #pragma once
 
-#define $LATTICE_LENGTH 36
-//TODO: would be delete
-#define $DATA_NUMBER 100
-//TODO: would be delete
-#define $LAST_10_PERCENT 1000 // 1/1000
-#define $AVERAGE_NUMBER 50
+//Parameters:
+#define $LATTICE_LENGTH		36
+#define $VECTOR_PLOT_NUMBER	10
+#define $AVERAGE_NUMBER		50
 
+//Switches:
 #define NORMAL_RUN
 #ifndef NORMAL_RUN
 #define VECTOR_TEST_ON
