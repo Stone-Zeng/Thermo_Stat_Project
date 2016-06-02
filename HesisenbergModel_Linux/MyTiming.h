@@ -12,6 +12,13 @@
 #endif
 #ifdef GNU_TIMING
 #include <sys/time.h>
+#include <cstdio>
+
+// struct timeval
+// {
+// 	long tv_sec;
+// 	long tv_usec;
+// };
 #endif
 
 //#define GNU_TIMING
@@ -23,8 +30,8 @@ class MyTiming
 	LARGE_INTEGER EndTime;
 #endif
 #ifdef GNU_TIMING
-	struct timeval tpstart, tpend;
 	double timeuse;
+	timeval tpstart, tpend;
 #endif
 
 public:

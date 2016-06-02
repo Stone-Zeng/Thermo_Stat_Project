@@ -5,6 +5,10 @@ MyTiming::MyTiming()
 #ifdef WIN_TIMING
 	QueryPerformanceFrequency(&m_nFreq);
 #endif
+#ifdef GNU_TIMING
+	timeuse = 0;
+#endif
+
 }
 
 void MyTiming::timingStart()
@@ -33,7 +37,8 @@ double MyTiming::runTime()
 	return (double) (EndTime.QuadPart - BeginTime.QuadPart) / m_nFreq.QuadPart;
 #endif
 #ifdef GNU_TIMING
-	return (double) (tpend.tv_sec - tpstart.tv_sec) + tpend.tv_usec - tpstart.tv_usec;
+	timeuse = 1000000 * (tpend.tv_sec - tpstart.tv_sec) + tpend.tv_usec - tpstart.tv_usec;
+	return timeuse / 1000000;
 #endif
 }
 
@@ -43,6 +48,7 @@ double MyTiming::runTime_ms()
 	return (double) 1000 * (EndTime.QuadPart - BeginTime.QuadPart) / m_nFreq.QuadPart;
 #endif
 #ifdef GNU_TIMING
-	return (double) 1000 * (tpend.tv_sec - tpstart.tv_sec) + tpend.tv_usec - tpstart.tv_usec;
+	timeuse = 1000000 * (tpend.tv_sec - tpstart.tv_sec) + tpend.tv_usec - tpstart.tv_usec;
+	return timeuse / 1000;
 #endif
 }

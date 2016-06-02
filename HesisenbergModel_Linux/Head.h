@@ -5,12 +5,14 @@
 #define _HEAD_H_
 #pragma once
 
-//Parameters:
+/****Parameters:****/
 #define $LATTICE_LENGTH		36
 #define $VECTOR_PLOT_NUMBER	10
 #define $AVERAGE_NUMBER		50
 
-//Switches:
+#define $PARALLEL_CORES     num_threads(4) //schedule(dynamic, 65536)//num_threads(2) 
+
+/****Switches:****/
 #define NORMAL_RUN
 #ifndef NORMAL_RUN
 #define VECTOR_TEST_ON
@@ -20,7 +22,7 @@
 #define INPUT_PARAMETERS_ON
 //#define HEISENBERG_ON
 #define FLIP_DATA_OUTPUT_ON
-#define VECTOR_PLOT_OUTPUT_ON
+//#define VECTOR_PLOT_OUTPUT_ON
 
 //#define CPP11_RANDOM
 
