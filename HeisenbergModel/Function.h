@@ -15,6 +15,15 @@
 #endif
 #include <string>
 #include <cstdlib>
+#include <ctime>
+
+static unsigned int g_seed = (unsigned int) time(NULL);
+
+inline unsigned int fastrand()
+{
+	g_seed = (214013 * g_seed + 2531011);
+	return (g_seed >> 16) & 0x7FFF;
+}
 
 inline int randomInt(const int& min, const int& max)
 {
@@ -24,7 +33,7 @@ inline int randomInt(const int& min, const int& max)
 	std::mt19937 gen(rd());
 	return dist(gen);
 #else
-	return rand() % (max - min + 1) + min;
+	return fastrand() % (max - min + 1) + min;
 #endif
 }
 
@@ -36,9 +45,9 @@ inline double randomReal(const double& min, const double& max)
 	std::mt19937 gen(rd());
 	return dist(gen);
 #else
-	auto r = 0.0001 * (double) ((rand() * rand()) % 10000);
+	auto r = 0.0001 * (double) ((fastrand() * fastrand()) % 10000);
 	////Fast:
-	//auto r = 0.001 * (double) (rand() % 1000);
+	//auto r = 0.001 * (double) (fastrand() % 1000);
 	return (max - min) * r + min;
 #endif
 }

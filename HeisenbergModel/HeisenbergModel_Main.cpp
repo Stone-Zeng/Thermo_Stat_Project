@@ -60,7 +60,7 @@ void simulationWithT()
 	//Simulation:
 	timingFlag.timingStart();
 
-#pragma omp parallel for
+#pragma omp parallel for $PARALLEL_CORES
 	for (auto i = 0; i < T_n; ++i)
 		lattices[i].completeFlip(step, T_array[i], min_J, min_B, min_D);
 
@@ -111,7 +111,7 @@ void simulationWithJ()
 	//Simulation:
 	timingFlag.timingStart();
 
-#pragma omp parallel for
+#pragma omp parallel for $PARALLEL_CORES
 	for (auto i = 0; i < J_n; ++i)
 		lattices[i].completeFlip(step, min_T, J_array[i], min_B, min_D);
 
@@ -162,7 +162,7 @@ void simulationWithB()
 	//Simulation:
 	timingFlag.timingStart();
 
-#pragma omp parallel for
+#pragma omp parallel for $PARALLEL_CORES
 	for (auto i = 0; i < B_n; ++i)
 		lattices[i].completeFlip(step, min_T, min_J, B_array[i], min_D);
 
@@ -213,7 +213,7 @@ void simulationWithD()
 	//Simulation:
 	timingFlag.timingStart();
 
-#pragma omp parallel for
+#pragma omp parallel for $PARALLEL_CORES
 	for (auto i = 0; i < D_n; ++i)
 		lattices[i].completeFlip(step, min_T, min_J, min_B, D_array[i]);
 
