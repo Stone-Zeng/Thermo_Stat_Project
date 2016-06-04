@@ -17,7 +17,6 @@
 using namespace std;
 
 //Flip parameters:
-//step must be larger than 10.
 int step = 10;
 
 //Temperature:

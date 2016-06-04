@@ -135,7 +135,7 @@
 
 \newcommand{\emphA}[1]{{\myHeavy #1}}
 \newcommand{\emphB}[1]{{\itshape #1}}
-\newcommand{\figCaption}[2][]{\captionof{figure}{#2 \\ \emphB{#1}}}
+\newcommand{\figCaption}[2][]{\vspace{-0.8cm}\captionof{figure}{#2 \\ \emphB{#1}}}
 
 \newenvironment{myAbstract}
 	{\begin{abstract} \normalsize}
@@ -168,19 +168,20 @@
 	
 	\begin{multicols}{2}
 	\section{引言}
-		Skyrmion最初由Skyrme在1962年提出 ，用于刻画描述重子的行为。它是一种具有特定拓扑结构的准粒子，并被实验观察所证实。\cite{yu2010real}
+		Skyrmion最初由Skyrme在1962年提出 ，用于刻画描述重子的行为。它是一种具有特定拓扑结构的准粒子，并被实验观察所证实\cite{yu2010real}。
 		
-		在磁性物质中，如果各电子自旋方向满足Skyrmion解，那就会形成一种稳定且具有手征性和拓扑性的磁结构。在二维磁性系统中，可以形成的一种Skyrmion呈涡旋形，自旋方向由中心向外周依次偏转，中心位置自旋向下，到最外周处自旋统一向上，如图 \ref{FIG_Skyrmions_WIKI} 所示。它的尺度是纳米数量级。由于自身的拓扑性质，Skyrmion能在外界扰动下保持稳定。%TODO：图，到底是哪一种
+		在磁性物质中，如果各电子自旋方向满足Skyrmion解，那就会形成一种稳定且具有手征性和拓扑性的磁结构。在二维磁性系统中，可以形成的一种Skyrmion呈涡旋形，自旋方向由中心向外周依次偏转，中心位置自旋向下，到最外周处自旋统一向上，如图 \ref{FIG_Skyrmions_WIKI} 所示。它的尺度通常是纳米数量级\cite{ulrich2011chiral}。由于自身的拓扑性质，Skyrmion能在外界扰动下保持稳定。%TODO：图，到底是哪一种
 		
 		\begin{myFigure}
 			\includegraphics[width = 5 cm]{"Figures/FIG_Skyrmions_WIKI.png"}
-			\captionof{figure}{二维Skyrmion的示意图\\图 (a)}
+			\vspace{0.8cm}
+			\figCaption[图 (a) 反映的是“刺猬”型Skyrmion，图 (b) 反映的是涡旋型Skyrmion。]{二维Skyrmion的示意图\cite{wiki:MagneticSkyrmion}}
 			\label{FIG_Skyrmions_WIKI}
 		\end{myFigure}
 		
-		微观尺度上，Skyrmion的形成源于电子间的D-M相互作用。\cite{dzyaloshinsky1958thermodynamic,moriya1960anisotropic,wiki:MagneticSkyrmion} 它是由于界面附近空间对称性破坏而产生的，对应的Hamilton量可以表示为
+		微观尺度上，Skyrmion的形成源于电子间的Dzyaloshinsky--Moriya（DM）相互作用\cite{dzyaloshinsky1958thermodynamic,moriya1960anisotropic,wiki:MagneticSkyrmion}。它是由于界面附近空间对称性破坏而产生的，对应的Hamilton量可以表示为
 		\begin{equation}
-			H_\text{DM} = \vecb{D}_{12} \cdot (\vecb{s}_1 \times \vecb{s}_2) \comma
+			\scH_\text{DM} = \vecb{D}_{12} \cdot (\vecb{s}_1 \times \vecb{s}_2) \comma
 		\end{equation}
 		其中的 $\vecb{s}_1$、$\vecb{s}_2$ 分别表示两个电子的自旋矢量，而 $\vecb{D}_{12}$ 是一个常矢量，由界面材料和晶体结构决定。
 	\section{Heisenberg模型}
@@ -193,7 +194,7 @@
 			\begin{equation} \label{EQ_DEF_OF_HEISENBERG_MODEL}
 				\scH = -\sum_{\mean{i,j}} J_{i\!j} \vecb{s}_i \cdot \vecb{s}_j \comma
 			\end{equation}
-			则该自旋系统就是Heisenberg模型。\cite{joyce1967classical,wiki:ClassicalHeisenbergModel} 式~\eqref{EQ_DEF_OF_HEISENBERG_MODEL} 中的
+			则该自旋系统就是Heisenberg模型\cite{joyce1967classical,wiki:ClassicalHeisenbergModel}。式~\eqref{EQ_DEF_OF_HEISENBERG_MODEL} 中的
 			\begin{equation}
 				J_{i\!j} =
 				\begin{cases}
@@ -245,26 +246,6 @@
 			
 		\subsection{结果与分析}
 			温度 $T$ 从0取到4，测量能量 $E$、总磁矩 $\vecb{M}$、比热 $C$ 和磁化率 $\c$ 随温度的变化。
-%			\begin{figure}[h]
-%				\centering
-%				\begin{subfigure}[h]{0.47 \textwidth}
-%					\includegraphics[width = 7cm]{"Figures/FIG_HEISENBERG_E_VS_T"}
-%					\subcaption{能量}
-%				\end{subfigure}
-%				\begin{subfigure}[h]{0.47 \textwidth}
-%					\includegraphics[width = 7cm]{"Figures/FIG_HEISENBERG_M_VS_T"}
-%					\subcaption{总磁矩的大小}
-%				\end{subfigure}
-%%				\begin{subfigure}[h]{0.47 \textwidth}
-%%					\includegraphics[width = 7cm]{"Figures/FIG_HEISENBERG_M_VS_T"}
-%%					\subcaption{热容}
-%%				\end{subfigure}
-%%				\begin{subfigure}[h]{0.47 \textwidth}
-%%					\includegraphics[width = 7cm]{"Figures/FIG_HEISENBERG_M_VS_T"}
-%%					\subcaption{磁化率}
-%%				\end{subfigure}
-%				\caption{各物理量随温度的变化}
-%			\end{figure}
 			\begin{myFigure}
 				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_E_M_VS_T}
 				\figCaption[灰色曲线表示原始数据，蓝色曲线表示平滑后的结果；数据已进行单位化，即将原始值除以格点数。]{能量、总磁矩大小随温度的变化}
@@ -280,10 +261,69 @@
 			
 			要写分析！！！
 	\section{Skyrmion的模拟}
+		\subsection{介绍}
+			连续情况下，Hamilton量为\cite{nagaosa2013topological}
+			\begin{equation}
+				\scH = \int \dd r \left[ J(\nabla \vecb{n})^2 + D \vecb{n} \cdot (\nabla \times \vecb{n}) - \vecb{H} \cdot \vecb{n} \right] \comma
+			\end{equation}
+			式中的 $J$ 是交换作用常数（$J>0$ 时为铁磁相互作用），$D$ 是DM相互作用常数，$\vecb{H}$ 是外加磁场。
+			
+			将其离散化，可得\cite{wiki:MagneticSkyrmion}
+			\begin{equation}
+				\begin{aligned}
+					\scH=&-J\sum_{\vecb{r}}\vecb{s}_{\vecb{r}} \cdot
+					\left(\vecb{s}_{\vecb{r}\pm\vecb{e}_x}\!+\vecb{s}_{\vecb{r}\pm\vecb{e}_y} \right) \\
+					&-D\sum_{\vecb{r}} \left[\vecb{s}_{\vecb{r}}\times\vecb{s}_{\vecb{r}\pm\vecb{e}_x}\!\!\cdot\left(\pm\vecb{e}_x\right) + \vecb{s}_{\vecb{r}}\times\vecb{s}_{\vecb{r}\pm\vecb{e}_y}\!\!\cdot\left(\pm\vecb{e}_y\right) \right] \\
+					&-\vecb{H}\cdot\sum_{\vecb{r}}\vecb{s}_{\vecb{r}} \comma
+				\end{aligned}
+			\end{equation}
+			其中，第一项为交换作用，即式~\eqref{EQ_DEF_OF_HEISENBERG_MODEL}；第二、第三项分别为DM相互作用和外加磁场。
+			
+			为了定量描述Skyrmion相的特性，除了能量与磁矩，还需引进Skyrmion密度（SkD）\cite{muhlbauer2009skyrmion}
+			\begin{equation}
+				\f=\frac{1}{4\p}\vecb{s}\cdot \left(\frac{\pd \vecb{s}}{\pd x}\times\frac{\pd \vecb{s}}{\pd y}\right) \comma
+			\end{equation}
+			其中的 $x$、$y$ 是垂直于磁场 $\vecb{H}$ 的坐标分量。当 $\abs{\f}$ 接近1时，即表明出现了稳定的拓扑结构。将其离散化，并忽略系数，可得
+			\begin{equation}
+				\f=\sum_{\vecb{r}} \vecb{s}\cdot\left[ \left(\vecb{s}_{\vecb{r}+\vecb{e}_x}\!-\vecb{s}_{\vecb{r}-\vecb{e}_x}\right) \times\left(\vecb{s}_{\vecb{r}+\vecb{e}_y}\!-\vecb{s}_{\vecb{r}-\vecb{e}_y}\right)\right] \fullstop
+			\end{equation}
+			
+			利用Monte Carlo算法模拟Skyrmion的思路与方法，和前文所述的Heisenberg模型完全相同。点阵大小同样也取为 $36\times36$。不同的是，由于存在较复杂的相互作用，达到稳定所需的步数会更多。
+			
+		\subsection{结果与分析}
+			\begin{myFigure}
+				\includegraphics[width = \textwidth]{Figures/FIG_PHASE_SD_AND_MZ}
+				\figCaption{Skyrmion密度与磁矩 $z$ 方向分量随外加磁场 $\vecb{H}$ 和温度 $T$ 的变化}
+			\end{myFigure}
+			\begin{myFigure}
+				\includegraphics[width = 7cm]{Figures/FIG_PHASE}
+				\vspace{0.5cm}
+				\figCaption{相图}
+			\end{myFigure}
+			\begin{myFigure}
+				\includegraphics[width = \textwidth]{Figures/FIG_LATTICE_VECTOR}
+%				\vspace{0.5cm}
+				\figCaption{$xy$ 平面投影}
+			\end{myFigure}
+%			\begin{myFigure}
+%				\includegraphics[width = 5cm]{Figures/FIG_VECTOR_SKX}
+%				\vspace{0.5cm}
+%				\figCaption{Skyrmion相}
+%			\end{myFigure}
+%			\begin{myFigure}
+%				\includegraphics[width = 5cm]{Figures/FIG_VECTOR_FM}
+%				\vspace{0.5cm}
+%				\figCaption{铁磁相}
+%			\end{myFigure}
+			\begin{myFigure}
+				\includegraphics[width = \textwidth]{Figures/FIG_LATTICE_MATRICX}
+%				\vspace{0.5cm}
+				\figCaption{$z$ 分量}
+			\end{myFigure}
 	\section{简要的数学}
 	\section{总结}
 	\section{致谢}
-		首先感谢陈焱老师在全过程的帮助，尤其是对我们选题的指导。其次要感谢吴义政老师，他从实验的角度提出了一些很有价值的观点。还要感谢左光宏老师，他帮助我们实现了并行计算。最后要感谢张宇学长、秦金谷学姐和李超然学长等人的支持与帮助，他们的科研经历给我们的课题带来了很多启发。
+		首先感谢陈焱老师在全过程的帮助，尤其是对我们选题的指导。其次要感谢吴义政老师，他从实验的角度提出了一些很有价值的观点。还要感谢左光宏老师，他帮助我们实现了并行计算，并提供了服务器。最后要感谢张宇、秦金谷、詹晨迪和郑益峰等学长学姐的支持与帮助。
 		
 %	\section{参考文献}
 		\nocite{LippmanLajoieMooEtAl2013}
@@ -295,24 +335,26 @@
 	\appendix
 	\section{评分}
 	\section{代码实现}
-		Heisenberg模型与产生Skyrmion的系统，差别仅在于Hamilton量，因此代码是相同的。实际模拟中，为了加快运行速度，Heisenberg模型中其他相互作用项的代码未被编译。
+		Heisenberg模型与产生Skyrmion的系统，差别仅在于Hamilton量，因此其代码是相同的。为了加快运行速度，在模拟经典Heisenberg模型时，涉及其他相互作用的代码未被编译。
 		
-		矢量类（\texttt{MyVector}）、计时类（\texttt{MyTiming}）和若干简单函数的实现代码没有给出。
+		矢量类（\texttt{MyVector}）、计时类（\texttt{MyTiming}）和若干简单函数的实现代码没有给出。编译平台：Microsoft\textregistered\;Visual C++ 2015。
 		\linespread{1}
-%		\subsection{Head.h}
-%		\lstinputlisting{../HeisenbergModel/Head.h}
-%		\subsection{MyLattice.h}
-%		\lstinputlisting{../HeisenbergModel/MyLattice.h}
-%		\subsection{MyLattice.cpp}
-%		\lstinputlisting{../HeisenbergModel/MyLattice.cpp}
-%		\subsection{Physics.h}
-%		\lstinputlisting{../HeisenbergModel/Physics.h}
-%		\subsection{Physics.cpp}
-%		\lstinputlisting{../HeisenbergModel/Physics.cpp}
-%		\subsection{SingleSimulation.h}
-%		\lstinputlisting{../HeisenbergModel/SingleSimulation.h}
-%		\subsection{SingleSimulation.cpp}
-%		\lstinputlisting{../HeisenbergModel/SingleSimulation.cpp}
+		\subsection{Head.h}
+		\lstinputlisting{../HeisenbergModel/Head.h}
+		\subsection{MyLattice.h}
+		\lstinputlisting{../HeisenbergModel/MyLattice.h}
+		\subsection{MyLattice.cpp}
+		\lstinputlisting{../HeisenbergModel/MyLattice.cpp}
+		\subsection{Physics.h}
+		\lstinputlisting{../HeisenbergModel/Physics.h}
+		\subsection{Physics.cpp}
+		\lstinputlisting{../HeisenbergModel/Physics.cpp}
+		\subsection{SingleSimulation.h}
+		\lstinputlisting{../HeisenbergModel/SingleSimulation.h}
+		\subsection{SingleSimulation.cpp}
+		\lstinputlisting{../HeisenbergModel/SingleSimulation.cpp}
 		\subsection{Main.cpp}
 		\lstinputlisting{../HeisenbergModel/HeisenbergModel_Main.cpp}
+		\subsection{PhaseDiagram.cpp}
+		\lstinputlisting{../HeisenbergModel/PhaseDiagram.cpp}
 \end{document}

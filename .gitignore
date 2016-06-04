@@ -20,6 +20,10 @@ EXE
 *.xls
 *.xlsx
 *.dat
+*.vector
+
+*.jpg
+*.png
 
 *.pdf
 *.doc

@@ -10,20 +10,20 @@
 #define $VECTOR_PLOT_NUMBER	10
 #define $AVERAGE_NUMBER		50
 
-#define $PARALLEL_CORES     //schedule(dynamic, 65536)//num_threads(2) 
+#define $PARALLEL_CORES     //schedule(dynamic, 65536) num_threads(2) 
 
 /****Switches:****/
-//#define NORMAL_RUN
+#define NORMAL_RUN
 #ifndef NORMAL_RUN
 //#define VECTOR_TEST_ON
 //#define AMP_TEST_ON
-#define PHASE_DIAGRAM_ON
+//#define PHASE_DIAGRAM_ON
 #endif
 
 #define INPUT_PARAMETERS_ON
 //#define HEISENBERG_ON
-//#define FLIP_DATA_OUTPUT_ON
-//#define VECTOR_PLOT_OUTPUT_ON
+#define FLIP_DATA_OUTPUT_ON
+#define VECTOR_PLOT_OUTPUT_ON
 //#define CPP11_RANDOM
 
 #ifdef _MSC_VER
