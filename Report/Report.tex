@@ -1,7 +1,6 @@
 \documentclass{article}
 
 \usepackage{geometry}
-%	\geometry{a4paper, twoside, left = 2.54 cm, right = 2.54 cm, top = 2.54 cm, bottom = 2.54 cm, headheight = 3 cm}
 	\geometry{a4paper, twoside, left = 1.91 cm, right = 1.91 cm, top = 2.54 cm, bottom = 2.54 cm, headheight = 3 cm}
 
 \usepackage{titlesec}
@@ -12,7 +11,7 @@
 		bookmarksopen = true,
 		bookmarksopenlevel = 1,
 		bookmarksnumbered = true,
-		pdftitle = {基于Heisenberg模型的Skyrmion研究},%TODO：title
+		pdftitle = {基于Heisenberg模型的skyrmion研究},%TODO：title
 		pdfauthor = {杜治纬，孙晓晨，陶润恺，王金银，曾祥东},
 		colorlinks,
 		linkcolor = {red!60!black},
@@ -57,10 +56,8 @@
 	\newcommand{\myHeavy}{\helvetica \CJKfamily{黑体}}
 	\renewcommand{\sffamily}{\verdana}
 	\renewcommand{\ttfamily}{\courier}
-%	\setcounter{secnumdepth}{4}
 	\pagestyle{plain}
 	\ctexset{
-		%abstractname = {中},%{\myHeavy \normalsize 摘\phantom{空}要}，
 		appendix = {
 			name = {附录}
 		},
@@ -70,10 +67,7 @@
 			number = \chinese{section},
 		},
 		subsection = {
-			format = {\myHeavy \large},
-%			name = {,、\hspace{-1 em}},
-%			numbering = true,
-%			number = \chinese{subsection},
+			format = {\myHeavy \large}
 		}
 	}
 	\renewcommand{\abstractname}{\myHeavy \large 摘 \quad 要}
@@ -99,6 +93,19 @@
 	morecomment = [l][\color{violet}]{\#}
 }
 
+\usepackage{siunitx}
+	\sisetup{
+		number-math-rm = \ensuremath,
+		inter-unit-product = \ensuremath{{}\cdot{}},
+		group-digits = true,
+		group-minimum-digits = 5,
+		group-separator = \text{~},
+		separate-uncertainty = true,
+		range-phrase = \text{~}$\sim$\text{~},
+		range-units = single
+	}
+\usepackage[version = 4]{mhchem}
+
 \usepackage{array}
 	\newcolumntype{M}{>{$}c<{$}} %数学模式，居中
 \usepackage{tabularx}
@@ -117,19 +124,20 @@
 		skip = 10 pt,
 		position = bottom,
 %		justification = centerfirst
-		format = hang
+		format = hang,
+		hypcap = false
 	}
-	\captionsetup[table]{
-		font = myTableCaptionFont,
-		labelsep = quad,
-		skip = 10 pt,
-		position = top
-	}
-\usepackage[labelformat=simple]{subcaption} %并排图表
-\makeatletter
-\renewcommand\p@subfigure{\thefigure-}
-\renewcommand\thesubfigure{(\alph{subfigure})} %Subfig reference format: x-(x)
-\makeatother
+%	\captionsetup[table]{
+%		font = myTableCaptionFont,
+%		labelsep = quad,
+%		skip = 10 pt,
+%		position = top
+%	}
+%\usepackage[labelformat=simple]{subcaption} %并排图表
+%\makeatletter
+%\renewcommand\p@subfigure{\thefigure-}
+%\renewcommand\thesubfigure{(\alph{subfigure})} %Subfig reference format: x-(x)
+%\makeatother
 
 \input{Symbols.tex}
 
@@ -147,7 +155,7 @@
 
 \title{
 	\vspace{-2 cm} \LARGE \bfseries
-	基于Heisenberg模型的Skyrmion研究
+	基于Heisenberg模型的skyrmion研究
 }
 \author{
 	\CJKfamily{楷体}
@@ -168,33 +176,30 @@
 	
 	\begin{multicols}{2}
 	\section{引言}
-		Skyrmion最初由Skyrme在1962年提出 ，用于刻画描述重子的行为。它是一种具有特定拓扑结构的准粒子，并被实验观察所证实\cite{yu2010real}。
+		Skyrmion（斯格米子）是由Tony Skyrme在1962提出来的一种拓扑激发态，它是受拓扑保护的与重子有关的准粒子，包括重子与共振态的叠加。在空间反射对称性破缺的手征磁体中，skyrmion可稳定存在；之后，在各种凝聚态物质体系中也发现了它的存在\cite{yu2010real}。它的尺度通常处在纳米数量级\cite{ulrich2011chiral}。但目前自旋体系中形成稳定skyrmion结构的机制尚不明确，驱动skyrmion运动的机理有待进一步研究。%TODO：纳米级后面有
 		
-		在磁性物质中，如果各电子自旋方向满足Skyrmion解，那就会形成一种稳定且具有手征性和拓扑性的磁结构。在二维磁性系统中，可以形成的一种Skyrmion呈涡旋形，自旋方向由中心向外周依次偏转，中心位置自旋向下，到最外周处自旋统一向上，如图 \ref{FIG_Skyrmions_WIKI} 所示。它的尺度通常是纳米数量级\cite{ulrich2011chiral}。由于自身的拓扑性质，Skyrmion能在外界扰动下保持稳定。%TODO：图，到底是哪一种
+		在场论中，skyrmion是非线性 $\sigma$ 模型中的一个非平庸经典解，是一种拓扑孤子。在二维磁性系统中，假设平面内各向同性，可以形成如图~\ref{FIG_SKYRMIONS_WIKI} 所示的中心对称结构，此结构的非最低自由能相在特定条件下是可以存在的。
 		
 		\begin{myFigure}
 			\includegraphics[width = 5 cm]{"Figures/FIG_Skyrmions_WIKI.png"}
 			\vspace{0.8cm}
-			\figCaption[图 (a) 反映的是“刺猬”型Skyrmion，图 (b) 反映的是涡旋型Skyrmion。]{二维Skyrmion的示意图\cite{wiki:MagneticSkyrmion}}
-			\label{FIG_Skyrmions_WIKI}
+			\figCaption[图 (a) 反映的是hedgehog（刺猬）型skyrmion，图 (b) 反映的是涡旋型skyrmion。]{二维skyrmion的示意图\cite{wiki:MagneticSkyrmion}}
+			\label{FIG_SKYRMIONS_WIKI}
 		\end{myFigure}
 		
-		微观尺度上，Skyrmion的形成源于电子间的Dzyaloshinsky--Moriya（DM）相互作用\cite{dzyaloshinsky1958thermodynamic,moriya1960anisotropic,wiki:MagneticSkyrmion}。它是由于界面附近空间对称性破坏而产生的，对应的Hamilton量可以表示为
-		\begin{equation}
-			\scH_\text{DM} = \vecb{D}_{12} \cdot (\vecb{s}_1 \times \vecb{s}_2) \comma
-		\end{equation}
-		其中的 $\vecb{s}_1$、$\vecb{s}_2$ 分别表示两个电子的自旋矢量，而 $\vecb{D}_{12}$ 是一个常矢量，由界面材料和晶体结构决定。
 	\section{Heisenberg模型}
 		\subsection{介绍}
-			（经典）Heisenberg模型是开展Skyrmion等一系列研究的基础，它是 $n$-矢量模型在 $n = 3$ 时的情况。取一个 $d$ 维点阵，每个点阵点均是具有单位长度的三维自旋矢量
+			（经典）Heisenberg模型是开展skyrmion等一系列研究的基础，它是 $n$-矢量模型在 $n = 3$ 时的情况。同时，与文献中的结果对比，也可以借此验证我们程序的正确性。
+			
+			取一个 $d$ 维点阵，每个点阵点均是具有单位长度的三维自旋矢量
 			\begin{equation}
 				\vecb{s}_i \in \mathbb{R}^3, \quad \abs{\vecb{s}_i} = 1 \fullstop
 			\end{equation}
 			若系统的Hamilton量定义为
 			\begin{equation} \label{EQ_DEF_OF_HEISENBERG_MODEL}
-				\scH = -\sum_{\mean{i,j}} J_{i\!j} \vecb{s}_i \cdot \vecb{s}_j \comma
+				\scH = -\sum_{\mean{i,j}} J_{i\!j} \vecb{s}_i \cdot \vecb{s}_i - H_z\sum_i s_i^z \comma
 			\end{equation}
-			则该自旋系统就是Heisenberg模型\cite{joyce1967classical,wiki:ClassicalHeisenbergModel}。式~\eqref{EQ_DEF_OF_HEISENBERG_MODEL} 中的
+			则该自旋系统就是Heisenberg模型\cite{binder2010monte,joyce1967classical}。式~\eqref{EQ_DEF_OF_HEISENBERG_MODEL} 中的
 			\begin{equation}
 				J_{i\!j} =
 				\begin{cases}
@@ -202,11 +207,11 @@
 					0, & \text{其他情况} \comma
 				\end{cases}
 			\end{equation}
-			在Hamilton量中添加其他的相互作用，就可以得到各种外场下的情况。
+			而 $H_z$ 是外界磁场的 $z$ 分量。在Hamilton量中添加其他的相互作用，就可以得到各种外场下的情况。
 			
 		\subsection{算法}
-			我们研究的是二维Heisenberg模型，并且不考虑外场。利用Metropolis算法（一种Monte Carlo算法），可以对该模型进行模拟。该算法的思路如下：
-			\begin{enumerate}[itemsep = 0 pt]
+			我们首先研究二维Heisenberg模型，并且不考虑外场。利用Metropolis算法（一种Monte Carlo算法），可以对该模型进行模拟。该算法的思路如下：
+			\begin{enumerate}[itemsep = 0 pt, parsep = 0 pt, topsep = 0 pt]
 				\item 给出自旋矢量在平面点阵中的一个随机分布。
 				\item 选择一个自旋 $\vecb{s}_i$。
 				\item 随机生成一个自旋矢量 $\vecb{s}'_i$，计算从 $\vecb{s}_i$ 翻转到 $\vecb{s}'_i$ 所带来的的能量变化 $\incr E$，从而得到翻转概率
@@ -219,67 +224,145 @@
 					\end{equation}
 				\item 生成一个 $[0,1)$ 之间的随机数。若该随机数小于翻转概率 $P$，则将 $\vecb{s}_i$ 翻转为 $\vecb{s}'_i$。
 				\item 重复进行步骤 $2\sim4$。我们采取的方式是遍历整个点阵，将它记为一个Monte Carlo步（MCS）。进行若干MCS后，体系就可以达到稳态。
-				\item 在最后的若干MCS中计算各物理量，并取其平均值。\cite{周琼2010蒙特卡洛方法在磁性系统中的应用}%TODO：为什么
+				\item 在最后的若干MCS中作系综平均，计算各物理量。\cite{周琼2010蒙特卡洛方法在磁性系统中的应用}
 			\end{enumerate}
 			
-			在我们的模拟中，点阵大小取为 $36 \times 36$。整个过程包含1000个MCS，并在最后50步中计算各物理量。另外，所有参数均采用约化单位。其中，取 $\kB=1$，$J=1$。
-			
-			下面给出各物理量的计算公式。总能量
-			\begin{equation}%TODO：系数
-				E = \sum_{i} \ve_i \comma
-			\end{equation}
-			这里的 $\ve_i$ 即单个格点的Hamilton量。总磁矩
-			\begin{equation}
-				\vecb{M} = \sum_{i} \vecb{s}_i \fullstop
-			\end{equation}
-			比热
-			\begin{equation} \label{EQ_HEAT_CAPACITY}
-				C = \frac{\mean{E^2} - \mean{E}^2}{\kB T^2}
-				= \frac{1}{\kB T^2} \left[ \frac{\sum_{i} \ve_i^2}{L^2} - \left( \frac{\sum_{i} \ve_i}{L^2} \right)^2 \right] \semicomma
-			\end{equation}
-			磁化率
-			\begin{equation} \label{EQ_MAGNETIC_SUSCEPTIBILITY}
-				\c = \frac{\mean{\vecb{M}^2} - \mean{\vecb{M}}^2}{\kB T}
-				= \frac{1}{\kB T} \left[ \frac{\sum_{i} \vecb{s}_i^2}{L^2} - \left( \frac{\sum_{i} \vecb{s}_i}{L^2} \right)^2 \right] \fullstop
-			\end{equation}
-			以上两式中的 $L$ 为点阵边长。实际模拟中，各常数均忽略不计。
-			
+			在我们的模拟中，整个过程包含一定数量的MCS，并在最后50步中统计能量和磁矩。另外，所有参数均采用约化单位。其中，取 $\kB=1$，$J=1$。			
+%			下面给出各物理量的计算公式。总能量
+%			\begin{equation}%TODO：系数
+%				E = \sum_{i} \ve_i \comma
+%			\end{equation}
+%			这里的 $\ve_i$ 即单个格点的Hamilton量。总磁矩
+%			\begin{equation}
+%				\vecb{M} = \sum_{i} \vecb{s}_i \fullstop
+%			\end{equation}
+%			比热
+%			\begin{equation} \label{EQ_HEAT_CAPACITY}
+%				C = \frac{\mean{E^2} - \mean{E}^2}{\kB T^2}
+%				= \frac{1}{\kB T^2} \left[ \frac{\sum_{i} \ve_i^2}{L^2} - \left( \frac{\sum_{i} \ve_i}{L^2} \right)^2 \right] \semicomma
+%			\end{equation}
+%			磁化率
+%			\begin{equation} \label{EQ_MAGNETIC_SUSCEPTIBILITY}
+%				\c = \frac{\mean{\vecb{M}^2} - \mean{\vecb{M}}^2}{\kB T}
+%				= \frac{1}{\kB T} \left[ \frac{\sum_{i} \vecb{s}_i^2}{L^2} - \left( \frac{\sum_{i} \vecb{s}_i}{L^2} \right)^2 \right] \fullstop
+%			\end{equation}
+%			以上两式中的 $L$ 为点阵边长。实际模拟中，各常数均忽略不计。
 		\subsection{结果与分析}
-			温度 $T$ 从0取到4，测量能量 $E$、总磁矩 $\vecb{M}$、比热 $C$ 和磁化率 $\c$ 随温度的变化。
+			首先取 $36\times36$ 的点阵，进行1000个MCS。温度 $T$ 从0改变到4，记录平均能量 $\ve$ 和平均磁矩 $\vecb{m}$ 随温度的变化。
+			
 			\begin{myFigure}
-				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_E_M_VS_T}
-				\figCaption[灰色曲线表示原始数据，蓝色曲线表示平滑后的结果；数据已进行单位化，即将原始值除以格点数。]{能量、总磁矩大小随温度的变化}
+				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_E_M_VS_T_LATTICE_36}
+				\figCaption[点阵大小为 $36\times36$，步数为1000。灰色曲线表示原始数据，蓝色曲线表示平滑后的结果；数据已进行单位化，即将原始值除以格点数。]{平均能量、平均磁矩大小随温度的变化}
+				\label{FIG_HEISENBERG_E_M_VS_T_LATTICE_36}
 			\end{myFigure}
 			
-			由于式 \eqref{EQ_HEAT_CAPACITY} 和 \eqref{EQ_MAGNETIC_SUSCEPTIBILITY} 在 $T \approach 0$ 时是发散的，因此热容与磁化率利用能量、总磁矩曲线的导数来计算，如图 
-			\ref{FIG_HEISENBERG_C_X_VS_T} 中的蓝色曲线所示。
+			与文献中给出的结果\cite{周琼2010蒙特卡洛方法在磁性系统中的应用,watson1970classical}比较，发现能量曲线符合得较好，而磁矩曲线差别较大。主要问题在于低温部分。从图~\ref{FIG_HEISENBERG_E_M_VS_T_LATTICE_36} 可以看出，低温部分有相当严重的涨落。这是模拟步数不够导致的。（见附录~\ref{SEC_演化情况}）%TODO：放在附录
+			
+			因此，我们把点阵大小调整为 $10\times10$，同时将MCS增加到 \num{100000}。这时得到的结果就与文献中给出的结果符合得很好，磁矩在低温下的涨落也有所减弱，如图~\ref{FIG_HEISENBERG_E_M_VS_T_LATTICE_10}。这就验证了我们的程序的正确性。
+			
 			\begin{myFigure}
-				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_C_X_VS_T}
-				\figCaption[灰色曲线表示原始数据，蓝色曲线表示利用能量、总磁矩曲线的导数（差分）计算出的结果。]{热容、磁化率随温度的变化}
-				\label{FIG_HEISENBERG_C_X_VS_T}
+				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_E_M_VS_T_LATTICE_10}
+				\figCaption[点阵大小为 $10\times10$，步数为 \num{100000}。]{平均能量、平均磁矩大小随温度的变化}
+				\label{FIG_HEISENBERG_E_M_VS_T_LATTICE_10}
 			\end{myFigure}
 			
-			要写分析！！！
-	\section{Skyrmion的模拟}
+%			为了与之后的skyrmion进行比较，我们
+%			\begin{myFigure}
+%				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_VECTOR_FM}
+%				\figCaption[点阵大小为 $36\times36$，步数为 \num{100000}。]{铁磁相互作用下的矢量图}
+%				\label{FIG_HEISENBERG_VECTOR_FM}
+%			\end{myFigure}
+%			
+%			\begin{myFigure}
+%				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_VECTOR_AFM}
+%				\figCaption[点阵大小为 $10\times10$，步数为 \num{100000}。]{AFM矢量图}
+%				\label{FIG_HEISENBERG_VECTOR_AFM}
+%			\end{myFigure}
+%			由于式 \eqref{EQ_HEAT_CAPACITY} 和 \eqref{EQ_MAGNETIC_SUSCEPTIBILITY} 在 $T \approach 0$ 时是发散的，因此热容与磁化率利用能量、总磁矩曲线的导数来计算，如图 
+%			\ref{FIG_HEISENBERG_C_X_VS_T} 中的蓝色曲线所示。
+%			\begin{myFigure}
+%				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_C_X_VS_T}
+%				\figCaption[灰色曲线表示原始数据，蓝色曲线表示利用能量、总磁矩曲线的导数（差分）计算出的结果。]{热容、磁化率随温度的变化}
+%				\label{FIG_HEISENBERG_C_X_VS_T}
+%			\end{myFigure}
+			
+			之后模拟反铁磁相互作用（AFM）下的情况。取 $J=-1$，其余参数同上。如图~\ref{FIG_HEISENBERG_E_M_VS_T_LATTICE_10_AFM} ，能量曲线与铁磁相互作用下几乎完全一样，而平均磁矩却始终为零。原因在于AFM使得邻近的磁矩存在反向的趋势，因而即使是低温，平均磁矩也是零。而在高温下，熵更占优势，自然磁矩处于混乱、无序状态，平均磁矩也为零。
+			
+			\begin{myFigure}
+				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_E_M_VS_T_LATTICE_10_AFM}
+				\figCaption[点阵大小为 $10\times10$，步数为 \num{100000}。]{能量、总磁矩大小随温度的变化}
+				\label{FIG_HEISENBERG_E_M_VS_T_LATTICE_10_AFM}
+			\end{myFigure}
+			
+			Heisenberg模型的相变是能量与熵竞争的结果。低温下，能量更占优势。因此相互作用的影响显著。$J>0$，即出现铁磁相；$J<0$，则出现反铁磁相。高温下，熵的作用超过能量。此时体系的状态就与 $J$ 的取值无关，都变现为无序与混乱。能量与熵的影响达到平衡时，即为临界点。%TODO：图片
+			
+			观察体系状态随步数的演化过程，可以有更多的发现。在低温下，无论是FM还是AFM，均需要相当多的步数才可以达到稳定的有序态。即使是在有序态，也并非处于磁矩取向完全相同的理想情况（以FM为例），而是大片取向相同的花斑，如图~\ref{FIG_HEISENBERG_STEP_FM}。由于Metropolis算法是逐点翻转，当出现大范围取向相同的区域时，翻转任意一个自旋所需的能量就会很大，因此难以进行。此即所谓“临界慢化”现象，需要更高级的算法来克服。
+			
+			\begin{myFigure}
+				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_STEP_FM}
+%				\vspace{0.5cm}
+				\figCaption[彩色矩阵图反映的是自旋 $z$ 分量的大小，矢量图反映的是自旋在 $xy$ 平面上的投影。从左至右依次为1000、\num{10000}、\num{100000} MCS。]{铁磁相随模拟步数的演化}
+				\label{FIG_HEISENBERG_STEP_FM}
+			\end{myFigure}
+			
+			对于AFM，在较小的点阵中临界慢化不很明显。如图~\ref{FIG_HEISENBERG_STEP_AFM}，并没有出现大片的花斑，而是几乎严格的理论情况，即相邻各点去向均相反。不过，在较大的点阵中，仍然是有花斑出现的。
+			
+			\begin{myFigure}
+				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_STEP_AFM}
+%				\vspace{0.5cm}
+				\figCaption[从左至右依次为1000、\num{10000}、\num{100000} MCS。]{反铁磁相随模拟步数的演化}
+				\label{FIG_HEISENBERG_STEP_AFM}
+			\end{myFigure}
+			
+			体系状态随步数的演化还与点阵的大小有关，详见附录~\ref{SEC_演化情况}。
+	\section{DM相互作用与skyrmion}
 		\subsection{介绍}
-			连续情况下，Hamilton量为\cite{nagaosa2013topological}
+			在非中心对称铁磁体中，存在一种特殊的相互作用——手征相互作用，它使得skyrmion这种拓扑结构可以作为一种激发态而存在。手征相互作用主要存在如下四种机制\cite{代杰2015手征磁体中的}：
+			\begin{enumerate}[itemsep = 0 pt, parsep = 0 pt, topsep = 0 pt]
+				\item  非中心对称的磁性材料中，自旋轨道耦合作用的高阶项，即Dzyaloshinsky--Moriya（DM）相互作用\cite{dzyaloshinsky1958thermodynamic,moriya1960anisotropic}，这是一种反对称交换作用；
+				\item 四自旋交换相互作用；
+				\item 长程的磁偶极--偶极相互作用；
+				\item 阻挫交换作用。
+			\end{enumerate}
+			
+			我们的讨论和模拟仅限于DM相互作用导致的skyrmion。DM作用是由于界面附近空间对称性被破坏而产生的，其具体形式可以表示为：
+			\begin{equation}
+				\scH_\text{DM} = \vecb{D}_{12} \cdot (\vecb{s}_1 \times \vecb{s}_2) \comma
+			\end{equation}
+			其中的 $\vecb{s}_1$、$\vecb{s}_2$ 分别表示两个自旋矢量，而 $\vecb{D}_{12}$ 为DM相互作用参量，它由界面材料和晶体结构决定，是一个与时间无关并且空间非均匀的矢量。$\vecb{D}_{12}$ 具有反对称性，即
+			\begin{equation}
+				\vecb{D}_{12}=-\vecb{D}_{21} \fullstop
+			\end{equation}
+			
+			DM相互作用最初由Dzyaloshinsky在1958年提出。他认为在对称度不够高的情形下，自旋方向会倾斜，而并非保持平行。1960年，T.~Moriya利用Anderson超交换作用的微扰方法对DM相互作用做了进一步阐释，并给与了微观的理论依据。如图~\ref{FIG_DM_INTERACTION}，DM相互作用就是相邻原子通过与异相中原子的自旋--轨道耦合作用（SOC）发生自旋偏转的原因。自旋-轨道耦合作用愈强烈，$\vecb{D}_{12}$ 矢量的模长越大，自旋方向翻转 \SI{180}{\degree} 时经过的空间长度越短，形成的skyrmion间距就越小。DM相互作用较强的二维磁性材料比材料对称性较强的三维材料在 $T$-$B$ 相图中对应区域更大，前者更易形成skyrmion相。
+			
+			由DM相互作用而导致出现skyrmion的材料，在实验中发现有 \ce{MnSi}、$\ce{Fe_$1-x$Co_$x$Si}$ 和 $\ce{Mn_$1-x$Fe_$x$Ge}$ 等。这些材料中，skyrmion的尺寸由DM相互作用和铁磁交换作用的强度共同决定，一般在 \SIrange{5}{10}{\nano\meter}，要比晶胞尺寸大很多，因此可以认为其满足连续性近似条件（当然在我们的模拟中仍然是离散的）。
+			
+			\begin{myFigure}
+				\includegraphics[width = 7 cm]{Figures/FIG_DM_INTERACTION}
+				\vspace{0.8 cm}
+				\figCaption[图 (a) 反映的是由两个原子自旋和一个带有强SOC的原子造成的DM相互作用，图 (b) 反映的是铁磁相金属（灰色）和有强SOC金属交界处的DM相互作用。]{DM相互作用\cite{fert2013skyrmions}}
+				\label{FIG_DM_INTERACTION}
+			\end{myFigure}
+			
+			在连续近似下，系统的Hamilton量为\cite{nagaosa2013topological}
 			\begin{equation}
 				\scH = \int \dd r \left[ J(\nabla \vecb{n})^2 + D \vecb{n} \cdot (\nabla \times \vecb{n}) - \vecb{H} \cdot \vecb{n} \right] \comma
 			\end{equation}
-			式中的 $J$ 是交换作用常数（$J>0$ 时为铁磁相互作用），$D$ 是DM相互作用常数，$\vecb{H}$ 是外加磁场。
-			
-			将其离散化，可得\cite{wiki:MagneticSkyrmion}
+			式中的 $J$ 是交换作用常数（$J>0$ 时为铁磁相互作用），$D$ 是DM相互作用常数，$\vecb{H}$ 是外加磁场。将其离散化，可得\cite{wiki:MagneticSkyrmion}
 			\begin{equation}
 				\begin{aligned}
 					\scH=&-J\sum_{\vecb{r}}\vecb{s}_{\vecb{r}} \cdot
 					\left(\vecb{s}_{\vecb{r}\pm\vecb{e}_x}\!+\vecb{s}_{\vecb{r}\pm\vecb{e}_y} \right) \\
 					&-D\sum_{\vecb{r}} \left[\vecb{s}_{\vecb{r}}\times\vecb{s}_{\vecb{r}\pm\vecb{e}_x}\!\!\cdot\left(\pm\vecb{e}_x\right) + \vecb{s}_{\vecb{r}}\times\vecb{s}_{\vecb{r}\pm\vecb{e}_y}\!\!\cdot\left(\pm\vecb{e}_y\right) \right] \\
-					&-\vecb{H}\cdot\sum_{\vecb{r}}\vecb{s}_{\vecb{r}} \comma
+					&-\vecb{H}\cdot\sum_{\vecb{r}}\vecb{s}_{\vecb{r}} \fullstop
 				\end{aligned}
 			\end{equation}
-			其中，第一项为交换作用，即式~\eqref{EQ_DEF_OF_HEISENBERG_MODEL}；第二、第三项分别为DM相互作用和外加磁场。
+			该式的第一项为交换作用，也就是式~\eqref{EQ_DEF_OF_HEISENBERG_MODEL} 的第一项；第二、第三项分别为DM相互作用和外加磁场。
 			
-			为了定量描述Skyrmion相的特性，除了能量与磁矩，还需引进Skyrmion密度（SkD）\cite{muhlbauer2009skyrmion}
+			这三种相互作用的竞争，将会导致不同的相。在Curie温度以下，当外加磁场较小或为0时，会出现螺旋相（helical phase)。此时Zeeman能忽略不计，只有交换作用与DM相互作用竞争。当外加磁场较大但低于某一临界值时，则会出现锥形相(conical phase)，此时外加磁场的存在可以改变螺旋的简并度，使自旋倾向与沿外磁场方向排列，但是Zeeman能仍然较小，不足与前两项竞争。
+			
+			为了定量描述skyrmion相的特性，除了能量与磁矩，还需引进skyrmion密度（SkD）\cite{muhlbauer2009skyrmion}
 			\begin{equation}
 				\f=\frac{1}{4\p}\vecb{s}\cdot \left(\frac{\pd \vecb{s}}{\pd x}\times\frac{\pd \vecb{s}}{\pd y}\right) \comma
 			\end{equation}
@@ -288,9 +371,10 @@
 				\f=\sum_{\vecb{r}} \vecb{s}\cdot\left[ \left(\vecb{s}_{\vecb{r}+\vecb{e}_x}\!-\vecb{s}_{\vecb{r}-\vecb{e}_x}\right) \times\left(\vecb{s}_{\vecb{r}+\vecb{e}_y}\!-\vecb{s}_{\vecb{r}-\vecb{e}_y}\right)\right] \fullstop
 			\end{equation}
 			
-			利用Monte Carlo算法模拟Skyrmion的思路与方法，和前文所述的Heisenberg模型完全相同。点阵大小同样也取为 $36\times36$。不同的是，由于存在较复杂的相互作用，达到稳定所需的步数会更多。
+			利用Monte Carlo算法模拟skyrmion的思路与方法，和前文所述的Heisenberg模型完全相同，只需改变翻转概率中 $\incr E$ 的计算。模拟程序也是基本一致的。
 			
 		\subsection{结果与分析}
+			首先，仍是利用 $36\times36$ 的点阵，进行1000个MCS。温度从0改变到5，记录平均磁矩 $\vecb{m}$ 和skyrmion密度 $\f$ 随温度 $T$ 的变化，如图
 			\begin{myFigure}
 				\includegraphics[width = \textwidth]{Figures/FIG_PHASE_SD_AND_MZ}
 				\figCaption{Skyrmion密度与磁矩 $z$ 方向分量随外加磁场 $\vecb{H}$ 和温度 $T$ 的变化}
@@ -318,7 +402,7 @@
 			\begin{myFigure}
 				\includegraphics[width = \textwidth]{Figures/FIG_LATTICE_MATRICX}
 %				\vspace{0.5cm}
-				\figCaption{$z$ 分量}
+				\figCaption{$z$ 分量图}
 			\end{myFigure}
 	\section{简要的数学}
 	\section{总结}
@@ -334,27 +418,36 @@
 	\end{multicols}
 	\appendix
 	\section{评分}
-	\section{代码实现}
-		Heisenberg模型与产生Skyrmion的系统，差别仅在于Hamilton量，因此其代码是相同的。为了加快运行速度，在模拟经典Heisenberg模型时，涉及其他相互作用的代码未被编译。
+	\section{Monte Carlo模拟的演化情况} \label{SEC_演化情况}
+	\section{额外的图片}
+		\begin{myFigure}
+			\includegraphics[width = \textwidth]{Figures/FIG_VECTOR_3D}
+			\vspace{-0.5cm}
+			\figCaption[从左至右依次为螺旋相、skyrmion相和铁磁相。只选取了点阵中的部分自旋矢量作图。]{不同相的三维矢量图}
+		\end{myFigure}
+	\section{部分代码实现}
+		Heisenberg模型与产生skyrmion的系统，差别仅在于Hamilton量，因此其代码是相同的。为了加快运行速度，在模拟经典Heisenberg模型时，涉及其他相互作用的代码未被编译。
 		
-		矢量类（\texttt{MyVector}）、计时类（\texttt{MyTiming}）和若干简单函数的实现代码没有给出。编译平台：Microsoft\textregistered\;Visual C++ 2015。
+		为节省篇幅，这里只给出了核心代码，完整代码请参见 \url{https://github.com/Stone-Zeng/Thermo_Stat_Project}。编译平台：Microsoft\textregistered\;Visual C++ 2015。
 		\linespread{1}
-		\subsection{Head.h}
-		\lstinputlisting{../HeisenbergModel/Head.h}
+%		\subsection{Head.h}
+%		\lstinputlisting{../HeisenbergModel/Head.h}
+		\subsection{Function.h}
+		\lstinputlisting{../HeisenbergModel/Function.h}
 		\subsection{MyLattice.h}
 		\lstinputlisting{../HeisenbergModel/MyLattice.h}
 		\subsection{MyLattice.cpp}
 		\lstinputlisting{../HeisenbergModel/MyLattice.cpp}
-		\subsection{Physics.h}
-		\lstinputlisting{../HeisenbergModel/Physics.h}
-		\subsection{Physics.cpp}
-		\lstinputlisting{../HeisenbergModel/Physics.cpp}
+%		\subsection{Physics.h}
+%		\lstinputlisting{../HeisenbergModel/Physics.h}
+%		\subsection{Physics.cpp}
+%		\lstinputlisting{../HeisenbergModel/Physics.cpp}
 		\subsection{SingleSimulation.h}
 		\lstinputlisting{../HeisenbergModel/SingleSimulation.h}
 		\subsection{SingleSimulation.cpp}
 		\lstinputlisting{../HeisenbergModel/SingleSimulation.cpp}
-		\subsection{Main.cpp}
-		\lstinputlisting{../HeisenbergModel/HeisenbergModel_Main.cpp}
-		\subsection{PhaseDiagram.cpp}
-		\lstinputlisting{../HeisenbergModel/PhaseDiagram.cpp}
+%		\subsection{Main.cpp}
+%		\lstinputlisting{../HeisenbergModel/HeisenbergModel_Main.cpp}
+%		\subsection{PhaseDiagram.cpp}
+%		\lstinputlisting{../HeisenbergModel/PhaseDiagram.cpp}
 \end{document}

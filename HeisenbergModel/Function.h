@@ -1,8 +1,8 @@
 //Here are some simple functions:
-//	randomInt
-//	randomReal
-//	possibilityOfFlip
+//  fastrand
+//	randomInt, randomReal
 //	doubleToString
+//	possibilityOfFlip
 
 #ifndef _FUNCTION_H_
 #define _FUNCTION_H_
@@ -46,15 +46,8 @@ inline double randomReal(const double& min, const double& max)
 	return dist(gen);
 #else
 	auto r = 0.0001 * (double) ((fastrand() * fastrand()) % 10000);
-	////Fast:
-	//auto r = 0.001 * (double) (fastrand() % 1000);
 	return (max - min) * r + min;
 #endif
-}
-
-inline double possibilityOfFlip(const double& dE, const double& temperature)
-{
-	return ((dE > 0.0) ? exp(-dE / temperature) : 1);
 }
 
 inline std::string doubleToString(const double& x)
@@ -66,6 +59,11 @@ inline std::string doubleToString(const double& x)
 	if (s[s.length() - 1] == '.')
 		--i;
 	return s.substr(0, i + 1);
+}
+
+inline double possibilityOfFlip(const double& dE, const double& temperature)
+{
+	return ((dE > 0.0) ? exp(-dE / temperature) : 1);
 }
 
 #endif
