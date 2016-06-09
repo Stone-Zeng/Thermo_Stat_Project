@@ -227,28 +227,32 @@
 				\item 在最后的若干MCS中作系综平均，计算各物理量。\cite{周琼2010蒙特卡洛方法在磁性系统中的应用}
 			\end{enumerate}
 			
-			在我们的模拟中，整个过程包含一定数量的MCS，并在最后50步中统计能量和磁矩。另外，所有参数均采用约化单位。其中，取 $\kB=1$，$J=1$。			
-%			下面给出各物理量的计算公式。总能量
-%			\begin{equation}%TODO：系数
-%				E = \sum_{i} \ve_i \comma
-%			\end{equation}
-%			这里的 $\ve_i$ 即单个格点的Hamilton量。总磁矩
-%			\begin{equation}
-%				\vecb{M} = \sum_{i} \vecb{s}_i \fullstop
-%			\end{equation}
-%			比热
-%			\begin{equation} \label{EQ_HEAT_CAPACITY}
-%				C = \frac{\mean{E^2} - \mean{E}^2}{\kB T^2}
-%				= \frac{1}{\kB T^2} \left[ \frac{\sum_{i} \ve_i^2}{L^2} - \left( \frac{\sum_{i} \ve_i}{L^2} \right)^2 \right] \semicomma
-%			\end{equation}
-%			磁化率
-%			\begin{equation} \label{EQ_MAGNETIC_SUSCEPTIBILITY}
-%				\c = \frac{\mean{\vecb{M}^2} - \mean{\vecb{M}}^2}{\kB T}
-%				= \frac{1}{\kB T} \left[ \frac{\sum_{i} \vecb{s}_i^2}{L^2} - \left( \frac{\sum_{i} \vecb{s}_i}{L^2} \right)^2 \right] \fullstop
-%			\end{equation}
-%			以上两式中的 $L$ 为点阵边长。实际模拟中，各常数均忽略不计。
+			在我们的模拟中，整个过程包含一定数量的MCS，并在最后50步中统计能量和磁矩。另外，所有参数均采用约化单位。其中，取 $\kB=1$，$J=1$。
+			
+			下面给出各物理量的计算公式。总能量
+			\begin{equation}
+				E = \sum_{i} \ve_i \comma
+			\end{equation}
+			这里的 $\ve_i$ 即单个格点的Hamilton量。总磁矩
+			\begin{equation}
+				\vecb{M} = \sum_{i} \vecb{s}_i \fullstop
+			\end{equation}
+			比热\cite{林宗涵2007热力学与统计物理学——北京大学物理学丛书}
+			\begin{equation} \label{EQ_HEAT_CAPACITY}
+				C = \frac{\mean{E^2} - \mean{E}^2}{\kB T^2}
+				= \frac{1}{\kB T^2} \left[ \frac{\sum_{i} \ve_i^2}{L^2} - \left( \frac{\sum_{i} \ve_i}{L^2} \right)^2 \right] \semicomma
+			\end{equation}
+			磁化率
+			\begin{equation} \label{EQ_MAGNETIC_SUSCEPTIBILITY}
+				\c = \frac{\mean{\vecb{M}^2} - \mean{\vecb{M}}^2}{\kB T}
+				= \frac{1}{\kB T} \left[ \frac{\sum_{i} \vecb{s}_i^2}{L^2} - \left( \frac{\sum_{i} \vecb{s}_i}{L^2} \right)^2 \right] \fullstop
+			\end{equation}
+			以上两式中的 $L$ 为点阵边长。
+			
 		\subsection{结果与分析}
-			首先取 $36\times36$ 的点阵，进行1000个MCS。温度 $T$ 从0改变到4，记录平均能量 $\ve$ 和平均磁矩 $\vecb{m}$ 随温度的变化。
+			首先取 $36\times36$ 的点阵，进行1000个MCS。温度 $T$ 从0改变到4，记录平均能量 $\ve$ 和平均磁矩 $\vecb{m}$ \footnote{
+				由于点阵大小有变，因此这里作了归一化，以方便比较。
+			}随温度的变化。
 			
 			\begin{myFigure}
 				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_E_M_VS_T_LATTICE_36}
@@ -264,6 +268,14 @@
 				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_E_M_VS_T_LATTICE_10}
 				\figCaption[点阵大小为 $10\times10$，步数为 \num{100000}。]{平均能量、平均磁矩大小随温度的变化}
 				\label{FIG_HEISENBERG_E_M_VS_T_LATTICE_10}
+			\end{myFigure}
+			
+			按照该条件下的结果绘制热容与磁化率曲线，如图~\eqref{FIG_HEISENBERG_C_X_VS_T_LATTICE_10}。利用式~\eqref{EQ_HEAT_CAPACITY} 和式~\ref{EQ_MAGNETIC_SUSCEPTIBILITY} 得到的结果在低温下是发散的。这是因为Heisenberg对应经典的连续情况，而在低温下必须考虑量子效应。此时式~\eqref{EQ_HEAT_CAPACITY} 和式~\eqref{EQ_MAGNETIC_SUSCEPTIBILITY} 是失效的。对于热容曲线，我们还用之前能量曲线的导数来进行计算，也在图~\ref{FIG_HEISENBERG_C_X_VS_T_LATTICE_10} 中。这实际上对应热容的定义，是不发散的合理结果。
+			
+			\begin{myFigure}
+				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_C_X_VS_T_LATTICE_10}
+				\figCaption[左图中的灰色曲线是利用能量曲线导数（差分）计算出的结果。]{热容、磁化率随温度的变化}
+				\label{FIG_HEISENBERG_C_X_VS_T_LATTICE_10}
 			\end{myFigure}
 			
 			之后模拟反铁磁相互作用（AFM）下的情况。取 $J=-1$，其余参数同上。如图~\ref{FIG_HEISENBERG_E_M_VS_T_LATTICE_10_AFM} ，能量曲线与铁磁相互作用下几乎完全一样，而平均磁矩却始终为零。原因在于AFM使得邻近的磁矩存在反向的趋势，因而即使是低温，平均磁矩也是零。而在高温下，熵更占优势，自然磁矩处于混乱、无序状态，平均磁矩也为零。
@@ -442,7 +454,18 @@
 			
 			前文提到的skyrmion指数由式~\eqref{EQ_TOPOLOGICAL_INVARIANT} 决定。拓扑指数不依赖于相互作用形式，可表征该场拓扑非平庸的程度。在计算模拟中即为单位体积内形成的skyrmion数量。
 			
-		\subsection{...}
+		\subsection{螺旋相的数学解释}
+			因为 $CP_1$ 群同构于 $S^2$ 流形，所以自旋矢量可以由 $CP_1$ 的两个复坐标表示：
+			\begin{equation}
+				\vecb{Z} = 
+			\end{equation}
+			它可以通过映射
+			\begin{equation}
+				h=\vecb{Z}\s\vecb{Z}
+			\end{equation}
+			反变换为自旋矢量，其中σ为自旋向量。
+			在复场表示下重新写出金兹堡——朗道泛函
+			
 	\section{总结}
 	\section{致谢}
 		首先感谢陈焱老师在全过程的帮助，尤其是对我们选题的指导。其次感谢吴义政老师和虞跃，他们分别他从实验和理论的角度提出了一些很有价值的观点。还要感谢左光宏老师，他帮助我们实现了并行计算，并提供了服务器。最后要感谢张宇、王敬淳、秦金谷、詹晨迪和郑益峰等学长学姐的支持与帮助。
@@ -456,7 +479,13 @@
 	\end{multicols}
 	\appendix
 	\section{评分}
+		杜治纬，
+		孙晓晨
+		陶润恺
+		王金银
+		曾祥东
 	\section{Monte Carlo模拟的演化情况} \label{SEC_演化情况}
+		
 	\section{额外的图片}
 		\begin{myFigure}
 			\includegraphics[width = \textwidth]{Figures/FIG_VECTOR_3D}
@@ -467,6 +496,7 @@
 		Heisenberg模型与产生skyrmion的系统，差别仅在于Hamilton量，因此其代码是相同的。为了加快运行速度，在模拟经典Heisenberg模型时，涉及其他相互作用的代码未被编译。
 		
 		为节省篇幅，这里只给出了核心代码，完整代码请参见 \url{https://github.com/Stone-Zeng/Thermo_Stat_Project}。编译平台：Microsoft\textregistered\;Visual C++ 2015。
+		{
 		\linespread{1}
 %		\subsection{Head.h}
 %		\lstinputlisting{../HeisenbergModel/Head.h}
@@ -488,4 +518,14 @@
 %		\lstinputlisting{../HeisenbergModel/HeisenbergModel_Main.cpp}
 %		\subsection{PhaseDiagram.cpp}
 %		\lstinputlisting{../HeisenbergModel/PhaseDiagram.cpp}
+		}
+		
+	\section{LabVIEW\texorpdfstring{\textsuperscript{\textregistered}}{®}平台下的模拟结果}
+		我们还利用LabVIEW\textregistered 进行了Heisenberg模型的模拟。正文使用的C++代码使用并行算法（模拟退火），而这里改用了串行算法，即在点阵平衡后连续改变温度，并记录结果，如图~\ref{FIG_LABVIEW}。所使用的点阵大小为 $50\times50$，$J$ 取1。从初始温度 $T=0$ 开始，约1000MCS后，认为系统达到稳定。此后逐渐升温，每个温度下认为100MCS后稳定。其结果与正文中的类似。
+		\begin{myFigure}
+			\includegraphics[width = 14cm]{Figures/FIG_LABVIEW}
+			\vspace{0.5cm}
+			\figCaption[能量曲线中，灰色曲线为原始数据，蓝色曲线为平滑后的结果。热容曲线是利用能量曲线的差分来计算的。]{平均能量与热容随温度的变化曲线}
+			\label{FIG_LABVIEW}
+		\end{myFigure}
 \end{document}
