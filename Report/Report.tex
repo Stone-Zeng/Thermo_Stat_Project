@@ -11,7 +11,7 @@
 		bookmarksopen = true,
 		bookmarksopenlevel = 1,
 		bookmarksnumbered = true,
-		pdftitle = {基于Heisenberg模型的skyrmion研究},%TODO：title
+		pdftitle = {基于Heisenberg模型的skyrmion研究}
 		pdfauthor = {杜治纬，孙晓晨，陶润恺，王金银，曾祥东},
 		colorlinks,
 		linkcolor = {red!60!black},
@@ -171,12 +171,12 @@
 	\maketitle
 	
 	\begin{myAbstract}
-		我们
+		我们从铁磁相变的Heisenberg模型出发，基于C++和LabVIEW\textregistered 等平台，利用Metropolis算法模拟了系统各热力学参量随温度的变化，讨论了不同步数下铁磁相的演变。进一步地，我们对有外场和DM相互作用情形下铁磁体系的拓扑相变进行了研究，画出各种相的图像，并绘制了相图，还简要讨论了铁磁体中这些相变产生的机制。最后我们通过解非线性 $\s$ 模型的过程，从理论角度进行了完善。
 	\end{myAbstract}
 	
 	\begin{multicols}{2}
 	\section{引言}
-		Skyrmion（斯格米子）是由Tony Skyrme在1962提出来的一种拓扑激发态，它是受拓扑保护的与重子有关的准粒子，包括重子与共振态的叠加。在空间反射对称性破缺的手征磁体中，skyrmion可稳定存在；之后，在各种凝聚态物质体系中也发现了它的存在\cite{yu2010real}。它的尺度通常处在纳米数量级\cite{ulrich2011chiral}。但目前自旋体系中形成稳定skyrmion结构的机制尚不明确，驱动skyrmion运动的机理有待进一步研究。%TODO：纳米级后面有
+		Skyrmion（斯格米子）是由T.~Skyrme在1962提出来的一种拓扑激发态，它是受拓扑保护的与重子有关的准粒子，包括重子与共振态的叠加。在空间反射对称性破缺的手征磁体中，skyrmion可稳定存在；之后，在各种凝聚态物质体系中也发现了它的存在\cite{yu2010real}。它的尺度通常处在纳米数量级\cite{ulrich2011chiral}。但目前自旋体系中形成稳定skyrmion结构的机制尚不明确，驱动skyrmion运动的机理有待进一步研究。
 		
 		在场论中，skyrmion是非线性 $\sigma$ 模型中的一个非平庸经典解，是一种拓扑孤子。在二维磁性系统中，假设平面内各向同性，可以形成如图~\ref{FIG_SKYRMIONS_WIKI} 所示的中心对称结构，此结构的非最低自由能相在特定条件下是可以存在的。
 		
@@ -286,7 +286,7 @@
 				\label{FIG_HEISENBERG_E_M_VS_T_LATTICE_10_AFM}
 			\end{myFigure}
 			
-			Heisenberg模型的相变是能量与熵竞争的结果。低温下，能量更占优势。因此相互作用的影响显著。$J>0$，即出现铁磁相；$J<0$，则出现反铁磁相。高温下，熵的作用超过能量。此时体系的状态就与 $J$ 的取值无关，都变现为无序与混乱。能量与熵的影响达到平衡时，即为临界点。%TODO：图片
+			Heisenberg模型的相变是能量与熵竞争的结果。低温下，能量更占优势。因此相互作用的影响显著。$J>0$，即出现铁磁相；$J<0$，则出现反铁磁相。高温下，熵的作用超过能量。此时体系的状态就与 $J$ 的取值无关，都变现为无序与混乱。能量与熵的影响达到平衡时，即为临界点。
 			
 			观察体系状态随步数的演化过程，可以有更多的发现。在低温下，无论是FM还是AFM，均需要相当多的步数才可以达到稳定的有序态。即使是在有序态，也并非处于磁矩取向完全相同的理想情况（以FM为例），而是大片取向相同的花斑，如图~\ref{FIG_HEISENBERG_STEP_FM}。由于Metropolis算法是逐点翻转，当出现大范围取向相同的区域时，翻转任意一个自旋所需的能量就会很大，因此难以进行。此即所谓“临界慢化”现象，需要更高级的算法来克服。
 			
@@ -301,12 +301,12 @@
 			
 			\begin{myFigure}
 				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_STEP_AFM}
-%				\vspace{0.5cm}
 				\figCaption[从左至右依次为1000、\num{10000}、\num{100000} MCS。]{反铁磁相随模拟步数的演化}
 				\label{FIG_HEISENBERG_STEP_AFM}
 			\end{myFigure}
 			
 			体系状态随步数的演化还与点阵的大小有关，详见附录~\ref{SEC_演化情况}。
+			
 	\section{DM相互作用与skyrmion}
 		\subsection{介绍}
 			在非中心对称铁磁体中，存在一种特殊的相互作用——手征相互作用，它使得skyrmion这种拓扑结构可以作为一种激发态而存在。手征相互作用主要存在如下四种机制\cite{代杰2015手征磁体中的}：
@@ -333,9 +333,9 @@
 				\label{FIG_DM_INTERACTION}
 			\end{myFigure}
 			
-			DM相互作用最初由Dzyaloshinsky在1958年提出。他认为在对称度不够高的情形下，自旋方向会倾斜，而并非保持平行。1960年，T.~Moriya利用Anderson超交换作用的微扰方法对DM相互作用做了进一步阐释，并给与了微观的理论依据。如图~\ref{FIG_DM_INTERACTION}，DM相互作用就是相邻原子通过与异相中原子的自旋--轨道耦合作用（SOC）发生自旋偏转的原因。自旋-轨道耦合作用愈强烈，$\vecb{D}_{12}$ 矢量的模长越大，自旋方向翻转 \SI{180}{\degree} 时经过的空间长度越短，形成的skyrmion间距就越小。DM相互作用较强的二维磁性材料比材料对称性较强的三维材料在 $T$-$H$ 相图中对应区域更大，前者更易形成skyrmion相。
+			DM相互作用最初由Dzyaloshinsky在1958年提出。他认为在对称度不够高的情形下，自旋方向会倾斜，而并非保持平行。\cite{dzyaloshinsky1958thermodynamic} 1960年，T.~Moriya利用Anderson超交换作用的微扰方法对DM相互作用做了进一步阐释，并给与了微观的理论依据。\cite{moriya1960anisotropic} 如图~\ref{FIG_DM_INTERACTION}，DM相互作用就是相邻原子通过与异相中原子的自旋--轨道耦合作用（SOC）发生自旋偏转的原因。自旋-轨道耦合作用愈强烈，$\vecb{D}_{12}$ 矢量的模长越大，自旋方向翻转 \SI{180}{\degree} 时经过的空间长度越短，形成的skyrmion间距就越小。DM相互作用较强的二维磁性材料比材料对称性较强的三维材料在 $T$-$H$ 相图中对应区域更大，前者更易形成skyrmion相。
 			
-			由DM相互作用而导致出现skyrmion的材料，在实验中发现有 \ce{MnSi}、$\ce{Fe_$1-x$Co_$x$Si}$ 和 $\ce{Mn_$1-x$Fe_$x$Ge}$ 等。这些材料中，skyrmion的尺寸由DM相互作用和铁磁交换作用的强度共同决定，一般在 \SIrange{5}{10}{\nano\meter}，要比晶胞尺寸大很多，因此可以认为其满足连续性近似条件（当然在我们的模拟中仍然是离散的）。
+			由DM相互作用而导致出现skyrmion的材料，在实验中发现有 \ce{MnSi}、$\ce{Fe_$1-x$Co_$x$Si}$ 和 $\ce{Mn_$1-x$Fe_$x$Ge}$ 等。这些材料中，skyrmion的尺寸由DM相互作用和铁磁交换作用的强度共同决定，一般在 \SIrange{5}{10}{\nano\meter}，要比晶胞尺寸大很多，因此可以认为其满足连续性近似条件（当然在我们的模拟中仍然是离散的）。\cite{代杰2015手征磁体中的}
 			
 			在连续近似下，系统的Hamilton量为\cite{nagaosa2013topological}
 			\begin{equation}
@@ -394,7 +394,7 @@
 			
 			根据之前模拟Heisenberg模型的经验，我们增加了模拟的步数。\num{10000} 和 \num{100000} 步下的结果都绘制在图~\ref{FIG_PHASE_CURVE} 中。此时可以看出，锥形相逐渐开始明显。三种相\footnote{
 				螺旋相与锥形相的图像是类似的，但在我们的模拟中，螺旋相出现的条件比较苛刻。我们得到的结果是锥形相。
-			}的典型图像见图~\ref{FIG_LATTICE_VECTOR} 和图~\ref{FIG_LATTICE_MATRICX}。
+			}的典型图像见图~\ref{FIG_LATTICE_VECTOR} 和图~\ref{FIG_LATTICE_MATRICX}，以及放在附录~\ref{SEC_额外的图片} 中的图~\ref{FIG_VECTOR_3D}。
 			
 			\begin{myFigure}
 				\includegraphics[width = \textwidth]{Figures/FIG_LATTICE_VECTOR}
@@ -422,6 +422,8 @@
 			
 			把图~\ref{FIG_PHASE_SD_AND_MZ} 中的两部分合并，就得到了 $T$-$H$ 相图，即图~\ref{FIG_PHASE}。
 			
+			从相图可以看出，随着温度的增大，相的边界逐渐模糊，螺旋相（或锥形相）和skyrmion区域变窄。说明温度增加，会破坏拓扑相的存在，使相变临界逐渐变得不清晰。锥形相和skyrmion相处在竞争关系中。$T\approx 0.5$ 时，锥形相的宽度最大，而左右都是skyrmion相主导。我们认为，随着温度的增加，skyrmion更容易形成，从而抑制锥形相的出现。低温下，则是由于Monte Carlo步数的不足，导致螺旋相无法形成。
+			
 			\begin{myFigure}
 				\includegraphics[width = 7cm]{Figures/FIG_PHASE}
 				\vspace{0.5cm}
@@ -430,23 +432,21 @@
 			\end{myFigure}
 			
 	\section{简要的数学}
-		本部分需要初步的微分几何与群论知识。
-		
 		\subsection{非线性\texorpdfstring{$\sigma$}{σ}模型}
-			非线性 $\sigma$ 模型是一种场论模型，其相互作用是靠流形度规所决定的联络与曲率引入的。不妨讨论 $d$ 维时空中取值在 $n$ 维流形 $M$ 上的场 $u(x)$，流形 $M$ 上有Riemann度规 $g_{i\!j}$。由该度规引入的作用量泛函可以写成
+			非线性 $\sigma$ 模型是一种场论模型，其相互作用是靠流形度规所决定的联络与曲率引入的。不妨讨论 $d$ 维时空中取值在 $n$ 维流形 $M$ 上的场 $u(x)$，流形 $M$ 上有Riemann度规 $g_{i\!j}$。由该度规引入的作用量泛函可以写成\cite{侯伯元2004物理学家用微分几何}
 			\begin{equation} \label{EQ_ACTION_FUNCTIONAL}
 				I= \frac{1}{2} \int \dd^{\;d} \!\!x g_{i\!j}\pd_\mu \!u^i(x)\pd^{\,\mu} \!\!u^j(x) \fullstop
 			\end{equation}
 			对作用量求变分即可得非线性 $\sigma$ 模型的解。讨论有限解时，$u(x)$ 场可看成由 $S^d \rightarrow M$ 的映射。场 $u(x)$ 可用同伦群 $\pi_d(M)$ 的同伦等价类标志，当 $\pi_d(M)\neq 0$ 时，可能存在拓扑非平庸解。
 			
-			对应于经典Heisenberg模型，有 $d=2$，而底流形 $M$ 对应 $E^2$，映射为 $S^2 \rightarrow E^2$，式~\eqref{EQ_ACTION_FUNCTIONAL} 可对应普通铁磁激发。此时对应场流形为 $S^2$，$\pi_2 (S_2)$ 即可描述该体系的拓扑不变量
+			对应于经典Heisenberg模型，有 $d=2$，而底流形 $M$ 对应 $E^2$，映射为 $S^2 \rightarrow E^2$，式~\eqref{EQ_ACTION_FUNCTIONAL} 可对应普通铁磁激发。此时对应场流形为 $S^2$，$\pi_2 (S_2)$ 即可描述该体系的拓扑不变量\cite{侯伯元2004物理学家用微分几何}
 			\begin{equation} \label{EQ_TOPOLOGICAL_INVARIANT}
 				\pi_2 (S_2)= \frac{1}{8\p} \int \dd^{\;2} \!x \vecb{N} \cdot \left(\pd_\mu \!\vecb{N} \times \pd_\nu \!\vecb{N}\right) \e^{\mu\nu} \comma
 			\end{equation}
-			其中的 $\vecb{N}$ 为底流形 $E^2$ 上每一点的单位矢量。该式为丛 $S^2$ 的卷绕数（winding number），为该自旋场底流形上的第一陈数。
+			其中的 $\vecb{N}$ 为底流形 $E^2$ 上每一点的单位矢量。该式为丛 $S^2$ 的卷绕数（winding number），为该自旋场底流形上的第一陈数。该式的拓扑不变性推导见附录~\ref{}。
 			
 		\subsection{二维skyrmion模型}
-			在某些缺少反演对称的铁磁体系，它们的铁磁相互作用可以用铁磁交换参数 $J$ 和DM耦合来描述。与非线性 $\sigma$ 模型类似，可以用一个作用量泛函来求解这个体系，这里引入Ginzburg--Landau泛函
+			在某些缺少反演对称的铁磁体系，它们的铁磁相互作用可以用铁磁交换参数 $J$ 和DM耦合来描述。与非线性 $\sigma$ 模型类似，可以用一个作用量泛函来求解这个体系，这里引入Ginzburg--Landau泛函\cite{臧佳栋2012凝聚态物理学中的拓扑现象}
 			\begin{equation}
 				F[\vecb{N}]= \frac{J}{2} \sum_{\mu} \left(\pd_\mu \!\vecb{N}\right) \cdot \left(\pd_\mu \!\vecb{N}\right)+D\vecb{N} \cdot \nabla\times\vecb{N} - \vecb{B}\cdot\vecb{N} \comma
 			\end{equation}
@@ -455,23 +455,67 @@
 			前文提到的skyrmion指数由式~\eqref{EQ_TOPOLOGICAL_INVARIANT} 决定。拓扑指数不依赖于相互作用形式，可表征该场拓扑非平庸的程度。在计算模拟中即为单位体积内形成的skyrmion数量。
 			
 		\subsection{螺旋相的数学解释}
-			因为 $CP_1$ 群同构于 $S^2$ 流形，所以自旋矢量可以由 $CP_1$ 的两个复坐标表示：
+			因为 $\mathbb{C}P_1$ 群同构于 $S^2$ 流形，所以自旋矢量可以由 $\mathbb{C}P_1$ 的两个复坐标表示：
 			\begin{equation}
-				\vecb{Z} = 
+				\vecb{Z} =
+				\begin{pmatrix}
+					z_1 \\ z_2
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+					\ee^{-\ii \vf}\cos \dfrac{\th}{2}\\
+					\sin \dfrac{\th}{2}
+				\end{pmatrix}
+				\comma
 			\end{equation}
 			它可以通过映射
 			\begin{equation}
-				h=\vecb{Z}\s\vecb{Z}
+				\vecb{n}=\vecb{Z}^\dag\vecb{\s}\vecb{Z}
 			\end{equation}
-			反变换为自旋矢量，其中σ为自旋向量。
-			在复场表示下重新写出金兹堡——朗道泛函
+			反变换为自旋矢量，其中的 $\vecb{\s}$ 为自旋向量。
+			
+			在复场表示下重新写出Ginzburg--Landau泛函：
+			\begin{equation} \label{EQ_GL_FUNCTIONAL_2}
+				\left\{
+					\begin{aligned}
+						F[\vecb{Z}] &=2J \sum_{\mu} \left(\DD_\mu \!\vecb{Z}\right)^\dag  \left(\DD_\mu \!\vecb{Z}\right) - \vecb{B}\cdot\vecb{Z}^\dag\vecb{\s}\vecb{Z} \comma\\
+						\DD_\mu &=\pd_\mu - \,\ii A_\mu -\ii\k\vecb{\s}_\mu\comma \\
+						A_\mu &=-\frac{\ii}{2}\left[\vecb{Z}^\dag \left(\pd_\mu\!\vecb{Z}\right) - \left(\pd_\mu\!\vecb{Z}^\dag\right)\vecb{Z} \right] \comma
+					\end{aligned}
+				\right.
+			\end{equation}
+			其中的 $\k=D/2J$ 是DM耦合。
+			
+			在 $B=0$ 情况下，当初始 $\vecb{Z}_0$ 为任意常矢量时，对式~\eqref{EQ_GL_FUNCTIONAL_2} 变分，解得
+			\begin{equation}
+				\vecb{Z}_\text{H}=\ee^{\ii \k \left(\vecb{\s}\cdot\hat{\vecb{k}}\right) \left(\vecb{r}\cdot\hat{\vecb{k}}\right) } \vecb{Z}_0 \comma
+			\end{equation}
+			其中， $\vecb{r}$ 为平面上的坐标，而 $\vecb{k}$ 是与 $\vecb{n}_0=\vecb{Z}_0^\dag \vecb{\s}\vecb{Z}_0$ 相垂直的一个单位矢量。可验证 $\vecb{n}_\text{H}=\vecb{Z}_\text{H}^\dag \vecb{\s}\vecb{Z}_\text{H}$ 也与 $\vecb{k}$ 垂直，此时即是沿 $\vecb{k}$ 方向旋转的螺旋相。进一步计算可知，拓扑指数为0.
+			
+		\subsection{Skyrmion解}
+			下面研究二维空间中一个单独的skyrmion。设其在中心 $r=0$ 处自旋方向向下；而 $r\approach\infty$ 时，自旋方向向上。可以写出式~\eqref{EQ_GL_FUNCTIONAL_2} 解的形式：
+			\begin{equation}
+				\vecb{Z}_\text{Sk}=\ee^{\ii \,\left(\th(r)/2\right) \left(\vecb{\s}\cdot\hat{\vecb{r}} \times \hat{\vecb{Z}}\right)} \vecb{Z}_0 \comma
+			\end{equation}
+			其中 $\vecb{Z}_0=(1,\,0)$，$\vecb{r}$ 为面内的极坐标矢量，$\th(r)$则是倾角 $\th$ 与极坐标 $r$ 的光滑函数。可取一个典型解分析
+			\begin{equation}
+				\vecb{Z}_\text{Sk}=\frac{1}{\sqrt{R^2+r^2}}
+				\begin{pmatrix}
+				\ii \,x+y \\ -R
+				\end{pmatrix}
+				\fullstop
+			\end{equation}
+			面内自旋用 $(\Re[z_1],\,\Im[z_1])$表示。该结构即是一个涡旋结构。这个解对应的 $\vecb{n}=\vecb{Z}^\dag \vecb{\s}\vecb{Z}$ 即为skyrmion。作出图像，就得到图~\ref{FIG_SKYRMIONS_WIKI} 中的 (b)。\cite{臧佳栋2012凝聚态物理学中的拓扑现象}
 			
 	\section{总结}
+		在这篇文章中，我们对Heisenberg模型进行深入的研究，发现低温下铁磁相的形成对Monte Carlo步数的要求很高；低温下的螺旋相也是如此。然而skyrmion则是一种极稳定的相，很快就可以形成。我们认为skyrmion的形成是因为体系DM作用的存在而打破了 $xy$ 平面的空间反演对称，这使得破坏空间反演对称的skymion相可以大面积存在。这种拓扑结构，可以阻碍随温度增加时由于对称性增加而产生的体系熵的增加。换而言之，拓扑结构是为了维持体系自身能级简并的产物，以此来对抗温度变化而产生的熵的增加。这可以使体系维持在更低能量状态。这是该相如此稳定的原因。我们进一步希望研究其他的相互作用对体系对称性的影响。
+		
 	\section{致谢}
 		首先感谢陈焱老师在全过程的帮助，尤其是对我们选题的指导。其次感谢吴义政老师和虞跃，他们分别他从实验和理论的角度提出了一些很有价值的观点。还要感谢左光宏老师，他帮助我们实现了并行计算，并提供了服务器。最后要感谢张宇、王敬淳、秦金谷、詹晨迪和郑益峰等学长学姐的支持与帮助。
 		
 %	\section{参考文献}
 		\nocite{LippmanLajoieMooEtAl2013}
+		\nocite{于禄2005边缘奇迹}
 		{
 			\flushleft \small
 			\bibliography{Reference}
@@ -479,18 +523,72 @@
 	\end{multicols}
 	\appendix
 	\section{评分}
-		杜治纬，
-		孙晓晨
-		陶润恺
-		王金银
-		曾祥东
-	\section{Monte Carlo模拟的演化情况} \label{SEC_演化情况}
+		杜治纬（20分）：查阅Heisenberg模型的相关文献，写论文的引言部分，运行程序，处理数据；
 		
-	\section{额外的图片}
+		孙晓晨（20分）：查阅DM作用的相关文献，写论文DM相互作用的物理分析部分和引言部分，程序debug，运行程序；
+		
+		陶润恺\footnote{本小组组长。}（20分）：C++、LabVIEW\textregistered 模拟Heisenberg模型，验证skyrmion的出现，写论文的非线性$\sigma$模型部分；
+		
+		王金银（20分）：查阅skyrmion的相关文献，运行程序，处理数据，程序debug，写论文的总结、摘要；
+		
+		曾祥东（20分）：C++模拟Heisenberg模型，程序并行化，Mathematica\textregistered 图像处理，\LaTeX 论文排版。
+		
+	\section{Monte Carlo模拟的演化情况} \label{SEC_演化情况}
+		对于经典Heisenberg模型的Metropolis模拟，点阵尺寸大约在 $14\times14$ 时，存在一个临界点。在小于14时，能量与磁矩均迅速趋于稳定；大于14时，能量仍迅速稳定，而磁矩的收敛速度却大幅下降。在14附近，磁矩的演化存在突跃，见图~\ref{FIG_DYNAMIC}。
+		\begin{myFigure}
+			\includegraphics[width = 15cm]{Figures/FIG_DYNAMIC}
+			\vspace{0.8cm}
+			\figCaption[步数为\num{100000}。从左至右，尺寸依次为 $12\times12$、$14\times14$、$15\times15$。]{平均能量、磁矩的演化曲线}
+			\label{FIG_DYNAMIC}
+		\end{myFigure}
+		
+	\section{拓扑不变量的证明}
+		分量展开：
+		\begin{align} \label{EQ_000}
+			&\phantom{=}\hat{\vecb{M}}\cdot\left[ \frac{\pd}{\pd \th} \hat{\vecb{M}} \times \frac{\pd}{\pd \vf} \hat{\vecb{M}}\right] \notag\\
+			&= M \myB{1}\left[\pd \myB{2}M\myB{2}+M\myB{1}\right]
+			\left[\pd \myB{3}M\myB{3}+M\myB{1}+\cot \th M\myB{2}\right] \notag\\ 
+			&+ M\myB{2}[\pd\myB{2}M\myB{3}[\pd\myB{3}M\myB{1}-M
+			\myB{3}]\notag\\
+			&+M\myB{3}[\pd\myB{2}M\myB{1}-M\myB{2}][\pd\myB{3}M\myB{2}-\cot \th M\myB{3}] \notag\\
+			&-M\myB{1}[\pd\myB{2}M\myB{3}][\pd\myB{3}M\myB{2}-\cot\th M\myB{3}] \notag\\
+			&-M\myB{2}[\pd\myB{2}M\myB{2}+M\myB{1}][\pd\myB{3}M\myB{3}+M\myB{1}+\cot\th M\myB{2} \notag\\
+			&-M\myB{3}[\pd\myB{2}M\myB{2}+M\myB{1}][\pd\myB{3}M\myB{1}-M\myB{3}]
+		\end{align}
+		
+		第一种情况：设 $\hat{\vecb{M}}\perp\vecb{e}\myB{3}$，即$M\myB{3}=0$。$\abs{\hat{\vecb{M}}}=1$要求$M\myB{1}=\cos\omega\th$ 和$M\myB{2}=\sin\omega\th$。自洽要求$\left.M\myB{2}\right|_{\th=\p}=\sin\omega\pi=0$。所以$\omega\pi=k\pi,\,k=0,\,\pm1,\,\pm2\cdots$，故$\omega=k$。
+		
+		\begin{myFigure}
+			\includegraphics[width = 4cm]{"Figures/FIG_CIRCLE.jpg"}
+			\vspace{0.5cm}
+			\figCaption{参考图示}
+		\end{myFigure}
+		
+		代入式~\eqref{EQ_000} 并计算，可得
+		\begin{equation}
+			\hat{\vecb{M}}\cdot\left[ \frac{\pd}{\pd \th} \hat{\vecb{M}} \times \frac{\pd}{\pd \vf} \hat{\vecb{M}}\right] =(1+k)[\cos k\th+\cot\th \sin k\th] \fullstop
+		\end{equation}
+		所以拓扑指数 $Q$ 为该式在底流形上的积分：
+		\begin{align}
+			\frac{1}{4\p}\int \hat{\vecb{M}}\cdot\left[ \frac{\pd}{\pd \th} \hat{\vecb{M}} \times \frac{\pd}{\pd \vf} \hat{\vecb{M}}\right]\sin\th\dd\th\dd\vf &=\frac{1}{2}\int_{0}^{\p} (1+k)[\cos k\th+\cot\th \sin k\th]\sin\th\dd\th \\
+			&=\frac{1}{2}\left[1+(-1)^k\right]\comma
+		\end{align}
+		它是整数。
+		
+		第二种情况：设 $\hat{\vecb{M}}\perp\vecb{e}\myB{2}$，即$M\myB{2}=0$。同理可得
+		\begin{align}
+			\frac{1}{4\p}\int \hat{\vecb{M}}\cdot\left[ \frac{\pd}{\pd \th} \hat{\vecb{M}} \times \frac{\pd}{\pd \vf} \hat{\vecb{M}}\right]\sin\th\dd\th\dd\vf
+			&=\frac{1}{2}\int_{0}^{\p} [\cos k\th+k\cot\th \sin k\th]\sin\th\dd\th \\
+			&=1+(-1)^k\comma
+		\end{align}
+		它也是整数。
+		
+	\section{额外的图片} \label{SEC_额外的图片}
 		\begin{myFigure}
 			\includegraphics[width = \textwidth]{Figures/FIG_VECTOR_3D}
 			\vspace{-0.5cm}
 			\figCaption[从左至右依次为锥形相、skyrmion相和铁磁相。只选取了点阵中的部分自旋矢量作图。]{不同相的三维矢量图}
+			\label{FIG_VECTOR_3D}
 		\end{myFigure}
 	\section{部分代码实现}
 		Heisenberg模型与产生skyrmion的系统，差别仅在于Hamilton量，因此其代码是相同的。为了加快运行速度，在模拟经典Heisenberg模型时，涉及其他相互作用的代码未被编译。

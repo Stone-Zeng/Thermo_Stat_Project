@@ -85,6 +85,7 @@
 %已经调整好前后间距
 \DeclareMathOperator{\incr}{\Delta\!}
 \DeclareMathOperator{\dd}{\mathrm{d}\!} %微分 Differential D
+\DeclareMathOperator{\DD}{\mathrm{D}\!} %微分 Differential D
 \DeclareMathOperator{\db}{{\mkern2.5mu\mathchar'26\mkern-11mu\mathrm{d}}\!} %不完全微分 Inexact Differential D; Only for "Adobe Garamond" font!
 \DeclareMathOperator{\pd}{\partial\!} %偏微分 Partial D
 \DeclareMathOperator{\vd}{\deltaup\!} %变分 Variational D
@@ -98,11 +99,14 @@
 %\newcommand{\coordinateLabel}[2]{#1\text{-}#2} %如p-V坐标
 \newcommand{\myPartial}[3]{\left( \frac{\pd #1}{\pd #2} \right)_{#3}} %带括号的偏微分
 \newcommand{\myPartialDisplay}[3]{\left( \dfrac{\pd #1}{\pd #2} \right)_{#3}}
+\newcommand{\myB}[1]{\left<#1\right>}
 
 %重定义符号
 \newcommand{\approach}{\rightarrow} %趋向于
 \newcommand{\eqdef}{\equiv} %定义等号（三线）
 \newcommand{\dotTimes}{\cdot} %点乘
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
 
 %公式用标点、文字
 \newcommand{\comma}{\text{，}}

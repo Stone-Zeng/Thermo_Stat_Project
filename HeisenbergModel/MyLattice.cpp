@@ -37,7 +37,6 @@ inline double MyLattice::energyCount(const Point& p, const int& i, const int& j,
 #ifndef HEISENBERG_ON
 	//Magnetic field:
 	MyVector B(0, 0, magnetic_B);
-	//MyVector B((j - 18) / 25, (-i + 18) / 25, 0);
 	H -= B.dot(p);
 
 	//D-M interaction:
