@@ -266,26 +266,6 @@
 				\label{FIG_HEISENBERG_E_M_VS_T_LATTICE_10}
 			\end{myFigure}
 			
-%			为了与之后的skyrmion进行比较，我们
-%			\begin{myFigure}
-%				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_VECTOR_FM}
-%				\figCaption[点阵大小为 $36\times36$，步数为 \num{100000}。]{铁磁相互作用下的矢量图}
-%				\label{FIG_HEISENBERG_VECTOR_FM}
-%			\end{myFigure}
-%			
-%			\begin{myFigure}
-%				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_VECTOR_AFM}
-%				\figCaption[点阵大小为 $10\times10$，步数为 \num{100000}。]{AFM矢量图}
-%				\label{FIG_HEISENBERG_VECTOR_AFM}
-%			\end{myFigure}
-%			由于式 \eqref{EQ_HEAT_CAPACITY} 和 \eqref{EQ_MAGNETIC_SUSCEPTIBILITY} 在 $T \approach 0$ 时是发散的，因此热容与磁化率利用能量、总磁矩曲线的导数来计算，如图 
-%			\ref{FIG_HEISENBERG_C_X_VS_T} 中的蓝色曲线所示。
-%			\begin{myFigure}
-%				\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_C_X_VS_T}
-%				\figCaption[灰色曲线表示原始数据，蓝色曲线表示利用能量、总磁矩曲线的导数（差分）计算出的结果。]{热容、磁化率随温度的变化}
-%				\label{FIG_HEISENBERG_C_X_VS_T}
-%			\end{myFigure}
-			
 			之后模拟反铁磁相互作用（AFM）下的情况。取 $J=-1$，其余参数同上。如图~\ref{FIG_HEISENBERG_E_M_VS_T_LATTICE_10_AFM} ，能量曲线与铁磁相互作用下几乎完全一样，而平均磁矩却始终为零。原因在于AFM使得邻近的磁矩存在反向的趋势，因而即使是低温，平均磁矩也是零。而在高温下，熵更占优势，自然磁矩处于混乱、无序状态，平均磁矩也为零。
 			
 			\begin{myFigure}
@@ -334,16 +314,16 @@
 				\vecb{D}_{12}=-\vecb{D}_{21} \fullstop
 			\end{equation}
 			
-			DM相互作用最初由Dzyaloshinsky在1958年提出。他认为在对称度不够高的情形下，自旋方向会倾斜，而并非保持平行。1960年，T.~Moriya利用Anderson超交换作用的微扰方法对DM相互作用做了进一步阐释，并给与了微观的理论依据。如图~\ref{FIG_DM_INTERACTION}，DM相互作用就是相邻原子通过与异相中原子的自旋--轨道耦合作用（SOC）发生自旋偏转的原因。自旋-轨道耦合作用愈强烈，$\vecb{D}_{12}$ 矢量的模长越大，自旋方向翻转 \SI{180}{\degree} 时经过的空间长度越短，形成的skyrmion间距就越小。DM相互作用较强的二维磁性材料比材料对称性较强的三维材料在 $T$-$B$ 相图中对应区域更大，前者更易形成skyrmion相。
-			
-			由DM相互作用而导致出现skyrmion的材料，在实验中发现有 \ce{MnSi}、$\ce{Fe_$1-x$Co_$x$Si}$ 和 $\ce{Mn_$1-x$Fe_$x$Ge}$ 等。这些材料中，skyrmion的尺寸由DM相互作用和铁磁交换作用的强度共同决定，一般在 \SIrange{5}{10}{\nano\meter}，要比晶胞尺寸大很多，因此可以认为其满足连续性近似条件（当然在我们的模拟中仍然是离散的）。
-			
 			\begin{myFigure}
 				\includegraphics[width = 7 cm]{Figures/FIG_DM_INTERACTION}
 				\vspace{0.8 cm}
 				\figCaption[图 (a) 反映的是由两个原子自旋和一个带有强SOC的原子造成的DM相互作用，图 (b) 反映的是铁磁相金属（灰色）和有强SOC金属交界处的DM相互作用。]{DM相互作用\cite{fert2013skyrmions}}
 				\label{FIG_DM_INTERACTION}
 			\end{myFigure}
+			
+			DM相互作用最初由Dzyaloshinsky在1958年提出。他认为在对称度不够高的情形下，自旋方向会倾斜，而并非保持平行。1960年，T.~Moriya利用Anderson超交换作用的微扰方法对DM相互作用做了进一步阐释，并给与了微观的理论依据。如图~\ref{FIG_DM_INTERACTION}，DM相互作用就是相邻原子通过与异相中原子的自旋--轨道耦合作用（SOC）发生自旋偏转的原因。自旋-轨道耦合作用愈强烈，$\vecb{D}_{12}$ 矢量的模长越大，自旋方向翻转 \SI{180}{\degree} 时经过的空间长度越短，形成的skyrmion间距就越小。DM相互作用较强的二维磁性材料比材料对称性较强的三维材料在 $T$-$H$ 相图中对应区域更大，前者更易形成skyrmion相。
+			
+			由DM相互作用而导致出现skyrmion的材料，在实验中发现有 \ce{MnSi}、$\ce{Fe_$1-x$Co_$x$Si}$ 和 $\ce{Mn_$1-x$Fe_$x$Ge}$ 等。这些材料中，skyrmion的尺寸由DM相互作用和铁磁交换作用的强度共同决定，一般在 \SIrange{5}{10}{\nano\meter}，要比晶胞尺寸大很多，因此可以认为其满足连续性近似条件（当然在我们的模拟中仍然是离散的）。
 			
 			在连续近似下，系统的Hamilton量为\cite{nagaosa2013topological}
 			\begin{equation}
@@ -360,7 +340,18 @@
 			\end{equation}
 			该式的第一项为交换作用，也就是式~\eqref{EQ_DEF_OF_HEISENBERG_MODEL} 的第一项；第二、第三项分别为DM相互作用和外加磁场。
 			
-			这三种相互作用的竞争，将会导致不同的相。在Curie温度以下，当外加磁场较小或为0时，会出现螺旋相（helical phase)。此时Zeeman能忽略不计，只有交换作用与DM相互作用竞争。当外加磁场较大但低于某一临界值时，则会出现锥形相(conical phase)，此时外加磁场的存在可以改变螺旋的简并度，使自旋倾向与沿外磁场方向排列，但是Zeeman能仍然较小，不足与前两项竞争。
+			这三种相互作用的竞争，将会导致不同的相。在Curie温度以下，当外加磁场较小或为0时，会出现螺旋相（helical phase），如图~\ref{FIG_HELICAL} 的 (a)。此时Zeeman能忽略不计，只有交换作用与DM相互作用竞争。
+			\begin{myFigure}
+				\includegraphics[width = \textwidth]{"Figures/FIG_Helical.png"}
+				\figCaption[图 (a) 的螺旋相中，自旋在垂直于波矢的自旋面内旋转，黑色箭头代表波矢的传播方向；图 (b) 的在锥形相中，外磁场平行于波矢方向，自旋绕着波矢进动，故在外磁场方向上存在一个均一的磁化分量；图 (c) 中，外磁场垂直于波矢传播方向，此时螺旋（helice）变成横向扭曲的螺旋曲面（helicoid）结构。]{螺旋相与锥形相\cite{ulrich2011chiral}}
+				\label{FIG_HELICAL}
+			\end{myFigure}
+			
+			若稍稍加大外加磁场，但仍使其低于低于某临界值，则会出现锥形相(conical phase)，如图~\ref{FIG_HELICAL} 的 (b) 和 (c)。此时外加磁场的存在可以改变螺旋的简并度，使自旋倾向与沿外磁场方向排列，但是Zeeman能仍然较小，不足与前两项竞争。
+			
+			当外加磁场高于该临界值，但不是非常大时，则会出skyrmion相，此时发生的是Zeeman能、交换作用与DM相互作用三者间的竞争。对于一个孤立的skyrmion，在其中心自旋向下，反平行于外磁场；而在边缘处，自旋向上，与外磁场平行，中间的自旋则在二维平面内旋转。当磁场非常大的时候，便达到铁磁相（FM），此时Zeeman能非常大，交换作用与DM相互作用都不足以与其竞争。
+			
+			在温度超过Curie点时，显然体系将处于无序相，因为相互作用带来的能量均不足以与熵竞争，微观上的拓扑性质都被抹平。
 			
 			为了定量描述skyrmion相的特性，除了能量与磁矩，还需引进skyrmion密度（SkD）\cite{muhlbauer2009skyrmion}
 			\begin{equation}
@@ -374,40 +365,87 @@
 			利用Monte Carlo算法模拟skyrmion的思路与方法，和前文所述的Heisenberg模型完全相同，只需改变翻转概率中 $\incr E$ 的计算。模拟程序也是基本一致的。
 			
 		\subsection{结果与分析}
-			首先，仍是利用 $36\times36$ 的点阵，进行1000个MCS。温度从0改变到5，记录平均磁矩 $\vecb{m}$ 和skyrmion密度 $\f$ 随温度 $T$ 的变化，如图
+			首先，仍是利用 $36\times36$ 的点阵，进行1000个MCS。取 $J=1$、$D=2.5$、$T=0.1$，外磁场 $H$ 从0改变到5。记录磁矩 $z$ 分量 $m_z$ 和skyrmion密度 $\f$ 随温度 $T$ 的变化，如图~\ref{FIG_PHASE_CURVE} 中的蓝色曲线。
+			\begin{myFigure}
+				\includegraphics[width = \textwidth]{Figures/FIG_PHASE_CURVE}
+				\figCaption{磁矩 $z$ 方向分量和skyrmion密度随外加磁场的变化}
+				\label{FIG_PHASE_CURVE}
+			\end{myFigure}
+			
+			可以看出，skyrmion相和铁磁相是非常明显的，但锥形相的形成受到了skyrmion的抑制，表现在矢量图中即螺旋与skyrmion的混合，如图~\ref{FIG_ORIGINAL_VECTOR_CONICAL}。
+			\begin{myFigure}
+				\includegraphics[width = 3 cm]{Figures/FIG_ORIGINAL_VECTOR_CONICAL}
+				\vspace{0.8cm}
+				\figCaption[步数为1000，其余参数见上文。]{受skyrmion抑制的锥形相（磁矩在 $xy$ 平面上的投影）}
+				\label{FIG_ORIGINAL_VECTOR_CONICAL}
+			\end{myFigure}
+			
+			根据之前模拟Heisenberg模型的经验，我们增加了模拟的步数。\num{10000} 和 \num{100000} 步下的结果都绘制在图~\ref{FIG_PHASE_CURVE} 中。此时可以看出，锥形相逐渐开始明显。三种相\footnote{
+				螺旋相与锥形相的图像是类似的，但在我们的模拟中，螺旋相出现的条件比较苛刻。我们得到的结果是锥形相。
+			}的典型图像见图~\ref{FIG_LATTICE_VECTOR} 和图~\ref{FIG_LATTICE_MATRICX}。
+			
+			\begin{myFigure}
+				\includegraphics[width = \textwidth]{Figures/FIG_LATTICE_VECTOR}
+				\figCaption[锥形相：$J=1\comma B=0\comma D=2.5\comma T=0.2\semicomma$\\
+				skyrmion相：$J=1\comma B=2\comma D=2.5\comma T=0.1\semicomma$\\
+				铁磁相：$J=1\comma B=4\comma D=2.5\comma T=0.1\fullstop$\\
+				点阵大小为 $10\times10$，步数为 \num{100000}。图~\ref{FIG_LATTICE_MATRICX} 中所用的参数与这里相同。]{磁矩在 $xy$ 平面上的投影}
+				\label{FIG_LATTICE_VECTOR}
+			\end{myFigure}
+			\begin{myFigure}
+				\includegraphics[width = \textwidth]{Figures/FIG_LATTICE_MATRICX}
+				\figCaption{磁矩的 $z$ 分量图}
+				\label{FIG_LATTICE_MATRICX}
+			\end{myFigure}
+			
+			在磁矩与SkD随外加磁场变化关系的基础上，我们改变温度，以此绘制相图。点阵大小与MCS仍保持上文的取值，温度 $T$ 从0取到2，而外磁场 $\vecb{H}$ 从 $-4$ 取到4。这里还增加了磁场反向的影响。结果见图~\ref{FIG_PHASE_SD_AND_MZ}。
+			
 			\begin{myFigure}
 				\includegraphics[width = \textwidth]{Figures/FIG_PHASE_SD_AND_MZ}
 				\figCaption{Skyrmion密度与磁矩 $z$ 方向分量随外加磁场 $\vecb{H}$ 和温度 $T$ 的变化}
+				\label{FIG_PHASE_SD_AND_MZ}
 			\end{myFigure}
+			
+			磁场反向后，skyrmion密度也变号，说明skyrmion的涡旋方向也随之改变。而 $m_z$ 分量与外磁场方向、大小的改变均一致，这是预料之中的。
+			
+			把图~\ref{FIG_PHASE_SD_AND_MZ} 中的两部分合并，就得到了 $T$-$H$ 相图，即图~\ref{FIG_PHASE}。
+			
 			\begin{myFigure}
 				\includegraphics[width = 7cm]{Figures/FIG_PHASE}
 				\vspace{0.5cm}
 				\figCaption{相图}
+				\label{FIG_PHASE}
 			\end{myFigure}
-			\begin{myFigure}
-				\includegraphics[width = \textwidth]{Figures/FIG_LATTICE_VECTOR}
-%				\vspace{0.5cm}
-				\figCaption{$xy$ 平面投影}
-			\end{myFigure}
-%			\begin{myFigure}
-%				\includegraphics[width = 5cm]{Figures/FIG_VECTOR_SKX}
-%				\vspace{0.5cm}
-%				\figCaption{Skyrmion相}
-%			\end{myFigure}
-%			\begin{myFigure}
-%				\includegraphics[width = 5cm]{Figures/FIG_VECTOR_FM}
-%				\vspace{0.5cm}
-%				\figCaption{铁磁相}
-%			\end{myFigure}
-			\begin{myFigure}
-				\includegraphics[width = \textwidth]{Figures/FIG_LATTICE_MATRICX}
-%				\vspace{0.5cm}
-				\figCaption{$z$ 分量图}
-			\end{myFigure}
+			
 	\section{简要的数学}
+		本部分需要初步的微分几何与群论知识。
+		
+		\subsection{非线性\texorpdfstring{$\sigma$}{σ}模型}
+			非线性 $\sigma$ 模型是一种场论模型，其相互作用是靠流形度规所决定的联络与曲率引入的。不妨讨论 $d$ 维时空中取值在 $n$ 维流形 $M$ 上的场 $u(x)$，流形 $M$ 上有Riemann度规 $g_{i\!j}$。由该度规引入的作用量泛函可以写成
+			\begin{equation} \label{EQ_ACTION_FUNCTIONAL}
+				I= \frac{1}{2} \int \dd^{\;d} \!\!x g_{i\!j}\pd_\mu \!u^i(x)\pd^{\,\mu} \!\!u^j(x) \fullstop
+			\end{equation}
+			对作用量求变分即可得非线性 $\sigma$ 模型的解。讨论有限解时，$u(x)$ 场可看成由 $S^d \rightarrow M$ 的映射。场 $u(x)$ 可用同伦群 $\pi_d(M)$ 的同伦等价类标志，当 $\pi_d(M)\neq 0$ 时，可能存在拓扑非平庸解。
+			
+			对应于经典Heisenberg模型，有 $d=2$，而底流形 $M$ 对应 $E^2$，映射为 $S^2 \rightarrow E^2$，式~\eqref{EQ_ACTION_FUNCTIONAL} 可对应普通铁磁激发。此时对应场流形为 $S^2$，$\pi_2 (S_2)$ 即可描述该体系的拓扑不变量
+			\begin{equation} \label{EQ_TOPOLOGICAL_INVARIANT}
+				\pi_2 (S_2)= \frac{1}{8\p} \int \dd^{\;2} \!x \vecb{N} \cdot \left(\pd_\mu \!\vecb{N} \times \pd_\nu \!\vecb{N}\right) \e^{\mu\nu} \comma
+			\end{equation}
+			其中的 $\vecb{N}$ 为底流形 $E^2$ 上每一点的单位矢量。该式为丛 $S^2$ 的卷绕数（winding number），为该自旋场底流形上的第一陈数。
+			
+		\subsection{二维skyrmion模型}
+			在某些缺少反演对称的铁磁体系，它们的铁磁相互作用可以用铁磁交换参数 $J$ 和DM耦合来描述。与非线性 $\sigma$ 模型类似，可以用一个作用量泛函来求解这个体系，这里引入Ginzburg--Landau泛函
+			\begin{equation}
+				F[\vecb{N}]= \frac{J}{2} \sum_{\mu} \left(\pd_\mu \!\vecb{N}\right) \cdot \left(\pd_\mu \!\vecb{N}\right)+D\vecb{N} \cdot \nabla\times\vecb{N} - \vecb{B}\cdot\vecb{N} \comma
+			\end{equation}
+			式中的第一项是 \eqref{EQ_ACTION_FUNCTIONAL} 式的离散化处理，描述普通铁磁体激发，第二项描述DM相互作用对应的连续模型，第三项则是外磁场贡献。对该体系的作用量做变分处理后，即可求解模型。上文已经通过Metropolis算法模拟了能量最低情况的体系构型。
+			
+			前文提到的skyrmion指数由式~\eqref{EQ_TOPOLOGICAL_INVARIANT} 决定。拓扑指数不依赖于相互作用形式，可表征该场拓扑非平庸的程度。在计算模拟中即为单位体积内形成的skyrmion数量。
+			
+		\subsection{...}
 	\section{总结}
 	\section{致谢}
-		首先感谢陈焱老师在全过程的帮助，尤其是对我们选题的指导。其次要感谢吴义政老师，他从实验的角度提出了一些很有价值的观点。还要感谢左光宏老师，他帮助我们实现了并行计算，并提供了服务器。最后要感谢张宇、秦金谷、詹晨迪和郑益峰等学长学姐的支持与帮助。
+		首先感谢陈焱老师在全过程的帮助，尤其是对我们选题的指导。其次感谢吴义政老师和虞跃，他们分别他从实验和理论的角度提出了一些很有价值的观点。还要感谢左光宏老师，他帮助我们实现了并行计算，并提供了服务器。最后要感谢张宇、王敬淳、秦金谷、詹晨迪和郑益峰等学长学姐的支持与帮助。
 		
 %	\section{参考文献}
 		\nocite{LippmanLajoieMooEtAl2013}
@@ -423,7 +461,7 @@
 		\begin{myFigure}
 			\includegraphics[width = \textwidth]{Figures/FIG_VECTOR_3D}
 			\vspace{-0.5cm}
-			\figCaption[从左至右依次为螺旋相、skyrmion相和铁磁相。只选取了点阵中的部分自旋矢量作图。]{不同相的三维矢量图}
+			\figCaption[从左至右依次为锥形相、skyrmion相和铁磁相。只选取了点阵中的部分自旋矢量作图。]{不同相的三维矢量图}
 		\end{myFigure}
 	\section{部分代码实现}
 		Heisenberg模型与产生skyrmion的系统，差别仅在于Hamilton量，因此其代码是相同的。为了加快运行速度，在模拟经典Heisenberg模型时，涉及其他相互作用的代码未被编译。
