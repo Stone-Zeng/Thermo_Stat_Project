@@ -1,5 +1,6 @@
 #include <cmath>
 #include <cstdlib>
+#include "Head.h"
 #include "Function.h"
 #include "MyVector.h"
 using namespace std;
@@ -52,13 +53,13 @@ MyVector MyVector::initialize()
 {
 	//For Heisenberg model:
 	double r[3] = { 0 };
-	double rSum = 0.0, rSumSqrt = 0.0;
+	double rSumSqrt = 0.0;
 	for (auto i = 0; i != 3; ++i)
-	{
 		r[i] = randomReal(-10, 10);
-		rSum += r[i] * r[i];
-	}
-	rSumSqrt = sqrt(rSum); 
+	//Anisotropy:
+	r[2] *= $ANISOTROPY_INDEX;
+
+	rSumSqrt = sqrt(r[0] * r[0] + r[1] * r[1] + r[2] * r[2]);
 	for (auto i = 0; i != 3; ++i)
 		data[i] = r[i] / rSumSqrt;
 

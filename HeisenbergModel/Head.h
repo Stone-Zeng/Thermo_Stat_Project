@@ -6,8 +6,9 @@
 #pragma once
 
 /****Parameters:****/
-#define $LATTICE_LENGTH		15
-#define $VECTOR_PLOT_NUMBER	100
+#define $LATTICE_LENGTH		36
+#define $ANISOTROPY_INDEX	0.1
+#define $VECTOR_PLOT_NUMBER	1
 #define $AVERAGE_NUMBER		50
 
 #define $PARALLEL_CORES     //schedule(dynamic, 65536) num_threads(2) 
@@ -21,9 +22,9 @@
 #endif
 
 #define INPUT_PARAMETERS_ON
-#define HEISENBERG_ON
-#define FLIP_DATA_OUTPUT_ON
-//#define VECTOR_PLOT_OUTPUT_ON
+//#define HEISENBERG_ON
+//#define FLIP_DATA_OUTPUT_ON
+#define VECTOR_PLOT_OUTPUT_ON
 //#define CPP11_RANDOM
 
 #ifdef _MSC_VER
