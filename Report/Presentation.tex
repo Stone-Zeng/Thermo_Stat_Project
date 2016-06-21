@@ -1,0 +1,343 @@
+\documentclass[UTF8, aspectratio = 43]{beamer}
+	\usetheme{CambridgeUS}
+	\setbeamercolor{caption name}{fg = darkred}
+	\setbeamersize{text margin left = 1cm, text margin right = 1cm}
+	\setbeamertemplate{caption}[numbered]
+	\setbeamertemplate{bibliography item}{\insertbiblabel}
+	\setbeamerfont{institute}{size = \small}
+	\setbeamerfont{date}{size = \small}
+	\setbeamerfont{footnote}{size = \tiny}
+	\logo{\includegraphics[width = 0.8cm]{Figures/Fudan_University_Emblem.pdf}}
+
+	\hypersetup{pdfpagemode=FullScreen}
+	
+	\bibliographystyle{gbt-7714-2015-numerical}
+
+\usepackage{cmbright}
+\SetSymbolFont{largesymbols}{normal}{OMX}{iwona}{m}{n}
+\SetSymbolFont{symbols}{normal}{OMS}{iwona}{m}{n}
+\usepackage{bm}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+	\setlength\abovedisplayskip{40pt}
+	\setlength\belowdisplayskip{40pt}
+	\setlength\abovedisplayshortskip{40pt}
+	\setlength\belowdisplayshortskip{40pt}
+}
+\makeatother
+
+%\usepackage[no-math]{fontspec}
+%	\setsansfont{Calibri}
+\usepackage{ctex}
+\usepackage{xeCJK}
+	\xeCJKsetup{
+		AutoFakeBold = false,
+		AutoFakeSlant = false
+	}
+	\setCJKsansfont[BoldFont = 思源黑体 CN Medium, Mapping = fullwidth-stop]{思源黑体 CN Normal}
+\usepackage{multicol}
+%\usepackage{tabularx}
+%\newcolumntype{Y}{>{\centering\arraybackslash}X}
+%\usepackage{booktabs}
+
+\usepackage{siunitx}
+	\sisetup{
+		number-math-rm = \ensuremath,
+		inter-unit-product = \ensuremath{{}\cdot{}},
+		group-digits = true,
+		group-minimum-digits = 5,
+		group-separator = \text{~},
+		separate-uncertainty = true,
+		range-phrase = \text{~}$\sim$\text{~},
+		range-units = single
+	}
+
+\usepackage{graphicx}
+\usepackage[labelformat = simple]{subcaption}
+	\renewcommand\thesubfigure{(\alph{subfigure})}
+
+\input{Symbols.tex}
+\renewcommand{\emph}[1]{ \textcolor{darkred} {#1} }
+\newcommand{\keyword}[1]{\emph{#1}\quad}
+
+\title{基于Heisenberg模型的skyrmion研究}
+%\subtitle{SPR Based on Spectrometer}
+\author[曾祥东]{杜治纬，孙晓晨，陶润恺，王金银，曾祥东}
+\institute{复旦大学物理系}
+\date{2016年6月15日}
+
+\begin{document}
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	\section{Introduction}
+		\begin{frame}{Heisenberg Model}
+			\begin{columns}
+				\begin{column}{0.46 \textwidth}
+					\begin{itemize}
+						\item Why? \pause
+						\item Hamilton量：
+						\begin{equation*}
+							\scH = -\sum_{\mean{i,\,j}} J_{ij} \,\textcolor{darkred}{\vecb{s}_i \!\cdot \!\vecb{s}_i} \, - H_z\sum_i s_i^{\,z}
+						\end{equation*}
+						其中 $\vecb{s}_i \in \mathbb{R}^3, \quad \abs{\vecb{s}_i\,} = 1$
+						并且满足
+						\begin{equation*}
+							J_{ij} =
+							\begin{cases}
+							J, & \text{若 $i$、$j$ 近邻} \semicomma \\
+							0, & \text{其他情况}
+							\end{cases}
+						\end{equation*}
+					\end{itemize}
+				\end{column} \pause
+				\begin{column}{0.56 \textwidth}
+					\begin{itemize}
+						\small
+						\item 给出平面点阵的一个随机分布
+						\item 选择一个自旋 $\vecb{s}_i$
+						\item 随机生成另一个自旋矢量 $\vecb{s}_i^{\,\prime}$，计算翻转带来的的 $\Delta E$，得到\emph{翻转概率} $P$
+						\item 生成一个 $[0,1)$ 之间的随机数，若小于 $P$，则将 $\vecb{s}_i$ 翻转为 $\vecb{s}_i^{\,\prime}$
+						\item 重复步骤 $2\sim4$。遍历整个点阵，将它记为一个\emph{MCS}。进行若干MCS后，认为体系达到稳态
+						\item 在最后的若干MCS中作系综平均，计算各物理量
+					\end{itemize}
+				\end{column}
+			\end{columns}
+		\end{frame}
+		
+		\begin{frame}{Skyrmion \& DM Interaction}
+			\small
+			\begin{columns}
+				\begin{column}{0.45\textwidth}
+					\begin{itemize}
+						\item 一种拓扑激发态（T.~Skyrme, 1962）
+						\item 元激发 or 准粒子
+					\end{itemize}
+					\begin{figure}
+						\vspace{-0.4cm}
+						\includegraphics[width = 0.8\textwidth] {Figures/FIG_Skyrmions_WIKI.png}
+						\caption{二维skyrmion的示意图\footnotemark}
+					\end{figure}
+				\end{column} \pause
+				\begin{column}{0.55\textwidth}
+					\begin{itemize}
+						\item DM相互作用：空间对称性破缺
+						\item Hamilton量：
+						\vspace{-0.2cm}
+						\begin{equation*}
+							\scH_\text{DM} = \vecb{D}_{12} \cdot (\vecb{s}_1 \times \vecb{s}_2)
+						\end{equation*} \pause
+						\vspace{-0.8cm}
+						\item 总Hamilton量：
+						\vspace{-0.2cm}
+						\begin{equation*}
+							\scH_\text{total} = \text{J} + \text{D} + \text{H}
+						\end{equation*} \pause
+						\vspace{-0.8cm}
+						\item 三种相互作用的竞争
+						\item 四种不同的相（低温）
+						\begin{itemize}
+							\item Helical, conical, skyrmion, FM
+						\end{itemize} \pause
+						\item Skyrmion密度（SkD）
+						\vspace{-0.2cm}
+						\begin{equation*}
+							\phi =\frac{1}{4\pi} \vecb{s} \cdot \left(\frac{\pd \vecb{s}}{\pd x}\times\frac{\pd \vecb{s}}{\pd y}\right)
+						\end{equation*}
+					\end{itemize}
+				\end{column}
+				\footnotetext{图片来源：\url{https://en.wikipedia.org/wiki/Magnetic_skyrmion}}
+			\end{columns}
+		\end{frame}
+		
+	\section{Our Results}
+		\begin{frame}{Heisenberg Model}
+			\begin{columns}
+				\begin{column}{0.47\textwidth}
+					\begin{figure}
+						\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_E_M_VS_T_LATTICE_10}
+						\caption{$E$、$\abs{\vecb{M}\,}$ 随温度的变化。点阵大小为 $10\times10$，步数为 \num{100000}。}
+					\end{figure} \pause
+					\vspace{-1cm}
+					\begin{figure}
+						\includegraphics[width = \textwidth]{Figures/FIG_HEISENBERG_C_X_VS_T_LATTICE_10}
+						\caption{$C$、$\c$ 随温度的变化。参数同上。}
+					\end{figure}
+				\end{column} \pause
+				\begin{column}{0.53\textwidth}
+					\begin{figure}
+						\includegraphics[width = 0.78 \textwidth]{Figures/FIG_HEISENBERG_STEP_FM}
+						\caption{铁磁相随模拟步数的演化}
+					\end{figure} \pause
+					\vspace{-1cm}
+					\begin{figure}
+						\includegraphics[width = 0.78 \textwidth]{Figures/FIG_HEISENBERG_STEP_AFM}
+						\caption{反铁磁相随模拟步数的演化}
+					\end{figure}
+				\end{column}
+			\end{columns}
+		\end{frame}
+		
+		\begin{frame}{Skyrmion (I)}
+			\begin{columns}
+				\begin{column}{0.5\textwidth}
+					\begin{figure}
+						\includegraphics[width = \textwidth]{Figures/FIG_PHASE_CURVE}
+						\caption{Skyrmion密度和磁矩 $z$ 分量随外加磁场的变化}
+					\end{figure} \pause
+					\vspace{-1cm}
+					\begin{figure}
+						\includegraphics[width = 2.5 cm]{Figures/FIG_ORIGINAL_VECTOR_CONICAL}
+						\caption{受skyrmion抑制的锥形相}
+					\end{figure}
+				\end{column} \pause
+				\begin{column}{0.5\textwidth}
+					\begin{figure}
+						\includegraphics[width = \textwidth]{Figures/FIG_LATTICE_VECTOR}
+						\caption{磁矩在 $xy$ 平面上的投影}
+					\end{figure}
+					\vspace{-1cm}
+					\begin{figure}
+						\includegraphics[width = \textwidth]{Figures/FIG_LATTICE_MATRICX}
+						\caption{磁矩的 $z$ 分量}
+					\end{figure}
+					\vspace{-0.8cm}
+					\begin{center}
+						\tiny
+						Conical：$J=1\comma H=0\comma D=2.5\comma T=0.2$
+						
+						Skyrmion：$J=1\comma H=2\comma D=2.5\comma T=0.1$
+						
+						FM：$J=1\comma H=4\comma D=2.5\comma T=0.1$
+					\end{center}
+				\end{column}
+			\end{columns}
+		\end{frame}
+		
+		\begin{frame}{Skyrmion (II) --- Vector Diagram}
+			\begin{center}
+				\begin{figure}
+					\includegraphics[width = \textwidth]{Figures/FIG_VECTOR_3D}
+					\caption{从左至右依次为锥形相、skyrmion相和铁磁相}
+				\end{figure}
+			\end{center}
+		\end{frame}
+		
+		\begin{frame}{Skyrmion (III) --- Phase Diagram}
+			\begin{columns}
+				\begin{column}{0.6\textwidth}
+					\begin{figure}
+						\includegraphics[width = \textwidth]{Figures/FIG_PHASE_SD_AND_MZ}
+						\caption{SkD与 $m_z$ 随外加磁场 $\vecb{H}$ 和温度 $T$ 的变化}
+					\end{figure}
+				\end{column} \pause
+				\begin{column}{0.4\textwidth}
+					\begin{figure}
+						\includegraphics[width = 4cm]{Figures/FIG_PHASE}
+						\caption{$T$-$H$ 相图}
+					\end{figure}
+				\end{column}
+			\end{columns}
+		\end{frame}
+		
+		\begin{frame}{Skyrmion (IV) --- Ising \& XY Limit}
+			\begin{columns}
+				\begin{column}{0.5\textwidth}
+					\begin{figure}
+						\includegraphics[width = 4cm]{Figures/FIG_LIMIT_ISING}
+						\caption{趋向Ising极限的过程}
+					\end{figure}
+					\vspace{-1cm}
+					\begin{figure}
+						%						\includegraphics[width = \textwidth]{Figures/FIG_LIMIT_ISING_VECTOR}
+						%						
+						\includegraphics[width = \textwidth]{Figures/FIG_LIMIT_ISING_MATRIX}
+						\caption{类Ising情形下的三种相}
+					\end{figure}
+				\end{column} \pause
+				\begin{column}{0.5\textwidth}
+					\begin{figure}
+						\includegraphics[width = 4cm]{Figures/FIG_LIMIT_XY}
+						\caption{趋向XY极限的过程}
+					\end{figure}
+					\vspace{-1cm}
+					\begin{figure}
+%						\includegraphics[width = \textwidth]{Figures/FIG_LIMIT_XY_VECTOR}
+%						
+						\includegraphics[width = \textwidth]{Figures/FIG_LIMIT_XY_MATRIX}
+						\caption{类XY情形下的三种相}
+					\end{figure}
+				\end{column}
+			\end{columns}
+		\end{frame}
+		
+	\section{Afterwards}
+		\begin{frame}{Unsolved Problems}
+			\begin{itemize}
+				\item 理论？ \pause
+				\item 低温下热容与磁化率的发散 \pause
+				\item 稳定过程 \&“神奇的突跃”
+			\end{itemize}
+			\begin{figure}
+				\includegraphics[width = 10cm]{Figures/FIG_DYNAMIC}
+				\caption{平均能量、平均磁矩的演化曲线}
+			\end{figure}
+		\end{frame}
+		
+		\begin{frame}{Suggestions}
+			\begin{itemize}
+				\footnotesize
+				\item \emph{第10组}
+				
+				各种相的稳定性与Monte Carlo步数之间的关系并不能明确，且证据不充分；
+				
+				高温部分，各种相在同一条件下混杂并存并不能明显体现；
+				
+				未能对能量与磁矩的现突变给出合理解释。
+				
+				\item \emph{第11组}
+				
+				从Hamilton量到直接提出算法有点突兀，可以适当加入一些公式推导；
+				
+				没有探讨大型点阵的模拟结果。
+				
+				\item \emph{第12组}
+				
+				$T$ 在趋于0时，由于涨落，所得热力学量会发散，此外通过差分得到的结果亦不满足热力学第三定律，可见在低温时模拟的可靠性是存疑的；
+				
+				未明确为何可以合理地使用 $36\times36$ 的点阵计算。
+				
+				\item \emph{第13组}
+				
+				对材料性质的研究较少；
+				
+				建议对各向异性指数 $\alpha$ 进行一些数学上的说明，并说明其对热力学量的影响。
+				
+				\item \emph{第14组}
+				
+				部分图片过小导致图中一些数据难以看清；
+				
+				代码部分不妨加入一些注释。
+			\end{itemize}
+		\end{frame}
+		
+		\section{Question Time}
+		\begin{frame}
+			\begin{center}
+				\Huge
+				\textcolor{darkgray}{Any questions?}
+			\end{center}
+		\end{frame}
+		
+%		\section{Acknowledgements}
+%		\begin{frame}
+%			\begin{center}
+%				\Huge
+%				谢谢大家！
+%			\end{center}
+%		\end{frame}
+\end{document}
+\documentclass{article}
+\usepackage[T1]{fontenc}
